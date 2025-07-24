@@ -13,6 +13,7 @@ import Layout from './components/Layout.jsx';
 import UserLoginStatusContext from './contexts/UserLoginStatusContext';
 
 import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
 
 // import { createContext } from 'react';
 // const UserLoginStatusContext = createContext();
@@ -55,6 +56,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
 
           <Route element={<Layout />}>
             {/* Testing header */}
