@@ -1,0 +1,25 @@
+button {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: normal;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+/* Active Link */
+.active-link {
+  background-color: #4db069;       /* darker green */
+  color: white;
+  font-weight: bold;
+  border-color: #377b4d;           /* matching dark border */
+  box-shadow: 0 0 10px rgba(73, 163, 98, 0.6); /* soft green glow */
+  transform: scale(1.05);
+}

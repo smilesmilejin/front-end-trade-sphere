@@ -31,3 +31,11 @@ https://reactrouter.com/start/declarative/routing
 
 Resource for React Outlet:
 https://api.reactrouter.com/v7/functions/react_router.Outlet.html
+
+
+Resouces for React Link:
+https://api.reactrouter.com/v7/functions/react_router.Link.html
+
+
+Resouces for React useLocation:
+https://reactrouter.com/api/hooks/useLocation

@@ -2,12 +2,13 @@
 import { Outlet } from "react-router";
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
+import NavBar from './NavBar.jsx';
 
 const Layout = () => {
   return (
     <div>
       <Header />
-
+      <NavBar />
       {/* Render the nested route components here */}
       <main>
         <Outlet />
