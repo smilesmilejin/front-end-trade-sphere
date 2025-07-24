@@ -13,3 +13,14 @@ cd front-end-trade-sphere
 npm install
 npm run dev
 ```
+
+
+https://reactrouter.com/start/declarative/installation
+
+
+??? What to install next
+
+Next install React Router from npm:
+```
+npm i react-router
+```
