@@ -1,15 +1,16 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
 
 import { BrowserRouter as Router, Routes, Route } from "react-router";
-import Home from './pages/Home'; 
-import ItemsListingsForSale from './pages/ItemsListingsForSale';
-
+import Home from './pages/Home.jsx'; 
+import ItemsForSale from './pages/ItemsForSale.jsx';
+import About from './pages/About.jsx';
+import Contact from './pages/Contact.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
 
   // return (
   //   <>
@@ -40,7 +41,9 @@ function App() {
     <Router>
       <Routes>
         <Route index element={<Home />} />
-        <Route path="itemsforsale" element={<ItemsListingsForSale />} />
+        <Route path="itemsforsale" element={<ItemsForSale />} />
+        <Route path="about" element={<About/>} />
+        <Route path="contact" element={<Contact/>} />
 
         {/* <Route element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
