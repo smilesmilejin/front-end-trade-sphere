@@ -39,3 +39,8 @@ https://api.reactrouter.com/v7/functions/react_router.Link.html
 
 Resouces for React useLocation:
 https://reactrouter.com/api/hooks/useLocation
+
+
+Resources for React createContext:
+
+https://react.dev/reference/react/createContext

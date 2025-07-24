@@ -4,23 +4,22 @@ import SearchIcon from '../assets/SearchIcon.png';
 import UserLogo from '../assets/UserLogo.png';
 
 // import { Link, useNavigate } from 'react-router-dom';
-// import { useContext } from 'react';
-// import { UserLoginStatusContext } from '../App';
+
+import { Link, useNavigate } from 'react-router';
+import { useContext } from 'react';
+import { UserLoginStatusContext } from '../App';
 
 
 const Header = () => {
-//   const { userLoginStatus, setUserLoginStatus } = useContext(UserLoginStatusContext);
-//   const navigate = useNavigate();
+  const { userLoginStatus, setUserLoginStatus } = useContext(UserLoginStatusContext);
+  const navigate = useNavigate();
 
-//   const handleLogout = () => {
-//     setUserLoginStatus(false);
-//     // Optional: clear user data from localStorage or cookies if used
-//     navigate('/');
-//   };
+  const handleLogout = () => {
+    setUserLoginStatus(false);
+    // Optional: clear user data from localStorage or cookies if used
+    navigate('/');
+  };
 
-  // return (
-  //   <header>This is header</header>
-  // )
 
   return (
     <header className="header">
@@ -39,7 +38,7 @@ const Header = () => {
       </div>
 
       {/* Auth Buttons */}
-      {/* <div className="auth-buttons">
+      <div className="auth-buttons">
         {userLoginStatus ? (
           <div className="user-logged-in">
             <Link to="/profile" className="user-logo-wrapper">
@@ -58,7 +57,7 @@ const Header = () => {
             </Link>
           </>
         )}
-      </div> */}
+      </div>
     </header>
   );
 };

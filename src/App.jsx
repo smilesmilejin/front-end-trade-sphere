@@ -1,4 +1,4 @@
-// import { useState } from 'react'
+import { useState } from 'react';
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
@@ -10,6 +10,10 @@ import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Layout from './components/Layout.jsx';
 // import Header from './components/Header.jsx';
+import { createContext } from 'react';
+
+// const UserLoginStatusContext = createContext();
+export const UserLoginStatusContext = createContext();
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -39,32 +43,36 @@ function App() {
   //   </>
   // )
 
+  const [userLoginStatus, setUserLoginStatus] = useState(false);
+  // const UserLoginStatusContext = createContext();
+
   return (
-    <Router>
-      <Routes>
-        <Route element={<Layout />}>
+     <UserLoginStatusContext value={{userLoginStatus, setUserLoginStatus}}>
+      <Router>
+        <Routes>
+          <Route element={<Layout />}>
 
-          {/* Testing header */}
-          {/* <Route path="header" element={<Header />} /> */}
-          <Route index element={<Home />} />
-          <Route path="itemsforsale" element={<ItemsForSale />} />
-          <Route path="about" element={<About/>} />
-          <Route path="contact" element={<Contact/>} />
+            {/* Testing header */}
+            {/* <Route path="header" element={<Header />} /> */}
+            <Route index element={<Home />} />
+            <Route path="itemsforsale" element={<ItemsForSale />} />
+            <Route path="about" element={<About/>} />
+            <Route path="contact" element={<Contact/>} />
 
-          {/* <Route element={<AuthLayout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
+            {/* <Route element={<AuthLayout />}>
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+            </Route>
+
+            <Route path="concerts">
+              <Route index element={<ConcertsHome />} />
+              <Route path=":city" element={<City />} />
+              <Route path="trending" element={<Trending />} />
+            </Route> */}
           </Route>
-
-          <Route path="concerts">
-            <Route index element={<ConcertsHome />} />
-            <Route path=":city" element={<City />} />
-            <Route path="trending" element={<Trending />} />
-          </Route> */}
-        </Route>
-      </Routes>  
-    </Router>
-
+        </Routes>  
+      </Router>
+    </UserLoginStatusContext>
   )
 }
 
