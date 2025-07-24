@@ -1,5 +1,5 @@
 import './Header.css';
-import Logo from '../assets/Logo.png';
+import Logo from '../assets/Logo.png'; // fixed typo
 import SearchIcon from '../assets/SearchIcon.png';
 import UserLogo from '../assets/UserLogo.png';
 
