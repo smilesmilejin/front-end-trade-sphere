@@ -12,6 +12,8 @@ import Layout from './components/Layout.jsx';
 // import Header from './components/Header.jsx';
 import UserLoginStatusContext from './contexts/UserLoginStatusContext';
 
+import Login from './pages/Login.jsx';
+
 // import { createContext } from 'react';
 // const UserLoginStatusContext = createContext();
 // due to fast fresh error move this to contexts/UserLoginStatusContext.jsx
@@ -52,8 +54,9 @@ function App() {
      <UserLoginStatusContext value={{userLoginStatus, setUserLoginStatus}}>
       <Router>
         <Routes>
-          <Route element={<Layout />}>
+          <Route path="/login" element={<Login />} />
 
+          <Route element={<Layout />}>
             {/* Testing header */}
             {/* <Route path="header" element={<Header />} /> */}
             <Route index element={<Home />} />
