@@ -25,6 +25,9 @@ Next install React Router from npm:
 npm i react-router
 ```
 
+Resources for React Router:
 
 https://reactrouter.com/start/declarative/routing
 
+Resource for React Outlet:
+https://api.reactrouter.com/v7/functions/react_router.Outlet.html

@@ -8,6 +8,8 @@ import Home from './pages/Home.jsx';
 import ItemsForSale from './pages/ItemsForSale.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
+import Layout from './components/Layout.jsx';
+// import Header from './components/Header.jsx';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -40,21 +42,26 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="itemsforsale" element={<ItemsForSale />} />
-        <Route path="about" element={<About/>} />
-        <Route path="contact" element={<Contact/>} />
+        <Route element={<Layout />}>
 
-        {/* <Route element={<AuthLayout />}>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          {/* Testing header */}
+          {/* <Route path="header" element={<Header />} /> */}
+          <Route index element={<Home />} />
+          <Route path="itemsforsale" element={<ItemsForSale />} />
+          <Route path="about" element={<About/>} />
+          <Route path="contact" element={<Contact/>} />
+
+          {/* <Route element={<AuthLayout />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+
+          <Route path="concerts">
+            <Route index element={<ConcertsHome />} />
+            <Route path=":city" element={<City />} />
+            <Route path="trending" element={<Trending />} />
+          </Route> */}
         </Route>
-
-        <Route path="concerts">
-          <Route index element={<ConcertsHome />} />
-          <Route path=":city" element={<City />} />
-          <Route path="trending" element={<Trending />} />
-        </Route> */}
       </Routes>  
     </Router>
 
