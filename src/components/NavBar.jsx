@@ -1,7 +1,6 @@
 // import { Link, useLocation } from 'react-router-dom';
-// import './Navbar.css';
 import { Link, useLocation } from "react-router";
-
+import './NavBar.css';
 
 function Navbar() {
   const location = useLocation(); // gives you current pathname
