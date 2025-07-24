@@ -7,8 +7,8 @@ import UserLogo from '../assets/UserLogo.png';
 
 import { Link, useNavigate } from 'react-router';
 import { useContext } from 'react';
-import { UserLoginStatusContext } from '../App';
-
+// import { UserLoginStatusContext } from '../App';
+import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 
 const Header = () => {
   const { userLoginStatus, setUserLoginStatus } = useContext(UserLoginStatusContext);

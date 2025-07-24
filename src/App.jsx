@@ -10,10 +10,12 @@ import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Layout from './components/Layout.jsx';
 // import Header from './components/Header.jsx';
-import { createContext } from 'react';
+import UserLoginStatusContext from './contexts/UserLoginStatusContext';
 
+// import { createContext } from 'react';
 // const UserLoginStatusContext = createContext();
-export const UserLoginStatusContext = createContext();
+// due to fast fresh error move this to contexts/UserLoginStatusContext.jsx
+// export const UserLoginStatusContext = createContext();
 
 function App() {
   // const [count, setCount] = useState(0)
