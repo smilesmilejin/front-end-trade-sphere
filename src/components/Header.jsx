@@ -13,7 +13,7 @@ import UserContext from '../contexts/UserContext';
 
 const Header = () => {
   const { userLoginStatus, setUserLoginStatus } = useContext(UserLoginStatusContext);
-  const { curUserData, setCurUserData } = useContext(UserContext);
+  const { setCurUserData } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {

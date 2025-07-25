@@ -15,6 +15,13 @@ import UserContext from './contexts/UserContext';
 
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
+import Profile from './pages/Profile.jsx';
+
+import ProfileLayout from './components/ProfileLayout.jsx';
+import ProfilePostItem from './pages/ProfilePostItem.jsx';
+import ProfileFavorites from './pages/ProfileFavorites.jsx';
+
+import ProfileListing from './pages/ProfileListing.jsx';
 
 // import { createContext } from 'react';
 // const UserLoginStatusContext = createContext();
@@ -70,6 +77,15 @@ function App() {
               <Route path="itemsforsale" element={<ItemsForSale />} />
               <Route path="about" element={<About/>} />
               <Route path="contact" element={<Contact/>} />
+              
+
+              <Route path="profile" element={<ProfileLayout />}>
+                <Route index element={<Profile />} /> {/* /profile */}
+                <Route path="post-item-to-sell" element={<ProfilePostItem />} />
+                <Route path="my-favorite-listings" element={<ProfileFavorites />} />
+                <Route path="my-sell-listings" element={<ProfileListing />} />
+              </Route>
+
 
               {/* <Route element={<AuthLayout />}>
                 <Route path="login" element={<Login />} />
