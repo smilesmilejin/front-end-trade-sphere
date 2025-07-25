@@ -26,7 +26,13 @@ const Header = () => {
     // console.log('User is logged out, curUserData is now:', curUserData);
 
     // Optional: clear user data from localStorage or cookies if used
-    navigate('/');
+
+    // Wait for state update then navigate
+    setTimeout(() => {
+      navigate('/');
+    }, 0);
+
+    // navigate('/');
   };
 
 

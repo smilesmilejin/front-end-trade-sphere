@@ -22,6 +22,7 @@ import ProfilePostItem from './pages/ProfilePostItem.jsx';
 import ProfileFavorites from './pages/ProfileFavorites.jsx';
 
 import ProfileListing from './pages/ProfileListing.jsx';
+import { Navigate, Outlet } from "react-router";
 
 // import { createContext } from 'react';
 // const UserLoginStatusContext = createContext();
@@ -62,6 +63,14 @@ function App() {
   // const UserLoginStatusContext = createContext();
   const [curUserData, setCurUserData] = useState(null);
 
+  // Inline RequireAuth component
+  const RequireAuth = () => {
+    if (!userLoginStatus) {
+      return <Navigate to="/login" replace />;
+    }
+    return <Outlet />;
+  };
+
   return (
      <UserLoginStatusContext value={{userLoginStatus, setUserLoginStatus}}>
         <UserContext value={{curUserData, setCurUserData}}>
@@ -78,13 +87,16 @@ function App() {
               <Route path="about" element={<About/>} />
               <Route path="contact" element={<Contact/>} />
               
-
-              <Route path="profile" element={<ProfileLayout />}>
-                <Route index element={<Profile />} /> {/* /profile */}
-                <Route path="post-item-to-sell" element={<ProfilePostItem />} />
-                <Route path="my-favorite-listings" element={<ProfileFavorites />} />
-                <Route path="my-sell-listings" element={<ProfileListing />} />
+              {/* Protect all /profile routes */}
+              <Route element={<RequireAuth />}>
+                <Route path="profile" element={<ProfileLayout />}>
+                  <Route index element={<Profile />} /> {/* /profile */}
+                  <Route path="post-item-to-sell" element={<ProfilePostItem />} />
+                  <Route path="my-favorite-listings" element={<ProfileFavorites />} />
+                  <Route path="my-sell-listings" element={<ProfileListing />} />
+                </Route>
               </Route>
+
 
 
               {/* <Route element={<AuthLayout />}>
