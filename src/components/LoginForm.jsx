@@ -15,8 +15,6 @@ const LoginForm = ({ onLoginUser }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
   const [errors, setErrors] = useState(kErrorState);
 
-//   const [formVisible, setFormVisible] = useState(true); 
-
   const handleSubmit = (event) => {
     console.log('submitted!');
 
