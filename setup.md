@@ -59,3 +59,23 @@ Login.jsx:25 AxiosError {message: 'Network Error', name: 'AxiosError', code: 'E
 Login.jsx:26 Login failed: AxiosError {message: 'Network Error', name: 'AxiosError', code: 'ERR_NETWORK', config: {…}, request: XMLHttpRequest, …}
 Login.jsx:18  POST https://back-end-trade-sphere.onrender.com/users/login net::ERR_FAILED -->
 ```
+
+https://expressjs.com/en/resources/middleware/cors.html
+?? try it later
+Typical fix in Node.js with Express:
+Install cors middleware if you haven’t:
+npm install cors
+
+
+In the deployed front-end, Axios calls is working. 
+
+Later try install backedn 
+$ npm install cors
+
+
+# Install prop-types packages
+
+Run the following command in your project root:
+```
+$ npm install prop-types
+```

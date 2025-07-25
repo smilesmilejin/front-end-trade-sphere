@@ -11,6 +11,7 @@ import Contact from './pages/Contact.jsx';
 import Layout from './components/Layout.jsx';
 // import Header from './components/Header.jsx';
 import UserLoginStatusContext from './contexts/UserLoginStatusContext';
+import UserContext from './contexts/UserContext';
 
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
@@ -52,35 +53,38 @@ function App() {
 
   const [userLoginStatus, setUserLoginStatus] = useState(false);
   // const UserLoginStatusContext = createContext();
+  const [curUserData, setCurUserData] = useState(null);
 
   return (
      <UserLoginStatusContext value={{userLoginStatus, setUserLoginStatus}}>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+        <UserContext value={{curUserData, setCurUserData}}>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
 
-          <Route element={<Layout />}>
-            {/* Testing header */}
-            {/* <Route path="header" element={<Header />} /> */}
-            <Route index element={<Home />} />
-            <Route path="itemsforsale" element={<ItemsForSale />} />
-            <Route path="about" element={<About/>} />
-            <Route path="contact" element={<Contact/>} />
+            <Route element={<Layout />}>
+              {/* Testing header */}
+              {/* <Route path="header" element={<Header />} /> */}
+              <Route index element={<Home />} />
+              <Route path="itemsforsale" element={<ItemsForSale />} />
+              <Route path="about" element={<About/>} />
+              <Route path="contact" element={<Contact/>} />
 
-            {/* <Route element={<AuthLayout />}>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-            </Route>
+              {/* <Route element={<AuthLayout />}>
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+              </Route>
 
-            <Route path="concerts">
-              <Route index element={<ConcertsHome />} />
-              <Route path=":city" element={<City />} />
-              <Route path="trending" element={<Trending />} />
-            </Route> */}
-          </Route>
-        </Routes>  
-      </Router>
+              <Route path="concerts">
+                <Route index element={<ConcertsHome />} />
+                <Route path=":city" element={<City />} />
+                <Route path="trending" element={<Trending />} />
+              </Route> */}
+              </Route>
+            </Routes>  
+          </Router>
+        </UserContext>
     </UserLoginStatusContext>
   )
 }
