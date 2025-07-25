@@ -9,13 +9,22 @@ import { Link, useNavigate } from 'react-router';
 import { useContext } from 'react';
 // import { UserLoginStatusContext } from '../App';
 import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
+import UserContext from '../contexts/UserContext';
 
 const Header = () => {
   const { userLoginStatus, setUserLoginStatus } = useContext(UserLoginStatusContext);
+  const { curUserData, setCurUserData } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     setUserLoginStatus(false);
+    setCurUserData(null);
+
+    console.log('User is logged out')
+
+    // console.log('User is logged out, userLoginStatus is now:', userLoginStatus);
+    // console.log('User is logged out, curUserData is now:', curUserData);
+
     // Optional: clear user data from localStorage or cookies if used
     navigate('/');
   };
