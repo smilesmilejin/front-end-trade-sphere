@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 // import '../styles/Board.css';
-
+import ImageGallery from './ImageGallery.jsx';
+const sampleImagesArray = [
+    "https://i.ibb.co/gLQ48Lrp/71-O-3j3d9-DL-AC-SL1500.jpg",
+    "https://i.ibb.co/vxj76yx1/71w0-Ozy-Bav-L.jpg",
+]
 const Item =({
     listing_id, 
     user_id, 
@@ -17,6 +21,10 @@ const Item =({
 
     return (
         <li>
+            <ImageGallery 
+                // images={images}
+                images={sampleImagesArray}
+            />
             <p>{listing_id}</p>
             <p>{user_id}</p>
             <p>{name}</p>
