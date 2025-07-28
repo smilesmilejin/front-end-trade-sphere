@@ -1,0 +1,42 @@
+
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+} */
+
+/* ImageGallerySlider.css */
+
+.image-slider {
+  position: relative;
+  width: 180px;          /* Enough space for image + arrows */
+  height: 150px;         /* Fixed height for consistent layout */
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.gallery-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;   /* Show full image without cropping */
+  border-radius: 8px;
+  user-select: none;
+}
+
+.arrow {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 24px;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+

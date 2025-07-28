@@ -1,10 +1,20 @@
 import PropTypes from 'prop-types';
 // import '../styles/Board.css';
-import ImageGallery from './ImageGallery.jsx';
+
+import ImageGallerySlider from './ImageGallerySlider.jsx';
+
 const sampleImagesArray = [
     "https://i.ibb.co/gLQ48Lrp/71-O-3j3d9-DL-AC-SL1500.jpg",
     "https://i.ibb.co/vxj76yx1/71w0-Ozy-Bav-L.jpg",
+    "https://i.ibb.co/jZwGPvXP/premium-photo-1710346961272-c23f174b6e39.jpg",
+    "https://i.ibb.co/DDMbKGDp/indoor-photo-realistic-green-christmas-260nw-2539815647-jpg.webp",
 ]
+
+
+
+// const sampleImagesArray = []
+
+
 const Item =({
     listing_id, 
     user_id, 
@@ -21,7 +31,11 @@ const Item =({
 
     return (
         <li>
-            <ImageGallery 
+            {/* <ImageGallery 
+                // images={images}
+                images={sampleImagesArray}
+            /> */}
+            <ImageGallerySlider 
                 // images={images}
                 images={sampleImagesArray}
             />
