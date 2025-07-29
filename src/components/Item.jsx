@@ -39,17 +39,19 @@ const Item =({
                 // images={images}
                 images={sampleImagesArray}
             />
-            <p>{listing_id}</p>
-            <p>{user_id}</p>
-            <p>{name}</p>
-            <p>{category}</p>
-            <p>{description}</p>
-            <p>{price}</p>
-            <p>{location}</p>
-            <p>{contact_information}</p>
-            <p>{created_at}</p>
-            <p>{updated_at}</p>
-            <p>{sold_status}</p>
+            <p>Listing Id: {listing_id}</p>
+            <p>User Id: {user_id}</p>
+            <p>Name: {name}</p>
+            <p>Category: {category}</p>
+            <p>Description: {description}</p>
+            <p>Price: {price}</p>
+            <p>Location: {location}</p>
+            <p>Contact Information: {contact_information}</p>
+            <p>Created at : {created_at}</p>
+            <p>Updated At: {updated_at}</p>
+            {/* <p>Sold Status: {sold_status}</p> */}
+            {/* When sold_status is false, React renders nothing, because false is a falsy value and not rendered as a string by default in JSX. */}
+            <p>Sold Status: {sold_status ? 'Sold' : 'Available'}</p>
             {/* <p>{images}</p> */}
         </li>
     )

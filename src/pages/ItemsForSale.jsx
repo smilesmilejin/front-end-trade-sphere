@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ItemList from '../components/ItemList';
+import ItemFilters from '../components/ItemFilters';
+import Item from '../components/Item';
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
@@ -161,7 +163,7 @@ function ItemsForSale() {
     <div>
       <h1>ItemsForSale Page</h1>
       <p>ItemsForSale Page</p>
-
+      <ItemFilters />
       <ItemList 
         listings={listingData}
         // listings={sampleListingsData} 
