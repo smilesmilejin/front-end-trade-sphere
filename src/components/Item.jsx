@@ -3,6 +3,7 @@ import '../styles/Item.css';
 
 import ImageGallerySlider from './ImageGallerySlider.jsx';
 import { useState } from 'react';
+import noImageAvailable from '../assets/noImageAvailable.png';
 
 const sampleImagesArray = [
     "https://i.ibb.co/gLQ48Lrp/71-O-3j3d9-DL-AC-SL1500.jpg",
@@ -43,6 +44,7 @@ const Item =({
             <ImageGallerySlider 
                 // images={images}
                 images={sampleImagesArray}
+                // images={images && images.length > 0 ? images : [noImageAvailable]}
             />
             {/* <p>Listing Id: {listing_id}</p>
             <p>User Id: {user_id}</p> */}
@@ -65,9 +67,12 @@ const Item =({
                 <div className="modal">
                     <button className="close-button" onClick={handleClose}>×</button>
                     <h2>Listing Details</h2>
-                    <ImageGallerySlider 
+                    {/* <ImageGallerySlider 
                         // images={images}
                         images={sampleImagesArray}
+                    /> */}
+                    <ImageGallerySlider 
+                        images={images && images.length > 0 ? images : [noImageAvailable]}
                     />
                     <p>Listing Id: {listing_id}</p>
                     <p>User Id: {user_id}</p>
