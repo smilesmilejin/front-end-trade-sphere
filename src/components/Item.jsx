@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-// import '../styles/Board.css';
+import '../styles/Item.css';
 
 import ImageGallerySlider from './ImageGallerySlider.jsx';
+import { useState } from 'react';
 
 const sampleImagesArray = [
     "https://i.ibb.co/gLQ48Lrp/71-O-3j3d9-DL-AC-SL1500.jpg",
@@ -29,6 +30,10 @@ const Item =({
     sold_status,
     images }) => {
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleOpen = () => setIsModalOpen(true);
+    const handleClose = () => setIsModalOpen(false);
+
     return (
         <li>
             {/* <ImageGallery 
@@ -39,20 +44,45 @@ const Item =({
                 // images={images}
                 images={sampleImagesArray}
             />
-            <p>Listing Id: {listing_id}</p>
-            <p>User Id: {user_id}</p>
+            {/* <p>Listing Id: {listing_id}</p>
+            <p>User Id: {user_id}</p> */}
             <p>Name: {name}</p>
             <p>Category: {category}</p>
-            <p>Description: {description}</p>
+            {/* <p>Description: {description}</p> */}
             <p>Price: {price}</p>
-            <p>Location: {location}</p>
+            {/* <p>Location: {location}</p>
             <p>Contact Information: {contact_information}</p>
             <p>Created at : {created_at}</p>
-            <p>Updated At: {updated_at}</p>
-            {/* <p>Sold Status: {sold_status}</p> */}
+            <p>Updated At: {updated_at}</p> */}
+
             {/* When sold_status is false, React renders nothing, because false is a falsy value and not rendered as a string by default in JSX. */}
-            <p>Sold Status: {sold_status ? 'Sold' : 'Available'}</p>
-            {/* <p>{images}</p> */}
+            {/* <p>Sold Status: {sold_status ? 'Sold' : 'Available'}</p> */}
+
+            <button onClick={handleOpen}>View Details</button>
+
+            {isModalOpen && (
+                <div className="modal-overlay">
+                <div className="modal">
+                    <button className="close-button" onClick={handleClose}>×</button>
+                    <h2>Listing Details</h2>
+                    <ImageGallerySlider 
+                        // images={images}
+                        images={sampleImagesArray}
+                    />
+                    <p>Listing Id: {listing_id}</p>
+                    <p>User Id: {user_id}</p>
+                    <p>Name: {name}</p>
+                    <p>Category: {category}</p>
+                    <p>Description: {description}</p>
+                    <p>Price: ${price}</p>
+                    <p>Location: {location}</p>
+                    <p>Contact Info: {contact_information}</p>
+                    <p>Created At: {created_at}</p>
+                    <p>Updated At: {updated_at}</p>
+                    <p>Status: {sold_status ? 'Sold' : 'Available'}</p>
+                </div>
+                </div>
+            )}
         </li>
     )
 }

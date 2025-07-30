@@ -175,24 +175,6 @@ function ItemsForSale() {
       }
     }
 
-    // // Price sorting
-    // if (filters.priceSort !== '') {
-    //   if (filters.priceSort === 'price-asc') {
-    //     filtered.sort((a, b) => a.price - b.price);
-    //   } else if (filters.priceSort === 'price-desc') {
-    //     filtered.sort((a, b) => b.price - a.price);
-    //   };
-    // }
-
-    // // Date sorting
-    // if (filters.dateSort !== '') {
-    //   if (filters.dateSort === 'date-asc') {
-    //     filtered.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-    //   } else if (filters.dateSort === 'date-desc') {
-    //     filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-    //   };
-    // }
-
     filtered.sort((a, b) => {
       // Price sort
       if (filters.priceSort !== '') {
