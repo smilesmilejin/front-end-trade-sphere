@@ -175,23 +175,58 @@ function ItemsForSale() {
       }
     }
 
-    // Price sorting
-    if (filters.priceSort !== '') {
-      if (filters.priceSort === 'price-asc') {
-        filtered.sort((a, b) => a.price - b.price);
-      } else if (filters.priceSort === 'price-desc') {
-        filtered.sort((a, b) => b.price - a.price);
-      };
-    }
+    // // Price sorting
+    // if (filters.priceSort !== '') {
+    //   if (filters.priceSort === 'price-asc') {
+    //     filtered.sort((a, b) => a.price - b.price);
+    //   } else if (filters.priceSort === 'price-desc') {
+    //     filtered.sort((a, b) => b.price - a.price);
+    //   };
+    // }
 
-    // Date sorting
-    if (filters.dateSort !== '') {
-      if (filters.dateSort === 'date-asc') {
-        filtered.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-      } else if (filters.dateSort === 'date-desc') {
-        filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-      };
-    }
+    // // Date sorting
+    // if (filters.dateSort !== '') {
+    //   if (filters.dateSort === 'date-asc') {
+    //     filtered.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    //   } else if (filters.dateSort === 'date-desc') {
+    //     filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    //   };
+    // }
+
+    filtered.sort((a, b) => {
+      // Price sort
+      if (filters.priceSort !== '') {
+        const priceA = a.price;
+        const priceB = b.price;
+
+        // Only sort by price if the prices are different. If they’re equal, continue to the next sorting criterion.
+        if (priceA !== priceB) {
+          if (filters.priceSort === 'price-asc') {
+            return priceA - priceB; // Sorts in ascending order. 
+          } else if (filters.priceSort === 'price-desc') {
+            return priceB - priceA; // Sorts in descending order.
+          }
+        }
+      }
+
+      // Date sort
+      if (filters.dateSort !== '') {
+        const dateA = new Date(a.created_at);
+        const dateB = new Date(b.created_at);
+
+        if (dateA.getTime() !== dateB.getTime()) {
+          if (filters.dateSort === 'date-asc') {
+            return dateA - dateB;
+          } else if (filters.dateSort === 'date-desc') {
+            return dateB - dateA; // Sort in descending date order.
+          }
+        }
+      }
+
+      return 0; // If all compared values are equal (price, date, name), return 0 to leave the order unchanged.
+    });
+
+
 
     console.log('##### Curretn Filtered Item Data: ', filtered)
     // return filteredItemData;
