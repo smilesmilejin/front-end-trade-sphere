@@ -54,6 +54,23 @@ const getUserFavoritesApi = (curUserId) => {
     });
 };
 
+// Update user Item api
+// PATCH /users/<user_id>/listings/<listing_id>
+const patchUserItemApi = (curUserId, listingId, updatedItemData) => {
+  console.log("updated User data:", updatedItemData);
+
+  return axios.patch(`${kBaseUrl}/users/${curUserId}/listings/${listingId}`, updatedItemData) 
+    .then(response => { 
+      console.log('###### Updated User Item response')
+      console.log('Updated User Item response:', response.data);
+      return response.data;
+    })
+    .catch (error => {
+      console.log('Edit User Item failed:', error);
+      console.log(error);
+      throw error;
+    });
+};
 
 
 function ProfileListing() {
@@ -121,6 +138,27 @@ function ProfileListing() {
       }
     };
 
+    const updateUserItem = (listingId, updatedUserData) => {
+      patchUserItemApi(curUserId, listingId, updatedUserData)
+        .then(newUserItemData => {
+          // Update listings: replace the updated listing in curUserListingsData
+          setCurUserListingsData(prevListings => 
+            prevListings.map(listing => 
+              listing.listing_id === listingId ? newUserItemData : listing
+            )
+          );
+          alert('User Item is Updated!')
+          // setIsEditing(false); // NOT quite necesasry , since setCurUserData caues the whole page to re render, and isEditing, state go back to default
+        })
+        .catch(error => {
+          // Optional: Show error message or keep editing mode active
+          console.error('Update failed', error);
+        });
+    };
+    const cancelUpdateUserItem = () => {
+      console.log('Cancell Update User Item');
+    }
+
     useEffect( () => {
       getUserListings();
       getUserFavorites();
@@ -140,6 +178,9 @@ function ProfileListing() {
         listings={curUserListingsData}
         userLikedListings={userLikedListings} 
         onToggleLike={toggleLike}
+        editButton={<button>Edit Listing</button>}
+        onUpdateUserItem={updateUserItem}
+        onCancelUpdateUserItem={cancelUpdateUserItem}
       />
 
     </div>

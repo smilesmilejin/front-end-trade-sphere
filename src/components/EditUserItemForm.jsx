@@ -1,0 +1,290 @@
+import { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
+import UserContext from '../contexts/UserContext';
+
+const kDefaultFormState = {
+    name: '',
+    category: '',
+    description: '',
+    price: '',
+    location: '',
+    contact_information: '',
+    images:[],
+    // created_at: '',
+    // updated_at: '',
+    sold_status: '',
+};
+
+const kErrorState = {
+    name: 'Name cannot be empty',
+    category: 'Category cannot be empty',
+    description: 'Description cannot be empty',
+    price: 'Price cannot be empty',
+    location: 'Location cannot be empty',
+    contact_information:'Contact Information cannot be empty',
+    sold_status: 'Sold cannot be empty',
+};
+
+
+
+const EditUserItemForm = ({ 
+    itemData = {
+    name: '',
+    category: '',
+    description: '',
+    price: '',
+    location: '',
+    contact_information: '',
+    images: [],
+    sold_status: false,
+    },
+    onUpdateUserItem, 
+    onCancelUpdateUserItem }) => {
+
+    // const [curUserData, setCurUserData] = useContext(UserContext);
+    // Make sure the initial userData fields are never null or undefined — use empty strings instead:
+    const initialItemData = {
+        name: itemData.name || '',
+        category: itemData.category || '',
+        description: itemData.description || '',
+        price: itemData.price || '',
+        location: itemData.location || '',
+        contact_information: itemData.contact_information || '',
+        images:itemData.images || [],
+        sold_status: itemData.sold_status,
+    };
+    const [formData, setFormData] = useState(initialItemData);
+
+    // const [errors, setErrors] = useState({});
+    const getInitialErrors = (data) => {
+    const errs = {};
+    for (const key in kErrorState) {
+        const value = (data[key] ?? '').toString().trim();
+        if (!value) {
+        errs[key] = kErrorState[key];
+        }
+    }
+    return errs;
+    };
+
+    const [errors, setErrors] = useState(() => getInitialErrors(initialItemData));
+
+
+
+    const handleSubmit = (event) => {
+      console.log('submitted!');
+
+      event.preventDefault();
+      
+      const trimmedName = formData.name.trim();
+      const trimmedDescription = formData.description.trim();
+      const trimmedPrice = formData.price.trim();
+      const trimmedLocation = formData.location.trim();
+      const trimmedContactInformation = formData.contact_information.trim();
+
+      const updateUserItemData = {
+            name: trimmedName,
+            category: formData.category,
+            description: trimmedDescription,
+            price: Number(trimmedPrice),
+            location: trimmedLocation,
+            contact_information: trimmedContactInformation,
+            images: formData.images,
+            sold_status: formData.sold_status === 'available' ? false : true,
+      };
+
+        // trim the title and owner before posting
+        console.log("Edit User Item Form: ", updateUserItemData);
+
+
+        setFormData(updateUserItemData);
+
+        const newErrors = getInitialErrors(updateUserItemData);
+        setErrors(newErrors);
+
+        onUpdateUserItem(itemData.listing_id, updateUserItemData);
+    };
+
+    const handelCancelEdit = () => {
+        onCancelUpdateUserItem();
+        setFormData(initialItemData);
+    }
+
+
+const handleChange = (event) => {
+    const inputName = event.target.name;
+    const inputValue = event.target.value;
+
+    setFormData((formData) => ({
+      ...formData,
+      [inputName]: inputValue,
+    }));
+
+    const trimmedLength = inputValue.trim().length;
+
+    if (trimmedLength === 0) {
+        setErrors((prev) => ({
+            ...prev,
+            [inputName]: kErrorState[inputName],
+        }));
+    } else {
+            setErrors((prev) => ({
+            ...prev,
+            [inputName]: '',
+        }));
+    }
+
+  };
+
+  const makeControlledInput = (inputName, type='text') => {
+    return (
+      <>
+        <input
+          onChange={handleChange}
+          type={type}
+          id={`input-${inputName}`}
+          name={inputName}
+          value={formData[inputName]}
+          placeholder={inputName}
+          step={inputName === 'price' ? '0.01' : undefined}
+          min={inputName === 'price' ? '0' : undefined}
+        />
+      </>
+    );
+  };
+
+    const hasErrors = Object.values(errors).some(errorMsg => errorMsg !== '');
+
+    return (
+        
+        <form className='signup-form' onSubmit={handleSubmit}>
+            <div className='form-header'>
+            Edit an Item for Sale
+            </div>
+
+            <div className='form-field'>
+                {makeControlledInput('name')}
+            </div>
+            {errors.name && (
+            <div className='form-errors'>
+                <p className='error-text'>{errors.name}</p>
+            </div>
+            )}
+
+            <div className='form-field'>
+                <label htmlFor="category">Category:</label>
+                <select
+                    id="category"
+                    name='category'
+                    value={formData.category}
+                    onChange={handleChange}
+                >
+                    <option value="">-- All --</option>
+                    <option value="household">Household Items</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing_accessories">Clothing & Accessories</option>
+                    <option value="books_media">Books & Media</option>
+                    <option value="toys_games">Toys & Games</option>
+                    <option value="miscellaneous">Miscellaneous</option>
+                </select>
+
+                {errors.category && (
+                <div className='form-errors'>
+                    <p className='error-text'>{errors.category}</p>
+                </div>
+                )}
+            </div>
+
+
+
+            <div className='form-field'>
+                {makeControlledInput('description')}
+            </div>
+            {errors.description && (
+                <div className='form-errors'>
+                    <p className='error-text'>{errors.description}</p>
+                </div>
+            )}
+
+            <div className='form-field'>
+                {makeControlledInput('price', 'number')}
+            </div>
+            {errors.price && (
+                <div className='form-errors'>
+                    <p className='error-text'>{errors.price}</p>
+                </div>
+            )}
+
+
+            <div className='form-field'>
+                {makeControlledInput('location')}
+            </div>
+            {errors.location && (
+                <div className='form-errors'>
+                    <p className='error-text'>{errors.location}</p>
+                </div>
+            )}
+
+
+            <div className='form-field'>
+                {makeControlledInput('contact_information')}
+            </div>
+                {errors.contact_information && (
+                <div className='form-errors'>
+                    <p className='error-text'>{errors.contact_information}</p>
+                </div>
+                )}
+
+            {/* <ImageUploader onSetFormData={setFormData} resetUploader={resetUploader}/> */}
+
+            <div className='form-field'>
+                <label htmlFor="sold_status">Sold Status:</label>
+                <select
+                    id="sold_status"
+                    name='sold_status'
+                    value={formData.sold_status}
+                    onChange={handleChange}
+                >
+                    <option value="available">Available</option>
+                    <option value="sold">Sold</option>
+                </select>
+
+                {errors.sold_status && (
+                <div className='form-errors'>
+                    <p className='error-text'>{errors.sold_status}</p>
+                </div>
+                )}
+            </div>
+
+          <div className="button-wrapper">
+            <button disabled={hasErrors}>SAVE</button>
+          </div>
+          <div className="button-wrapper">
+            {/* <button>CANCEL</button> */}
+            {/* type="button" prevents the cancel button from submitting the form. */}
+            <button type="button" onClick={handelCancelEdit}>CANCEL</button>
+          </div>
+
+        </form>
+    );
+};
+
+
+EditUserItemForm.propTypes = {
+  itemData: PropTypes.shape({
+    listing_id: PropTypes.number,
+    user_id: PropTypes.number,
+    name: PropTypes.string,
+    category: PropTypes.string,
+    description: PropTypes.string,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    location: PropTypes.string,
+    contact_information: PropTypes.string,
+    images: PropTypes.array,
+    sold_status: PropTypes.string,
+  }).isRequired,
+  onUpdateUserItem: PropTypes.func.isRequired,
+  onCancelUpdateUserItem: PropTypes.func.isRequired,
+};
+
+export default EditUserItemForm;
