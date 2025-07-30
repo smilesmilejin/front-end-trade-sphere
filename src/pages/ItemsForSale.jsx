@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ItemList from '../components/ItemList';
 import ItemFilters from '../components/ItemFilters';
 import Item from '../components/Item';
+import UserContext from '../contexts/UserContext';
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
@@ -141,9 +142,30 @@ const getAllListingsApi = () => {
     })
 };
 
+// Get user Favorites api
+const getUserFavoritesApi = (curUserId) => {
+  console.log("Get User Favorites Api:", curUserId);
+  return axios.get(`${kBaseUrl}/users/${curUserId}/favorites`) 
+    .then(response => { 
+      console.log('###### User Favorites API response')
+      console.log('User Favorites response:', response.data);
+      return response.data;
+    })
+    .catch (error => {
+      console.log('GET User Favorites failed:', error);
+      console.log(error);
+      // console.log('Login failed:', error);
+      throw error;
+    });
+};
+
 function ItemsForSale() {
   const [itemData, setItemData] = useState([]);
   const [filteredItemData, setFilteredItemData] = useState([]);
+
+  const { curUserData } = useContext(UserContext);
+  const [userLikedListings, setUserLikedListings] = useState(new Set());
+  const curUserId = curUserData?.user_id;
 
   const getAllListings = () => {
     return getAllListingsApi()
@@ -216,8 +238,52 @@ function ItemsForSale() {
     setFilteredItemData(filtered);
   };
 
+  const getUserFavorites = () => {
+    getUserFavoritesApi(curUserId)
+      .then(userFavorites => {
+        // const likedSet = new Set(userFavorites.data.map(fav => fav.listing_id));
+        const likedSet = new Set((userFavorites || []).map(fav => fav.listing_id));
+        setUserLikedListings(likedSet);
+      })
+      .catch(error => {
+        // Optional: Show error message or keep editing mode active
+        console.error('Update failed', error);
+      });
+  };
+
+    // Toggle like/unlike
+  const toggleLike = (listingId) => {
+    if (!curUserData) {
+      alert('Please log in to like items');
+      return;
+    }
+    // const isLiked = userLikedListings.has(listingId);
+    const isLiked = (userLikedListings || new Set()).has(listingId);
+
+    if (isLiked) {
+      // Call backend to unlike
+      axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+        .then(() => {
+          const updatedSet = new Set(userLikedListings);
+          updatedSet.delete(listingId);
+          setUserLikedListings(updatedSet);
+        });
+    } else {
+      // Call backend to like
+      axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+        .then(() => {
+          const updatedSet = new Set(userLikedListings);
+          updatedSet.add(listingId);
+          setUserLikedListings(updatedSet);
+        });
+    }
+  };
+
   useEffect( () => {
     getAllListings();
+    if (curUserId) {
+      getUserFavorites();
+    };
     console.log('I am inside the useEffect')
   }, [])
 
@@ -230,6 +296,8 @@ function ItemsForSale() {
         // listings={itemData}
         // listings={sampleListingsData} 
         listings={filteredItemData}
+        userLikedListings={userLikedListings} 
+        onToggleLike={toggleLike}
       />
     </div>
   );

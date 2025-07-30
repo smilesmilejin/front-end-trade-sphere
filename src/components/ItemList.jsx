@@ -16,7 +16,7 @@ const sampleImages = [
     }
 ];
 
-const ItemList = ({ listings }) => {
+const ItemList = ({ listings, userLikedListings, onToggleLike }) => {
 
     const getItemListJSX = (listings) => {
         return listings.map((listing) => {
@@ -35,6 +35,8 @@ const ItemList = ({ listings }) => {
                     updated_at={listing.updated_at}
                     sold_status={listing.sold_status}
                     images={listing.images}
+                    userLikedListings={userLikedListings}
+                    onToggleLike={onToggleLike}
                 />
             );
         });
@@ -59,7 +61,9 @@ ItemList.propTypes = {
             sold_status: PropTypes.bool.isRequired,
             images: PropTypes.array.isRequired,
         })
-    ).isRequired
+    ).isRequired,
+    userLikedListings: PropTypes.instanceOf(Set),
+    onToggleLike: PropTypes.func,
 };
 
 export default ItemList;

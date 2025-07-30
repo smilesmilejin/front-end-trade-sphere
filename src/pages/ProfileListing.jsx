@@ -37,11 +37,30 @@ const getUserListingsApi = (curUserId) => {
     });
 };
 
+// Get user Favorites api
+const getUserFavoritesApi = (curUserId) => {
+  console.log("Get User Favorites Api:", curUserId);
+  return axios.get(`${kBaseUrl}/users/${curUserId}/favorites`) 
+    .then(response => { 
+      console.log('###### User Favorites API response')
+      console.log('User Favorites response:', response.data);
+      return response.data;
+    })
+    .catch (error => {
+      console.log('GET User Favorites failed:', error);
+      console.log(error);
+      // console.log('Login failed:', error);
+      throw error;
+    });
+};
+
+
 
 function ProfileListing() {
   const { curUserData } = useContext(UserContext);
   const [curUserListingsData, setCurUserListingsData] = useState([]);
-
+  const [curUserFavoritesData, setCurUserFavoritesData] = useState([]);
+  const [userLikedListings, setUserLikedListings] = useState(new Set());
   const curUserId = curUserData.user_id;
 
 
@@ -60,16 +79,69 @@ function ProfileListing() {
       });
   };
 
-  useEffect( () => {
-    getUserListings()
-    console.log('I am inside the useEffect')
-  }, [])
+  const getUserFavorites = () => {
+    getUserFavoritesApi(curUserId)
+      .then(userFavorites => {
+        setCurUserFavoritesData(userFavorites);
+        const likedSet = new Set((userFavorites || []).map(fav => fav.listing_id));
+        setUserLikedListings(likedSet);
+      })
+      .catch(error => {
+        // Optional: Show error message or keep editing mode active
+        console.error('Update failed', error);
+      });
+  };
+
+    // Toggle like/unlike
+    // Toggle like/unlike
+    const toggleLike = (listingId) => {
+      if (!curUserData) {
+        alert('Please log in to like items');
+        return;
+      }
+      // const isLiked = userLikedListings.has(listingId);
+      const isLiked = (userLikedListings || new Set()).has(listingId);
+
+      if (isLiked) {
+        // Call backend to unlike
+        axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+          .then(() => {
+            const updatedSet = new Set(userLikedListings);
+            updatedSet.delete(listingId);
+            setUserLikedListings(updatedSet);
+          });
+      } else {
+        // Call backend to like
+        axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+          .then(() => {
+            const updatedSet = new Set(userLikedListings);
+            updatedSet.add(listingId);
+            setUserLikedListings(updatedSet);
+          });
+      }
+    };
+
+    useEffect( () => {
+      getUserListings();
+      getUserFavorites();
+      console.log('I am inside the useEffect')
+    }, [])
+
+
 
 
   return (
     <div>
       <h3>My Sell Listings</h3>
-      <ItemList listings={curUserListingsData}/>
+      {/* <ItemList listings={curUserListingsData}/> */}
+      <ItemList 
+        // listings={itemData}
+        // listings={sampleListingsData} 
+        listings={curUserListingsData}
+        userLikedListings={userLikedListings} 
+        onToggleLike={toggleLike}
+      />
+
     </div>
   );
 }

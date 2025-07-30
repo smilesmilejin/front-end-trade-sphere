@@ -29,7 +29,9 @@ const Item =({
     created_at,
     updated_at,
     sold_status,
-    images }) => {
+    images,
+    userLikedListings,
+    onToggleLike }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpen = () => setIsModalOpen(true);
@@ -38,6 +40,8 @@ const Item =({
     // const imageUrls = images.map(image => image.image_url);
 
     const imageUrls = images?.map(image => image.image_url) || [];
+    // const isLiked = userLikedListings.has(listing_id);
+    const isLiked = (userLikedListings || new Set()).has(listing_id);
 
     return (
         <li>
@@ -65,53 +69,78 @@ const Item =({
 
             {/* When sold_status is false, React renders nothing, because false is a falsy value and not rendered as a string by default in JSX. */}
             {/* <p>Sold Status: {sold_status ? 'Sold' : 'Available'}</p> */}
+            
+            {/* Heart icon */}
+            <button onClick={() => onToggleLike(listing_id)}>
+            {isLiked ? '❤️' : '🤍'}
+            </button>
 
             <button onClick={handleOpen}>View Details</button>
 
             {isModalOpen && (
                 <div className="modal-overlay">
-                <div className="modal">
-                    <button className="close-button" onClick={handleClose}>×</button>
-                    <h2>Listing Details</h2>
-                    {/* <ImageGallerySlider 
-                        // images={images}
-                        images={sampleImagesArray}
-                    /> */}
-                    <ImageGallerySlider 
-                        // images={images && images.length > 0 ? images : [NoImageAvailable]}
-                        images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
-                    />
-                    <p>Listing Id: {listing_id}</p>
-                    <p>User Id: {user_id}</p>
-                    <p>Name: {name}</p>
-                    <p>Category: {category}</p>
-                    <p>Description: {description}</p>
-                    <p>Price: ${price}</p>
-                    <p>Location: {location}</p>
-                    <p>Contact Info: {contact_information}</p>
-                    <p>Created At: {created_at}</p>
-                    <p>Updated At: {updated_at}</p>
-                    <p>Status: {sold_status ? 'Sold' : 'Available'}</p>
-                </div>
+                    <div className="modal">
+                        <button className="close-button" onClick={handleClose}>×</button>
+                        <h2>Listing Details</h2>
+                        {/* <ImageGallerySlider 
+                            // images={images}
+                            images={sampleImagesArray}
+                        /> */}
+                        <ImageGallerySlider 
+                            // images={images && images.length > 0 ? images : [NoImageAvailable]}
+                            images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
+                        />
+                        <p>Listing Id: {listing_id}</p>
+                        <p>User Id: {user_id}</p>
+                        <p>Name: {name}</p>
+                        <p>Category: {category}</p>
+                        <p>Description: {description}</p>
+                        <p>Price: ${price}</p>
+                        <p>Location: {location}</p>
+                        <p>Contact Info: {contact_information}</p>
+                        <p>Created At: {created_at}</p>
+                        <p>Updated At: {updated_at}</p>
+                        <p>Status: {sold_status ? 'Sold' : 'Available'}</p>
+                    </div>
                 </div>
             )}
         </li>
     )
 }
 
+// Item.propTypes = {
+//     listing_id: PropTypes.number.isRequired,
+//     user_id: PropTypes.number.isRequired,
+//     name: PropTypes.string.isRequired,
+//     category: PropTypes.string.isRequired,
+//     description: PropTypes.string.isRequired,
+//     price: PropTypes.number.isRequired, // Validate decimals elsewhere if needed
+//     location: PropTypes.string.isRequired,
+//     contact_information: PropTypes.string.isRequired,
+//     created_at: PropTypes.string.isRequired, // Or use PropTypes.instanceOf(Date)
+//     updated_at: PropTypes.string.isRequired,
+//     sold_status: PropTypes.bool.isRequired,
+//     images: PropTypes.array.isRequired,
+//     userLikedListings: PropTypes.instanceOf(Set),
+//     onToggleLike: PropTypes.func,
+// }
+
+
 Item.propTypes = {
-    listing_id: PropTypes.number.isRequired,
-    user_id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired, // Validate decimals elsewhere if needed
-    location: PropTypes.string.isRequired,
-    contact_information: PropTypes.string.isRequired,
-    created_at: PropTypes.string.isRequired, // Or use PropTypes.instanceOf(Date)
-    updated_at: PropTypes.string.isRequired,
-    sold_status: PropTypes.bool.isRequired,
-    images: PropTypes.array.isRequired,
-}
+  listing_id: PropTypes.number.isRequired,
+  user_id: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  category: PropTypes.string,
+  description: PropTypes.string,
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  location: PropTypes.string,
+  contact_information: PropTypes.string,
+  created_at: PropTypes.string.isRequired,
+  updated_at: PropTypes.string.isRequired,
+  sold_status: PropTypes.bool.isRequired,
+  images: PropTypes.array.isRequired,
+  userLikedListings: PropTypes.instanceOf(Set),
+  onToggleLike: PropTypes.func,
+};
 
 export default Item;

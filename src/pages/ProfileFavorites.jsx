@@ -41,7 +41,7 @@ const getUserFavoritesApi = (curUserId) => {
 function ProfileFavorites() {
   const { curUserData } = useContext(UserContext);
   const [curUserFavoritesData, setCurUserFavoritesData] = useState([]);
-
+  const [userLikedListings, setUserLikedListings] = useState(new Set());
   const curUserId = curUserData.user_id;
 
 
@@ -52,12 +52,58 @@ function ProfileFavorites() {
   const getUserFavorites = () => {
     getUserFavoritesApi(curUserId)
       .then(userFavorites => {
-        setCurUserFavoritesData(userFavorites)
+        setCurUserFavoritesData(userFavorites);
+        const likedSet = new Set((userFavorites || []).map(fav => fav.listing_id));
+        setUserLikedListings(likedSet);
       })
       .catch(error => {
         // Optional: Show error message or keep editing mode active
         console.error('Update failed', error);
       });
+  };
+
+  // Toggle like/unlike
+  const toggleLike = (listingId) => {
+    if (!curUserData) {
+      alert('Please log in to like items');
+      return;
+    }
+    // const isLiked = userLikedListings.has(listingId);
+    const isLiked = (userLikedListings || new Set()).has(listingId);
+
+    if (isLiked) {
+      // Call backend to unlike
+      axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+        .then(() => {
+          // Remove from liked set
+          const updatedSet = new Set(userLikedListings);
+          updatedSet.delete(listingId);
+          setUserLikedListings(updatedSet);
+
+        // Remove from favorites array
+        setCurUserFavoritesData(prevFavorites =>
+          prevFavorites.filter(fav => fav.listing_id !== listingId)
+        );
+
+        });
+    } 
+    
+    // else {
+    //   // Call backend to like
+    //   axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+    //     .then((response) => {
+    //       const updatedSet = new Set(userLikedListings);
+    //       updatedSet.add(listingId);
+    //       setUserLikedListings(updatedSet);
+
+    //     // Add new favorite to favorites array
+    //     // Assuming API returns the newly created favorite object in response.data
+    //     if (response.data) {
+    //       setCurUserFavoritesData(prevFavorites => [...prevFavorites, response.data]);
+    //     }
+
+    //     });
+    // }
   };
 
   useEffect( () => {
@@ -72,6 +118,8 @@ function ProfileFavorites() {
         // listings={itemData}
         // listings={sampleListingsData} 
         listings={curUserFavoritesData}
+        userLikedListings={userLikedListings} 
+        onToggleLike={toggleLike}
       />
     </div>
   );
