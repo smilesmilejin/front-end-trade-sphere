@@ -3,7 +3,7 @@ import '../styles/Item.css';
 
 import ImageGallerySlider from './ImageGallerySlider.jsx';
 import { useState } from 'react';
-import noImageAvailable from '../assets/noImageAvailable.png';
+import NoImageAvailable from '../assets/NoImageAvailable.png';
 
 const sampleImagesArray = [
     "https://i.ibb.co/gLQ48Lrp/71-O-3j3d9-DL-AC-SL1500.jpg",
@@ -72,7 +72,7 @@ const Item =({
                         images={sampleImagesArray}
                     /> */}
                     <ImageGallerySlider 
-                        images={images && images.length > 0 ? images : [noImageAvailable]}
+                        images={images && images.length > 0 ? images : [NoImageAvailable]}
                     />
                     <p>Listing Id: {listing_id}</p>
                     <p>User Id: {user_id}</p>
