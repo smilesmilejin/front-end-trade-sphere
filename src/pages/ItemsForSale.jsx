@@ -10,7 +10,6 @@ console.log("In ItemsForSale page, the kBaseUrl:", kBaseUrl);
 
 
 const sampleListingsData = 
-
 [
    {
        "listing_id": 9,
@@ -140,19 +139,65 @@ const getAllListingsApi = () => {
     .catch(error => {
       console.log(error);
     })
-}
+};
 
 function ItemsForSale() {
-  const [listingData, setListingData] = useState([]);
+  const [itemData, setItemData] = useState([]);
+  const [filteredItemData, setFilteredItemData] = useState([]);
 
   const getAllListings = () => {
     return getAllListingsApi()
       .then((listings) => {
-        setListingData(listings);
+        setItemData(listings);
+        setFilteredItemData(listings);
       });
   };
 
+  const getFilteredItems = (filters) => {
+    if (!itemData || itemData.length === 0) return [];
 
+    let filtered = [...itemData];
+
+    console.log('##### filtered: ', filtered)
+
+    // Category filter
+    if (filters.category !== '') {
+      filtered = filtered.filter(item => item.category === filters.category);
+      console.log('##### filtered category: ', filtered)
+    }
+
+    // Availability filter
+    if (filters.availability !== '') {
+      if (filters.availability === 'available') {
+        filtered = filtered.filter(item => item.sold_status === false); // Available = not sold
+      } else if (filters.availability === 'sold') {
+        filtered = filtered.filter(item => item.sold_status === true); // Sold = sold
+      }
+    }
+
+    // Price sorting
+    if (filters.priceSort !== '') {
+      if (filters.priceSort === 'price-asc') {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (filters.priceSort === 'price-desc') {
+        filtered.sort((a, b) => b.price - a.price);
+      };
+    }
+
+    // Date sorting
+    if (filters.dateSort !== '') {
+      if (filters.dateSort === 'date-asc') {
+        filtered.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+      } else if (filters.dateSort === 'date-desc') {
+        filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      };
+    }
+
+    console.log('##### Curretn Filtered Item Data: ', filtered)
+    // return filteredItemData;
+
+    setFilteredItemData(filtered);
+  };
 
   useEffect( () => {
     getAllListings();
@@ -163,10 +208,11 @@ function ItemsForSale() {
     <div>
       <h1>ItemsForSale Page</h1>
       <p>ItemsForSale Page</p>
-      <ItemFilters />
+      <ItemFilters onGetFilteredItems={getFilteredItems}/>
       <ItemList 
-        listings={listingData}
+        // listings={itemData}
         // listings={sampleListingsData} 
+        listings={filteredItemData}
       />
     </div>
   );

@@ -9,7 +9,7 @@ const defaultFiltersState = {
     dateSort: '',
 };
 
-const ItemFilters = ({ onFiltersChange }) => {
+const ItemFilters = ({ onGetFilteredItems }) => {
     // const [category, setCategory] = useState('');
     // const [availability, setAvailability] = useState('');
     // const [priceSort, setPriceSort] = useState('');
@@ -50,7 +50,7 @@ const ItemFilters = ({ onFiltersChange }) => {
         console.log('updatedFilters is:', updatedFilters);
 
         setFilters(updatedFilters);
-        onFiltersChange?.(updatedFilters);
+        onGetFilteredItems(updatedFilters);
     };
 
 
@@ -149,7 +149,7 @@ const ItemFilters = ({ onFiltersChange }) => {
 };
 
 ItemFilters.propTypes = {
-    onFiltersChange: PropTypes.func.isRequired,
+    onGetFilteredItems: PropTypes.func.isRequired,
 };
 
 export default ItemFilters;
