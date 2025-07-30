@@ -73,6 +73,23 @@ const patchUserItemApi = (curUserId, listingId, updatedItemData) => {
 };
 
 
+// DELETE user Item api
+// DELETE /users/<user_id>/listings/<listing_id>
+const deleteUserItemApi = (curUserId, listingId) => {
+  return axios.delete(`${kBaseUrl}/users/${curUserId}/listings/${listingId}`) 
+    .then(response => { 
+      console.log('###### Delete User Item response')
+      console.log('Delete User Item response:', response.data);
+      return response.data;
+    })
+    .catch (error => {
+      console.log('Delete User Item failed:', error);
+      console.log(error);
+      throw error;
+    });
+};
+
+
 function ProfileListing() {
   const { curUserData } = useContext(UserContext);
   const [curUserListingsData, setCurUserListingsData] = useState([]);
@@ -155,9 +172,29 @@ function ProfileListing() {
           console.error('Update failed', error);
         });
     };
+
     const cancelUpdateUserItem = () => {
-      console.log('Cancell Update User Item');
+      console.log('Cancel Update User Item');
     }
+
+    const deleteUserItem = (listingId) => {
+      deleteUserItemApi(curUserId, listingId)
+        .then(() => {
+          // Update listings: replace the updated listing in curUserListingsData
+          setCurUserListingsData(prevListings => 
+            prevListings.filter(listing => 
+              listing.listing_id !== listingId
+            )
+          );
+          alert('User Item is deleted!')
+          // setIsEditing(false); // NOT quite necesasry , since setCurUserData caues the whole page to re render, and isEditing, state go back to default
+        })
+        .catch(error => {
+          // Optional: Show error message or keep editing mode active
+          console.error('User Item Delete is failed', error);
+        });
+    };
+
 
     useEffect( () => {
       getUserListings();
@@ -181,6 +218,8 @@ function ProfileListing() {
         editButton={<button>Edit Listing</button>}
         onUpdateUserItem={updateUserItem}
         onCancelUpdateUserItem={cancelUpdateUserItem}
+        deleteButton={<button>Delete Listing</button>}
+        onDeleteUserItem={deleteUserItem}
       />
 
     </div>

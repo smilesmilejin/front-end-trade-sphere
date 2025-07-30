@@ -37,7 +37,9 @@ const Item =({
     onToggleLike,
     editButton,
     onUpdateUserItem, 
-    onCancelUpdateUserItem }) => {
+    onCancelUpdateUserItem,
+    deleteButton, 
+    onDeleteUserItem }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpen = () => setIsModalOpen(true);
@@ -89,6 +91,10 @@ const Item =({
 
             <div onClick={handleEditOpen}>
                 {editButton}
+            </div>
+
+            <div onClick={() => onDeleteUserItem(listing_id)}>
+            {deleteButton}
             </div>
 
             {isModalOpen && (
@@ -184,6 +190,8 @@ Item.propTypes = {
     editButton: PropTypes.element,
     onUpdateUserItem:PropTypes.func,
     onCancelUpdateUserItem: PropTypes.func,
+    deleteButton: PropTypes.element,
+    onDeleteUserItem: PropTypes.func,
 }
 
 
