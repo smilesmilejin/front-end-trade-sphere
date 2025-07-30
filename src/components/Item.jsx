@@ -35,7 +35,9 @@ const Item =({
     const handleOpen = () => setIsModalOpen(true);
     const handleClose = () => setIsModalOpen(false);
 
-    const imageUrls = images.map(image => image.image_url);
+    // const imageUrls = images.map(image => image.image_url);
+
+    const imageUrls = images?.map(image => image.image_url) || [];
 
     return (
         <li>
