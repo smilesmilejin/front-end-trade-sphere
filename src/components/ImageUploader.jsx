@@ -58,6 +58,16 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
       setLoading(false);
     }
   };
+  
+  const handleDeleteImage = (urlToDelete) => {
+    setUploadedImages((prev) => prev.filter(url => url !== urlToDelete));
+
+    // Also update parent formData
+    onSetFormData((prev) => ({
+      ...prev,
+      images: prev.images.filter(url => url !== urlToDelete),
+    }));
+  };
 
   // 👇 Clear on reset signal from parent
   useEffect(() => {
@@ -95,20 +105,47 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
       )}
 
         {/* Display all uploaded images */}
-        {uploadedImages.length > 0 && (
+        {/* {uploadedImages.length > 0 && (
             <div style={{ marginTop: 20 }}>
             <h3>All Uploaded Images:</h3>
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
                 {uploadedImages.map((url, idx) => (
+                  <div>
                 <img
                     key={idx}
                     src={url}
                     alt={`Uploaded ${idx + 1}`}
                     style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
                 />
-                ))}
+
+                </div>
             </div>
             </div>
+        )} */}
+
+        {uploadedImages.length > 0 && (
+          <div style={{ marginTop: 20 }}>
+            <h3>All Uploaded Images:</h3>
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+              {uploadedImages.map((url, idx) => (
+                <div
+                  key={idx}
+                >
+                  <img
+                    src={url}
+                    alt={`Uploaded ${idx + 1}`}
+                    style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteImage(url)}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
     </div>
 
