@@ -2,6 +2,20 @@ import PropTypes from 'prop-types';
 import Item from './Item.jsx';
 // import '../styles/BoardList.css';
 
+
+const sampleImages = [
+    {
+      image_id: 23,
+      listing_id: 23,
+      image_url: "https://i.ibb.co/tT57qP2d/81k4-Wltu3-RL-AC-SL1500.jpg"
+    },
+    {
+      image_id: 24,
+      listing_id: 23,
+      image_url: "https://i.ibb.co/bR8qdMb9/81-Hv-O7-AT5h-L-AC-SL1500.jpg"
+    }
+];
+
 const ItemList = ({ listings }) => {
 
     const getItemListJSX = (listings) => {
@@ -20,6 +34,7 @@ const ItemList = ({ listings }) => {
                     created_at={listing.created_at}
                     updated_at={listing.updated_at}
                     sold_status={listing.sold_status}
+                    images={listing.images}
                 />
             );
         });

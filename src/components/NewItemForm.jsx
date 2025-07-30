@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import ImageUploader from './ImageUploader';
 
 const kDefaultFormState = {
     name: '',
@@ -8,6 +9,7 @@ const kDefaultFormState = {
     price: '',
     location: '',
     contact_information: '',
+    images:[],
     // created_at: '',
     // updated_at: '',
     // sold_status: '',
@@ -48,6 +50,7 @@ const NewItemForm = ({ onPostItem }) => {
             price: trimmedPrice,
             location: trimmedLocation,
             contact_information: trimmedContactInformation,
+            images: formData.images
         };
 
     // trim the title and owner before posting
@@ -187,6 +190,8 @@ const NewItemForm = ({ onPostItem }) => {
                     <p className='error-text'>{errors.contact_information}</p>
                 </div>
                 )}
+
+            <ImageUploader onSetFormData={setFormData}/>
 
             <div className="button-wrapper">
                 <button disabled={hasErrors}>Submit</button>

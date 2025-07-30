@@ -60,6 +60,7 @@ function ProfilePostItem() {
       )}
 
       <NewItemForm onPostItem={postItem}/>
+
     </div>
   );
 }

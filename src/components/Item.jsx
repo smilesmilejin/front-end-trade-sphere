@@ -35,6 +35,8 @@ const Item =({
     const handleOpen = () => setIsModalOpen(true);
     const handleClose = () => setIsModalOpen(false);
 
+    const imageUrls = images.map(image => image.image_url);
+
     return (
         <li>
             {/* <ImageGallery 
@@ -43,8 +45,10 @@ const Item =({
             /> */}
             <ImageGallerySlider 
                 // images={images}
-                images={sampleImagesArray}
-                // images={images && images.length > 0 ? images : [noImageAvailable]}
+                // images={sampleImagesArray}
+                // images={images && images.length > 0 ? images : [NoImageAvailable]}
+                images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
+
             />
             {/* <p>Listing Id: {listing_id}</p>
             <p>User Id: {user_id}</p> */}
@@ -72,7 +76,8 @@ const Item =({
                         images={sampleImagesArray}
                     /> */}
                     <ImageGallerySlider 
-                        images={images && images.length > 0 ? images : [NoImageAvailable]}
+                        // images={images && images.length > 0 ? images : [NoImageAvailable]}
+                        images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
                     />
                     <p>Listing Id: {listing_id}</p>
                     <p>User Id: {user_id}</p>
