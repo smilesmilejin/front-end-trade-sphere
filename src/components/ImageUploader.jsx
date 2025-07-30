@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 console.log(API_KEY);
 
-const ImageUploader = ({ onSetFormData }) => {
+const ImageUploader = ({ onSetFormData, resetUploader }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedUrl, setUploadedUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [uploadedImages, setUploadedImages] = useState([]);
+
+  const [inputKey, setInputKey] = useState(Date.now());
 
 
 
@@ -57,9 +59,26 @@ const ImageUploader = ({ onSetFormData }) => {
     }
   };
 
+  // 👇 Clear on reset signal from parent
+  useEffect(() => {
+    if (resetUploader) {
+      setSelectedFile(null);
+      setUploadedUrl("");
+      setLoading(false);
+      setUploadedImages([]);
+      setInputKey(Date.now());  // Force remount of file input
+    }
+  }, [resetUploader]);
+
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+      {/* <input type="file" accept="image/*" onChange={handleFileChange} /> */}
+      <input
+        key={inputKey}
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        />
       <button onClick={handleUpload} disabled={loading}>
         {loading ? "Uploading..." : "Upload to ImGBB"}
       </button>

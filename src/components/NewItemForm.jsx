@@ -29,6 +29,7 @@ const kErrorState = {
 const NewItemForm = ({ onPostItem }) => {
     const [formData, setFormData] = useState(kDefaultFormState);
     const [errors, setErrors] = useState(kErrorState);
+    const [resetUploader, setResetUploader] = useState(false);
 
 
     const handleSubmit = (event) => {
@@ -61,6 +62,9 @@ const NewItemForm = ({ onPostItem }) => {
 
     setFormData(kDefaultFormState);
     setErrors(kErrorState);
+
+    setResetUploader(true); // Trigger image uploader reset
+    setTimeout(() => setResetUploader(false), 100); // Reset the flag after effect
   };
 
   const handleChange = (event) => {
@@ -191,7 +195,7 @@ const NewItemForm = ({ onPostItem }) => {
                 </div>
                 )}
 
-            <ImageUploader onSetFormData={setFormData}/>
+            <ImageUploader onSetFormData={setFormData} resetUploader={resetUploader}/>
 
             <div className="button-wrapper">
                 <button disabled={hasErrors}>Submit</button>
