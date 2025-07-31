@@ -27,22 +27,24 @@ function ProfilePostItem() {
 
   console.log('user Context is now: ', curUserData);
 
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  // const [successMessage, setSuccessMessage] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
 
   const curUserId = curUserData.user_id;
 
   const postItem= (newItemData) => {
     postItemApi(curUserId, newItemData)
     .then(response => {
-      setSuccessMessage('✅ Your item was posted successfully!');
-      setErrorMessage('');
+      // setSuccessMessage('✅ Your item was posted successfully!');
+      alert('✅ Your item was posted successfully!')
+      // setErrorMessage('');
       return response.data;
     })
     .catch (error => {
       console.log(error);
-      setErrorMessage('❌ Failed to post the item. Please try again.');
-      setSuccessMessage('');
+      alert('❌ Failed to post the item. Please try again.')
+      // setErrorMessage('❌ Failed to post the item. Please try again.');
+      // setSuccessMessage('');
     });
   }
 
@@ -52,12 +54,12 @@ function ProfilePostItem() {
       <h3>Post Item to Sell</h3>
       <p>Post a new item for sale here.</p>
       {/* Show success or error message */}
-      {successMessage && (
+      {/* {successMessage && (
         <div className="success-message">{successMessage}</div>
       )}
       {errorMessage && (
         <div className="error-message">{errorMessage}</div>
-      )}
+      )} */}
 
       <NewItemForm onPostItem={postItem}/>
 

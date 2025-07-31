@@ -56,7 +56,13 @@ const EditUserItemForm = ({
         location: itemData.location || '',
         contact_information: itemData.contact_information || '',
         images:itemData.images || [],
-        sold_status: itemData.sold_status,
+        // sold_status: itemData.sold_status,
+        sold_status:
+            itemData.sold_status === true 
+            // || itemData.sold_status === "true"
+            ? "sold"
+            : "available",
+
     };
     const [formData, setFormData] = useState(initialItemData);
     const navigate = useNavigate();
