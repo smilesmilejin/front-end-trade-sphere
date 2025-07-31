@@ -8,7 +8,6 @@ import UserContext from '../contexts/UserContext';
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
 // console.log("In ItemsForSale page, the kBaseUrl:", kBaseUrl);
 
-
 // const sampleListingsData = 
 // [
 //    {
@@ -158,6 +157,28 @@ const getUserFavoritesApi = (curUserId) => {
     });
 };
 
+// DELETE user favorites API
+const deleteUserFavoriteApi = async (userId, listingId) => {
+  try {
+    await axios.delete(`${kBaseUrl}/users/${userId}/favorites/${listingId}`);
+  } catch (error) {
+    console.error('Error unliking item:', error);
+    throw error;
+  }
+};
+
+
+// POST user favorites API
+const postUserFavoriteApi = async (userId, listingId) => {
+  try {
+    await axios.post(`${kBaseUrl}/users/${userId}/favorites/${listingId}`);
+  } catch (error) {
+    console.error('Error liking item:', error);
+    throw error;
+  }
+};
+
+
 function ItemsForSale() {
   const [itemData, setItemData] = useState([]);
   const [filteredItemData, setFilteredItemData] = useState([]);
@@ -246,6 +267,30 @@ function ItemsForSale() {
       });
   };
 
+  const deleteUserFavorite = (userId, listingId) => {
+    deleteUserFavoriteApi(userId, listingId)
+      .then(() => {
+        const updatedSet = new Set(userLikedListings);
+        updatedSet.delete(listingId);
+        setUserLikedListings(updatedSet);
+      })
+      .catch(error => {
+        console.error('Error deleting user favorite:', error);
+      });
+  };
+
+  const postUserFavorite = (userId, listingId) => {
+    postUserFavoriteApi(userId, listingId)
+      .then(() => {
+          const updatedSet = new Set(userLikedListings);
+          updatedSet.add(listingId);
+          setUserLikedListings(updatedSet);
+      })
+      .catch(error => {
+        console.error('Error adding user favorite:', error);
+      });
+  };
+
   // Toggle like/unlike
   const toggleLike = (listingId) => {
     if (!curUserData) {
@@ -255,22 +300,28 @@ function ItemsForSale() {
 
     const isLiked = (userLikedListings || new Set()).has(listingId);
 
+    // if (isLiked) {
+    //   // Call backend to unlike
+    //   axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+    //     .then(() => {
+    //       const updatedSet = new Set(userLikedListings);
+    //       updatedSet.delete(listingId);
+    //       setUserLikedListings(updatedSet);
+    //     });
+    // } else {
+    //   // Call backend to like
+    //   axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+    //     .then(() => {
+    //       const updatedSet = new Set(userLikedListings);
+    //       updatedSet.add(listingId);
+    //       setUserLikedListings(updatedSet);
+    //     });
+    // }
+
     if (isLiked) {
-      // Call backend to unlike
-      axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-        .then(() => {
-          const updatedSet = new Set(userLikedListings);
-          updatedSet.delete(listingId);
-          setUserLikedListings(updatedSet);
-        });
+      deleteUserFavorite(curUserId, listingId);
     } else {
-      // Call backend to like
-      axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-        .then(() => {
-          const updatedSet = new Set(userLikedListings);
-          updatedSet.add(listingId);
-          setUserLikedListings(updatedSet);
-        });
+      postUserFavorite(curUserId, listingId);
     }
   };
 
