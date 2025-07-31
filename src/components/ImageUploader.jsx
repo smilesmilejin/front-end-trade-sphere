@@ -9,9 +9,9 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
   const [uploadedUrl, setUploadedUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
-  const [inputKey, setInputKey] = useState(Date.now());
+  const [inputKey, setInputKey] = useState(Date.now()); // Used to force reset file input
 
-
+  // Handle file input change
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
     setUploadedUrl("");
@@ -37,9 +37,12 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
 
       const data = await response.json();
       if (data.success) {
+
+        // Update local image preview
         setUploadedUrl(data.data.display_url);
         setUploadedImages((prev) => [...prev, data.data.display_url]);
 
+        // Update form data in parent
         onSetFormData((prev) => ({
           ...prev,
           images: [...(prev.images || []), data.data.display_url],
@@ -55,6 +58,7 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
     }
   };
   
+    // Remove an uploaded image
   const handleDeleteImage = (urlToDelete) => {
     setUploadedImages((prev) => prev.filter(url => url !== urlToDelete));
 
@@ -65,14 +69,14 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
     }));
   };
 
-    // 👇 Clear on reset signal from parent
+    // Resets all internal states and forces file input to re-render when resetUploader is true.
     useEffect(() => {
       if (resetUploader) {
         setSelectedFile(null);
         setUploadedUrl("");
         setLoading(false);
         setUploadedImages([]);
-        setInputKey(Date.now());  // Force remount of file input
+        setInputKey(Date.now());  // Reset the <input type="file" />
       }
     }, [resetUploader]);
 
