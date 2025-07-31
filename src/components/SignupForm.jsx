@@ -1,32 +1,34 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
+
+// Default form values
 const kDefaultFormState = {
   email: '',
   name: '',
   address: '',
 };
 
-
+// Default error message (used for email field validation)
 const kErrorState = {
   message: 'Email cannot be empty',
 };
 
 
 const SignupForm = ({ onSignupUser }) => {
-    const [formData, setFormData] = useState(kDefaultFormState);
-    const [errors, setErrors] = useState(kErrorState);
 
+  const [formData, setFormData] = useState(kDefaultFormState);
+  const [errors, setErrors] = useState(kErrorState);
 
-    const handleSubmit = (event) => {
-    console.log('submitted!');
+  // Handle form submission
+  const handleSubmit = (event) => {
+    // console.log('sign up form submitted!');
 
     event.preventDefault();
     
+    // Trim input values to avoid leading/trailing whitespace issues
     const trimmedEmail = formData.email.trim();
-
     const trimmedName = formData.name.trim();
-
     const trimmedAddress = formData.address.trim();
 
     const signUpData = {
@@ -35,25 +37,28 @@ const SignupForm = ({ onSignupUser }) => {
         address: trimmedAddress
     };
 
-    // trim the title and owner before posting
-    console.log("Sign up Data: ", signUpData);
+    // console.log("Sign up Data: ", signUpData); // trim the title and owner before posting
 
-
+    // Pass cleaned data to parent component handler
     onSignupUser(signUpData);
 
+    // Reset form and error state
     setFormData(kDefaultFormState);
     setErrors(kErrorState);
   };
 
+  // Handle input field changes and validate email
   const handleChange = (event) => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
 
+    // Update the corresponding field in formData
     setFormData((formData) => ({
       ...formData,
       [inputName]: inputValue,
     }));
 
+    // Validate email field as user types
     if (inputName === 'email') {
         const trimmedLength = inputValue.trim().length;
 
@@ -71,6 +76,7 @@ const SignupForm = ({ onSignupUser }) => {
     }
   };
 
+  // Generate a controlled input field with dynamic attributes
   const makeControlledInput = (inputName, type='text') => {
     return (
       <>
@@ -86,34 +92,34 @@ const SignupForm = ({ onSignupUser }) => {
     );
   };
 
-    return (
-      <form className='signup-form' onSubmit={handleSubmit}>
-        <div className='form-header'>
-          Sign Up
+  return (
+    <form className='signup-form' onSubmit={handleSubmit}>
+      <div className='form-header'>
+        Sign Up
+      </div>
+      <>
+        <div className='form-field'>
+          {makeControlledInput('email','email')}
         </div>
-        <>
-          <div className='form-field'>
-            {makeControlledInput('email','email')}
+        {errors.message && (
+          <div className='form-errors'>
+              <p className='error-text'>{errors.message}</p>
           </div>
-          {errors.message && (
-            <div className='form-errors'>
-                <p className='error-text'>{errors.message}</p>
-            </div>
-          )}
+        )}
 
-          <div className='form-field'>
-            {makeControlledInput('name')}
-          </div>
+        <div className='form-field'>
+          {makeControlledInput('name')}
+        </div>
 
-          <div className='form-field'>
-            {makeControlledInput('address')}
-          </div>
+        <div className='form-field'>
+          {makeControlledInput('address')}
+        </div>
 
-          <div className="button-wrapper">
-            <button disabled={errors.message}>SIGN UP</button>
-          </div>
-        </>
-      </form>
+        <div className="button-wrapper">
+          <button disabled={errors.message}>SIGN UP</button>
+        </div>
+      </>
+    </form>
   );
 };
 
