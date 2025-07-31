@@ -1,15 +1,15 @@
-// import { Link, useLocation } from 'react-router-dom';
 import { Link, useLocation } from "react-router";
-import './NavBar.css';
+import '../styles/NavBar.css';
+
 
 function Navbar() {
   const location = useLocation(); // gives you current pathname
 
-  console.log('Current location:', location);            // Full location object
-  console.log('Current path:', location.pathname);       // Just the path like "/about"
+  // console.log('Current location:', location);            // Full location object
+  // console.log('Current path:', location.pathname);       // Just the path like "/about"
 
   // Current location: {pathname: '/itemsforsale', search: '', hash: '', state: null, key: 'qhzlwbqh'}
-  //   Current path: /itemsforsale
+  // Current path: /itemsforsale
 
   // helper to check if path is active
   // You're defining a helper function called isActive.
@@ -36,17 +36,4 @@ function Navbar() {
   );
 }
 
-export default Navbar; 
-
-
-// import { Link, useLocation } from "react-router";
-
-// <Link to="/dashboard">Dashboard</Link>;
-
-// <Link
-//   to={{
-//     pathname: "/some/path",
-//     search: "?query=string",
-//     hash: "#hash",
-//   }}
-// />
+export default Navbar;
