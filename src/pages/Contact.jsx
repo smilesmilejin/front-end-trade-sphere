@@ -1,7 +1,7 @@
-import './About.css';
+// import './About.css';
 
 
-function About() {
+function Contact() {
   return (
     <div>
       <h1>Contact Information</h1>
@@ -23,4 +23,4 @@ function About() {
   );
 }
 
-export default About;
+export default Contact;
