@@ -118,7 +118,7 @@ const Item =({
                         }}
                         onUpdateUserItem={onUpdateUserItem}
                         onCancelUpdateUserItem={onCancelUpdateUserItem}
-                        onDeleteImage={onDeleteImage}
+                        // onDeleteImage={onDeleteImage}
                         onHandleEditClose={handleEditClose}
                         />
                     </div>

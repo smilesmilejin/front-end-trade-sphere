@@ -40,7 +40,7 @@ const ItemList = ({ listings, userLikedListings, onToggleLike, editButton, onUpd
                     onCancelUpdateUserItem={onCancelUpdateUserItem}
                     deleteButton={deleteButton}
                     onDeleteUserItem={onDeleteUserItem}
-                    onDeleteImage={onDeleteImage}
+                    // onDeleteImage={onDeleteImage}
                 />
             );
         });

@@ -13,8 +13,6 @@ const kDefaultFormState = {
     location: '',
     contact_information: '',
     images:[],
-    // created_at: '',
-    // updated_at: '',
     sold_status: '',
 };
 
@@ -27,7 +25,6 @@ const kErrorState = {
     contact_information:'Contact Information cannot be empty',
     sold_status: 'Sold cannot be empty',
 };
-
 
 
 const EditUserItemForm = ({ 
@@ -43,10 +40,9 @@ const EditUserItemForm = ({
     },
     onUpdateUserItem, 
     onCancelUpdateUserItem,
-    onDeleteImage,
+    // onDeleteImage,
     onHandleEditClose }) => {
 
-    // const [curUserData, setCurUserData] = useContext(UserContext);
     // Make sure the initial userData fields are never null or undefined — use empty strings instead:
     const initialItemData = {
         name: itemData.name || '',
@@ -56,7 +52,6 @@ const EditUserItemForm = ({
         location: itemData.location || '',
         contact_information: itemData.contact_information || '',
         images:itemData.images || [],
-        // sold_status: itemData.sold_status,
         sold_status:
             itemData.sold_status === true 
             // || itemData.sold_status === "true"
@@ -67,57 +62,33 @@ const EditUserItemForm = ({
     const [formData, setFormData] = useState(initialItemData);
     const navigate = useNavigate();
 
-    // const [errors, setErrors] = useState({});
     const getInitialErrors = (data) => {
-    const errs = {};
-    for (const key in kErrorState) {
-        const value = (data[key] ?? '').toString().trim();
-        if (!value) {
-        errs[key] = kErrorState[key];
+        const errs = {};
+        for (const key in kErrorState) {
+            const value = (data[key] ?? '').toString().trim();
+            if (!value) {
+            errs[key] = kErrorState[key];
+            }
         }
-    }
-    return errs;
+        return errs;
     };
 
     const [errors, setErrors] = useState(() => getInitialErrors(initialItemData));
-
     const [deletedImageIds, setDeletedImageIds] = useState([]);
-
     const [resetUploader, setResetUploader] = useState(false);
     const [newUploadedimages, setNewUploadedimagesImages] = useState([]);
 
     const handleSubmit = async (event) => {
-        console.log('submitted!');
+        // console.log('Edit User Item Form is submitted!');
 
         event.preventDefault();
 
-        
         const trimmedName = formData.name.trim();
         const trimmedDescription = formData.description.trim();
-        // const trimmedPrice = formData.price.trim();
         const trimmedLocation = formData.location.trim();
         const trimmedContactInformation = formData.contact_information.trim();
 
-        console.log('deletedImageIds is now: ', deletedImageIds);
-
-
-
-        // const filteredImages = formData.images
-        // .filter(img => !deletedImageIds.includes(img.image_id))
-
-        // const updateUserTableData = {
-        //         name: trimmedName,
-        //         category: formData.category,
-        //         description: trimmedDescription,
-        //         price: Number(formData.price),
-        //         location: trimmedLocation,
-        //         contact_information: trimmedContactInformation,
-        //         // images: formData.images,
-        //         images: filteredImages,
-        //         sold_status: formData.sold_status === 'available' ? false : true,
-        // }
-
-        // setFormData(updateUserTableData); // Form Data Images, need to images that are objects
+        // console.log('deletedImageIds is now: ', deletedImageIds);
 
         // Filter out deleted images  before submitting
         const filteredImagesUrls = formData.images
@@ -133,34 +104,18 @@ const EditUserItemForm = ({
                 price: Number(formData.price),
                 location: trimmedLocation,
                 contact_information: trimmedContactInformation,
-                // images: formData.images,
-                // images: filteredImagesUrls, // for API calls, the images need to array of URLs
-                images: combinedImages,
+                images: combinedImages, // for API calls, the images need to array of URLs
                 sold_status: formData.sold_status === 'available' ? false : true,
         };
 
         // trim the title and owner before posting
-        console.log("Update User Item Form: ", updateUserItemData);
-
-
+        // console.log("Update User Item Form: ", updateUserItemData);
 
         const newErrors = getInitialErrors(updateUserItemData);
         setErrors(newErrors);
 
         // post new ItemData
-        const updatedFormData = await onUpdateUserItem(itemData.listing_id, updateUserItemData);
-
-        // setFormData(updatedFormData)
-
-        // setFormData(prev => ({
-        //     ...prev,
-        //     ...updatedFormData
-        // }));
-        console.log('UpdatedFormData: ', updatedFormData)
-        // // 2) Delete the images marked for deletion
-        // for (const imageId of deletedImageIds) {
-        //     await onDeleteImage(imageId, itemData.listing_id);
-        // }
+        await onUpdateUserItem(itemData.listing_id, updateUserItemData);
 
         // 3) Clear deleted images after successful save
         setDeletedImageIds([]);
@@ -170,7 +125,7 @@ const EditUserItemForm = ({
         setResetUploader(true); // Trigger image uploader reset
         setTimeout(() => setResetUploader(false), 100); // Reset the flag after effect
 
-        alert('Going back  to my-sell-listings pages!')
+        // alert('Going back  to my-sell-listings pages!')
         onHandleEditClose();
         navigate('/profile/my-sell-listings'); // Redirect user to home page or dashboard ediUser Form
 
@@ -180,6 +135,8 @@ const EditUserItemForm = ({
         onCancelUpdateUserItem();
         setFormData(initialItemData);
         setDeletedImageIds([]);
+        setNewUploadedimagesImages([]);
+        setResetUploader(true); // Trigger image uploader reset
     }
 
 
@@ -309,7 +266,6 @@ const handleChange = (event) => {
                 </div>
             )}
 
-
             <div className='form-field'>
                 {makeControlledInput('contact_information')}
             </div>
@@ -318,8 +274,6 @@ const handleChange = (event) => {
                     <p className='error-text'>{errors.contact_information}</p>
                 </div>
                 )}
-
-            {/* <ImageUploader onSetFormData={setFormData} resetUploader={resetUploader}/> */}
 
             <div className='form-field'>
                 <label htmlFor="sold_status">Sold Status:</label>
@@ -341,8 +295,7 @@ const handleChange = (event) => {
             </div>
         
           <ImageList 
-          images={formData.images} 
-            //   onDeleteImage={onDeleteImage}
+            images={formData.images} 
             onLocalHandlelDeleteImage={handleDeleteImage}
           />
 
@@ -354,9 +307,8 @@ const handleChange = (event) => {
           <div className="button-wrapper">
             <button disabled={hasErrors}>SAVE</button>
           </div>
+
           <div className="button-wrapper">
-            {/* <button>CANCEL</button> */}
-            {/* type="button" prevents the cancel button from submitting the form. */}
             <button type="button" onClick={handelCancelEdit}>CANCEL</button>
           </div>
 
@@ -380,7 +332,7 @@ EditUserItemForm.propTypes = {
   }).isRequired,
   onUpdateUserItem: PropTypes.func.isRequired,
   onCancelUpdateUserItem: PropTypes.func.isRequired,
-  onDeleteImage: PropTypes.func.isRequired,
+//   onDeleteImage: PropTypes.func.isRequired,
 };
 
 export default EditUserItemForm;
