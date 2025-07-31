@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-// import '../styles/NewCardForm.css';
+
 
 const kDefaultFormState = {
   email: '',
@@ -16,14 +16,14 @@ const LoginForm = ({ onLoginUser }) => {
   const [errors, setErrors] = useState(kErrorState);
 
   const handleSubmit = (event) => {
-    console.log('submitted!');
+    // console.log('Login Form submitted!');
 
     event.preventDefault();
     
+    // trim the title and owner before posting
     const trimmedEmail = formData.email.trim();
 
-    // trim the title and owner before posting
-    console.log("Email:", { message: trimmedEmail});
+    // console.log("Email:", { message: trimmedEmail});
     onLoginUser({ email: trimmedEmail});
 
     setFormData(kDefaultFormState);
@@ -83,6 +83,7 @@ const LoginForm = ({ onLoginUser }) => {
                 <p className='error-text'>{errors.message}</p>
             </div>
           )}
+
           <div className="button-wrapper">
             <button disabled={errors.message}>LOG IN</button>
           </div>
@@ -95,4 +96,4 @@ LoginForm.propTypes = {
   onLoginUser: PropTypes.func.isRequired,
 };
 
-export default LoginForm ;
+export default LoginForm;
