@@ -2,6 +2,8 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import ImageUploader from './ImageUploader';
 
+
+// Default empty form
 const kDefaultFormState = {
     name: '',
     category: '',
@@ -10,12 +12,9 @@ const kDefaultFormState = {
     location: '',
     contact_information: '',
     images:[],
-    // created_at: '',
-    // updated_at: '',
-    // sold_status: '',
 };
 
-
+// Default error messages for required fields
 const kErrorState = {
     name: 'Name cannot be empty',
     category: 'Category cannot be empty',
@@ -29,17 +28,16 @@ const kErrorState = {
 const NewItemForm = ({ onPostItem }) => {
     const [formData, setFormData] = useState(kDefaultFormState);
     const [errors, setErrors] = useState(kErrorState);
-    const [resetUploader, setResetUploader] = useState(false);
+    const [resetUploader, setResetUploader] = useState(false); // State to trigger reset of the ImageUploader component
 
 
     const handleSubmit = (event) => {
-        console.log('submitted!');
-
+        // console.log('New Item Form submitted!');
         event.preventDefault();
 
+        // Trim input values and parse price to float
         const trimmedName = formData.name.trim();
         const trimmedDescription = formData.description.trim();
-        // const trimmedPrice = formData.price.trim();
         const trimmedPrice = parseFloat(formData.price.trim());
         const trimmedLocation = formData.location.trim();
         const trimmedContactInformation = formData.contact_information.trim();
@@ -54,69 +52,70 @@ const NewItemForm = ({ onPostItem }) => {
             images: formData.images
         };
 
-    // trim the title and owner before posting
-    console.log("Post Item Data: ", postItemData);
+        // trim the title and owner before posting
+        // console.log("Post Item Data: ", postItemData);
 
+        // Call parent callback to handle posting
+        onPostItem(postItemData);
 
-    onPostItem(postItemData);
+        // Reset form and errors to initial state
+        setFormData(kDefaultFormState);
+        setErrors(kErrorState);
 
-    setFormData(kDefaultFormState);
-    setErrors(kErrorState);
-
-    setResetUploader(true); // Trigger image uploader reset
-    setTimeout(() => setResetUploader(false), 100); // Reset the flag after effect
+        // Trigger reset of the ImageUploader component
+        setResetUploader(true); // Trigger image uploader reset
+        setTimeout(() => setResetUploader(false), 100); // Reset the flag after effect
   };
 
-  const handleChange = (event) => {
-    const inputName = event.target.name;
-    const inputValue = event.target.value;
+    const handleChange = (event) => {
+        const inputName = event.target.name;
+        const inputValue = event.target.value;
 
-    setFormData((formData) => ({
-      ...formData,
-      [inputName]: inputValue,
-    }));
-
-    const trimmedLength = inputValue.trim().length;
-
-    if (trimmedLength === 0) {
-        setErrors((prev) => ({
-            ...prev,
-            [inputName]: kErrorState[inputName],
+        // Update form data with new input value
+        setFormData((formData) => ({
+            ...formData,
+            [inputName]: inputValue,
         }));
-    } else {
+
+        const trimmedLength = inputValue.trim().length;
+        if (trimmedLength === 0) {
             setErrors((prev) => ({
-            ...prev,
-            [inputName]: '',
-        }));
-    }
+                ...prev,
+                [inputName]: kErrorState[inputName],
+            }));
+        } else {
+            setErrors((prev) => ({
+                ...prev,
+                [inputName]: '',
+            }));
+        }
+    };
 
-  };
+    const makeControlledInput = (inputName, type='text') => {
+        return (
+            <>
+                <input
+                onChange={handleChange}
+                type={type}
+                id={`input-${inputName}`}
+                name={inputName}
+                value={formData[inputName]}
+                placeholder={inputName}
+                step={inputName === 'price' ? '0.01' : undefined}
+                min={inputName === 'price' ? '0' : undefined}
+                />
+            </>
+        );
+    };
 
-  const makeControlledInput = (inputName, type='text') => {
-    return (
-      <>
-        <input
-          onChange={handleChange}
-          type={type}
-          id={`input-${inputName}`}
-          name={inputName}
-          value={formData[inputName]}
-          placeholder={inputName}
-          step={inputName === 'price' ? '0.01' : undefined}
-          min={inputName === 'price' ? '0' : undefined}
-        />
-      </>
-    );
-  };
-
-    //   This converts the errors object into an array of its values:
+    // This converts the errors object into an array of its values:
     // The .some() array method tests whether at least one element in the array passes the condition inside the callback function. It returns:
     // true if any element meets the condition,
     // false if none do.
-  const hasErrors = Object.values(errors).some(errorMsg => errorMsg !== '');
+    // Determine if there are any validation errors
+    const hasErrors = Object.values(errors).some(errorMsg => errorMsg !== '');
 
     return (
-        
         <form className='signup-form' onSubmit={handleSubmit}>
             <div className='form-header'>
             Post an Item for Sale
