@@ -3,8 +3,6 @@ import '../styles/Image.css';
 
 
 const Image =({ image_id, listing_id, image_url, onLocalHandlelDeleteImage}) => {
-
-
     return (
         <li className="image-item">
             <img src={image_url} alt={`Image ${image_id}`} />
