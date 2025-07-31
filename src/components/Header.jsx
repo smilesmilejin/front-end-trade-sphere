@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router';
 import { useContext } from 'react';
 import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 import UserContext from '../contexts/UserContext';
-import './Header.css';
+import '../styles/Header.css';
 
 const Header = () => {
   const { userLoginStatus, setUserLoginStatus } = useContext(UserLoginStatusContext);
