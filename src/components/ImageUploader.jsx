@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
+import '../styles/ImageUploader.css';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 // console.log(API_KEY);
@@ -81,7 +82,7 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
     }, [resetUploader]);
 
   return (
-    <div>
+    <div className="image-uploader">
       <input
         key={inputKey}
         type="file"
@@ -89,11 +90,11 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
         onChange={handleFileChange}
         />
       <button onClick={handleUpload} disabled={loading}>
-        {loading ? "Uploading..." : "Upload to ImGBB"}
+        {loading ? "Uploading..." : "Upload Image"}
       </button>
 
       {uploadedUrl && (
-        <div style={{ marginTop: 20 }}>
+        <div className="image-preview">
           <p>Uploaded Image URL:</p>
           <a href={uploadedUrl} target="_blank" rel="noopener noreferrer">
             {uploadedUrl}
@@ -104,23 +105,14 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
       )}
 
         {uploadedImages.length > 0 && (
-          <div style={{ marginTop: 20 }}>
+          <div className="uploaded-images-container" >
             <h3>All Uploaded Images:</h3>
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+            <div className="uploaded-images">
               {uploadedImages.map((url, idx) => (
-                <div
-                  key={idx}
-                >
-                  <img
-                    src={url}
-                    alt={`Uploaded ${idx + 1}`}
-                    style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
-                  />
+                <div key={idx} >
+                  <img src={url} alt={`Uploaded ${idx + 1}`} />
 
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteImage(url)}
-                  >
+                  <button type="button" onClick={() => handleDeleteImage(url)} >
                     ×
                   </button>
   
