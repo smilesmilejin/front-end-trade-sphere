@@ -2,6 +2,8 @@ import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import UserContext from '../contexts/UserContext';
 import ImageList from './ImageList.jsx';
+import EditUserItemImageUploader from './EditUserItemImageUploader.jsx';
+import { useNavigate } from 'react-router';
 
 const kDefaultFormState = {
     name: '',
@@ -41,7 +43,8 @@ const EditUserItemForm = ({
     },
     onUpdateUserItem, 
     onCancelUpdateUserItem,
-    onDeleteImage }) => {
+    onDeleteImage,
+    onHandleEditClose }) => {
 
     // const [curUserData, setCurUserData] = useContext(UserContext);
     // Make sure the initial userData fields are never null or undefined — use empty strings instead:
@@ -56,6 +59,7 @@ const EditUserItemForm = ({
         sold_status: itemData.sold_status,
     };
     const [formData, setFormData] = useState(initialItemData);
+    const navigate = useNavigate();
 
     // const [errors, setErrors] = useState({});
     const getInitialErrors = (data) => {
@@ -73,6 +77,9 @@ const EditUserItemForm = ({
 
     const [deletedImageIds, setDeletedImageIds] = useState([]);
 
+    const [resetUploader, setResetUploader] = useState(false);
+    const [newUploadedimages, setNewUploadedimagesImages] = useState([]);
+
     const handleSubmit = async (event) => {
         console.log('submitted!');
 
@@ -89,27 +96,29 @@ const EditUserItemForm = ({
 
 
 
-        const filteredImages = formData.images
-        .filter(img => !deletedImageIds.includes(img.image_id))
+        // const filteredImages = formData.images
+        // .filter(img => !deletedImageIds.includes(img.image_id))
 
-        const updateUserTableData = {
-                name: trimmedName,
-                category: formData.category,
-                description: trimmedDescription,
-                price: Number(formData.price),
-                location: trimmedLocation,
-                contact_information: trimmedContactInformation,
-                // images: formData.images,
-                images: filteredImages,
-                sold_status: formData.sold_status === 'available' ? false : true,
-        }
+        // const updateUserTableData = {
+        //         name: trimmedName,
+        //         category: formData.category,
+        //         description: trimmedDescription,
+        //         price: Number(formData.price),
+        //         location: trimmedLocation,
+        //         contact_information: trimmedContactInformation,
+        //         // images: formData.images,
+        //         images: filteredImages,
+        //         sold_status: formData.sold_status === 'available' ? false : true,
+        // }
 
-        setFormData(updateUserTableData); // Form Data Images, need to images that are objects
+        // setFormData(updateUserTableData); // Form Data Images, need to images that are objects
 
         // Filter out deleted images  before submitting
         const filteredImagesUrls = formData.images
         .filter(img => !deletedImageIds.includes(img.image_id))
         .map(img => img.image_url);
+
+        const combinedImages = [...filteredImagesUrls, ...newUploadedimages];
 
         const updateUserItemData = {
                 name: trimmedName,
@@ -119,7 +128,8 @@ const EditUserItemForm = ({
                 location: trimmedLocation,
                 contact_information: trimmedContactInformation,
                 // images: formData.images,
-                images: filteredImagesUrls, // for API calls, the images need to array of URLs
+                // images: filteredImagesUrls, // for API calls, the images need to array of URLs
+                images: combinedImages,
                 sold_status: formData.sold_status === 'available' ? false : true,
         };
 
@@ -131,22 +141,39 @@ const EditUserItemForm = ({
         const newErrors = getInitialErrors(updateUserItemData);
         setErrors(newErrors);
 
-        await onUpdateUserItem(itemData.listing_id, updateUserItemData);
+        // post new ItemData
+        const updatedFormData = await onUpdateUserItem(itemData.listing_id, updateUserItemData);
 
-        // 2) Delete the images marked for deletion
-        for (const imageId of deletedImageIds) {
-            await onDeleteImage(imageId, itemData.listing_id);
-        }
+        // setFormData(updatedFormData)
+
+        // setFormData(prev => ({
+        //     ...prev,
+        //     ...updatedFormData
+        // }));
+        console.log('UpdatedFormData: ', updatedFormData)
+        // // 2) Delete the images marked for deletion
+        // for (const imageId of deletedImageIds) {
+        //     await onDeleteImage(imageId, itemData.listing_id);
+        // }
 
         // 3) Clear deleted images after successful save
         setDeletedImageIds([]);
 
+        setNewUploadedimagesImages([]);
+
+        setResetUploader(true); // Trigger image uploader reset
+        setTimeout(() => setResetUploader(false), 100); // Reset the flag after effect
+
+        alert('Going back  to my-sell-listings pages!')
+        onHandleEditClose();
+        navigate('/profile/my-sell-listings'); // Redirect user to home page or dashboard ediUser Form
 
     };
 
     const handelCancelEdit = () => {
         onCancelUpdateUserItem();
         setFormData(initialItemData);
+        setDeletedImageIds([]);
     }
 
 
@@ -185,6 +212,7 @@ const handleChange = (event) => {
             images: prev.images.filter(img => img.image_id !== imageId)
         }));
     };
+
 
   const makeControlledInput = (inputName, type='text') => {
     return (
@@ -310,6 +338,11 @@ const handleChange = (event) => {
           images={formData.images} 
             //   onDeleteImage={onDeleteImage}
             onLocalHandlelDeleteImage={handleDeleteImage}
+          />
+
+          <EditUserItemImageUploader 
+            onSetNewUploadedimagesImages={setNewUploadedimagesImages}
+            resetUploader={resetUploader}
           />
 
           <div className="button-wrapper">
