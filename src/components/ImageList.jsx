@@ -3,19 +3,6 @@ import Image from './Image.jsx';
 import '../styles/ImageList.css';
 
 
-// const sampleImages = [
-//     {
-//       image_id: 23,
-//       listing_id: 23,
-//       image_url: "https://i.ibb.co/tT57qP2d/81k4-Wltu3-RL-AC-SL1500.jpg"
-//     },
-//     {
-//       image_id: 24,
-//       listing_id: 23,
-//       image_url: "https://i.ibb.co/bR8qdMb9/81-Hv-O7-AT5h-L-AC-SL1500.jpg"
-//     }
-// ];
-
 const ImageList = ({ images = [], onLocalHandlelDeleteImage }) => {
 
     const getItemListJSX = (images) => {
