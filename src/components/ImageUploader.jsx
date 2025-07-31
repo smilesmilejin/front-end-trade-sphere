@@ -1,19 +1,15 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
-
 const API_KEY = import.meta.env.VITE_API_KEY;
-console.log(API_KEY);
+// console.log(API_KEY);
 
 const ImageUploader = ({ onSetFormData, resetUploader }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedUrl, setUploadedUrl] = useState("");
   const [loading, setLoading] = useState(false);
-
   const [uploadedImages, setUploadedImages] = useState([]);
-
   const [inputKey, setInputKey] = useState(Date.now());
-
 
 
   const handleFileChange = (event) => {
@@ -38,12 +34,12 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
         method: "POST",
         body: formData,
       });
+
       const data = await response.json();
       if (data.success) {
         setUploadedUrl(data.data.display_url);
         setUploadedImages((prev) => [...prev, data.data.display_url]);
 
-        // Optionally update form data with all uploaded images
         onSetFormData((prev) => ({
           ...prev,
           images: [...(prev.images || []), data.data.display_url],
@@ -69,20 +65,19 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
     }));
   };
 
-  // 👇 Clear on reset signal from parent
-  useEffect(() => {
-    if (resetUploader) {
-      setSelectedFile(null);
-      setUploadedUrl("");
-      setLoading(false);
-      setUploadedImages([]);
-      setInputKey(Date.now());  // Force remount of file input
-    }
-  }, [resetUploader]);
+    // 👇 Clear on reset signal from parent
+    useEffect(() => {
+      if (resetUploader) {
+        setSelectedFile(null);
+        setUploadedUrl("");
+        setLoading(false);
+        setUploadedImages([]);
+        setInputKey(Date.now());  // Force remount of file input
+      }
+    }, [resetUploader]);
 
   return (
     <div>
-      {/* <input type="file" accept="image/*" onChange={handleFileChange} /> */}
       <input
         key={inputKey}
         type="file"
@@ -104,25 +99,6 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
         </div>
       )}
 
-        {/* Display all uploaded images */}
-        {/* {uploadedImages.length > 0 && (
-            <div style={{ marginTop: 20 }}>
-            <h3>All Uploaded Images:</h3>
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                {uploadedImages.map((url, idx) => (
-                  <div>
-                <img
-                    key={idx}
-                    src={url}
-                    alt={`Uploaded ${idx + 1}`}
-                    style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
-                />
-
-                </div>
-            </div>
-            </div>
-        )} */}
-
         {uploadedImages.length > 0 && (
           <div style={{ marginTop: 20 }}>
             <h3>All Uploaded Images:</h3>
@@ -136,12 +112,14 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
                     alt={`Uploaded ${idx + 1}`}
                     style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
                   />
+
                   <button
                     type="button"
                     onClick={() => handleDeleteImage(url)}
                   >
                     ×
                   </button>
+  
                 </div>
               ))}
             </div>
