@@ -89,6 +89,22 @@ const deleteUserItemApi = (curUserId, listingId) => {
     });
 };
 
+// DELETE image api
+// DELETE /images/image_id
+const deleteImageApi = (imageId) => {
+  return axios.delete(`${kBaseUrl}/images/${imageId}`) 
+    .then(response => { 
+      console.log('###### Delete User Image response')
+      console.log('Delete User Image response:', response.data);
+      return response.data;
+    })
+    .catch (error => {
+      console.log('Delete User Image failed:', error);
+      console.log(error);
+      throw error;
+    });
+};
+
 
 function ProfileListing() {
   const { curUserData } = useContext(UserContext);
@@ -195,6 +211,28 @@ function ProfileListing() {
         });
     };
 
+    const deleteImage = (imageId, listingId) => {
+      deleteImageApi(imageId)
+        .then(() => {
+          // Update listings: remove the deleted image from the relevant listing
+          setCurUserListingsData(prevListings => 
+            prevListings.map(listing => {
+              if (listing.listing_id === listingId) {
+                return {
+                  ...listing,
+                  images: listing.images.filter(image => image.image_id !== imageId)
+                };
+              }
+              return listing;
+            })
+          );
+
+          alert('Image deleted!');
+        })
+        .catch(error => {
+          console.error('Image deletion failed:', error);
+        });
+    };
 
     useEffect( () => {
       getUserListings();
@@ -220,6 +258,7 @@ function ProfileListing() {
         onCancelUpdateUserItem={cancelUpdateUserItem}
         deleteButton={<button>Delete Listing</button>}
         onDeleteUserItem={deleteUserItem}
+        onDeleteImage={deleteImage}
       />
 
     </div>

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import NoImageAvailable from '../assets/NoImageAvailable.png';
 
 import EditUserItemForm from './EditUserItemForm.jsx';
-
+import ImageList from './ImageList.jsx';
 
 const sampleImagesArray = [
     "https://i.ibb.co/gLQ48Lrp/71-O-3j3d9-DL-AC-SL1500.jpg",
@@ -39,7 +39,8 @@ const Item =({
     onUpdateUserItem, 
     onCancelUpdateUserItem,
     deleteButton, 
-    onDeleteUserItem }) => {
+    onDeleteUserItem,
+    onDeleteImage }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpen = () => setIsModalOpen(true);
@@ -163,6 +164,7 @@ const Item =({
                         }}
                         onUpdateUserItem={onUpdateUserItem}
                         onCancelUpdateUserItem={onCancelUpdateUserItem}
+                        onDeleteImage={onDeleteImage}
                         />
                     </div>
                 </div>
@@ -192,6 +194,7 @@ Item.propTypes = {
     onCancelUpdateUserItem: PropTypes.func,
     deleteButton: PropTypes.element,
     onDeleteUserItem: PropTypes.func,
+    onDeleteImage: PropTypes.func,
 }
 
 

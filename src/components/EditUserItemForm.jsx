@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import UserContext from '../contexts/UserContext';
+import ImageList from './ImageList.jsx';
 
 const kDefaultFormState = {
     name: '',
@@ -39,7 +40,8 @@ const EditUserItemForm = ({
     sold_status: false,
     },
     onUpdateUserItem, 
-    onCancelUpdateUserItem }) => {
+    onCancelUpdateUserItem,
+    onDeleteImage }) => {
 
     // const [curUserData, setCurUserData] = useContext(UserContext);
     // Make sure the initial userData fields are never null or undefined — use empty strings instead:
@@ -69,40 +71,77 @@ const EditUserItemForm = ({
 
     const [errors, setErrors] = useState(() => getInitialErrors(initialItemData));
 
+    const [deletedImageIds, setDeletedImageIds] = useState([]);
+
+    const handleSubmit = async (event) => {
+        console.log('submitted!');
+
+        event.preventDefault();
+
+        
+        const trimmedName = formData.name.trim();
+        const trimmedDescription = formData.description.trim();
+        // const trimmedPrice = formData.price.trim();
+        const trimmedLocation = formData.location.trim();
+        const trimmedContactInformation = formData.contact_information.trim();
+
+        console.log('deletedImageIds is now: ', deletedImageIds);
 
 
-    const handleSubmit = (event) => {
-      console.log('submitted!');
 
-      event.preventDefault();
-      
-      const trimmedName = formData.name.trim();
-      const trimmedDescription = formData.description.trim();
-      const trimmedPrice = formData.price.trim();
-      const trimmedLocation = formData.location.trim();
-      const trimmedContactInformation = formData.contact_information.trim();
+        const filteredImages = formData.images
+        .filter(img => !deletedImageIds.includes(img.image_id))
 
-      const updateUserItemData = {
-            name: trimmedName,
-            category: formData.category,
-            description: trimmedDescription,
-            price: Number(trimmedPrice),
-            location: trimmedLocation,
-            contact_information: trimmedContactInformation,
-            images: formData.images,
-            sold_status: formData.sold_status === 'available' ? false : true,
-      };
+        const updateUserTableData = {
+                name: trimmedName,
+                category: formData.category,
+                description: trimmedDescription,
+                price: Number(formData.price),
+                location: trimmedLocation,
+                contact_information: trimmedContactInformation,
+                // images: formData.images,
+                images: filteredImages,
+                sold_status: formData.sold_status === 'available' ? false : true,
+        }
+
+        setFormData(updateUserTableData); // Form Data Images, need to images that are objects
+
+        // Filter out deleted images  before submitting
+        const filteredImagesUrls = formData.images
+        .filter(img => !deletedImageIds.includes(img.image_id))
+        .map(img => img.image_url);
+
+        const updateUserItemData = {
+                name: trimmedName,
+                category: formData.category,
+                description: trimmedDescription,
+                price: Number(formData.price),
+                location: trimmedLocation,
+                contact_information: trimmedContactInformation,
+                // images: formData.images,
+                images: filteredImagesUrls, // for API calls, the images need to array of URLs
+                sold_status: formData.sold_status === 'available' ? false : true,
+        };
 
         // trim the title and owner before posting
-        console.log("Edit User Item Form: ", updateUserItemData);
+        console.log("Update User Item Form: ", updateUserItemData);
 
 
-        setFormData(updateUserItemData);
 
         const newErrors = getInitialErrors(updateUserItemData);
         setErrors(newErrors);
 
-        onUpdateUserItem(itemData.listing_id, updateUserItemData);
+        await onUpdateUserItem(itemData.listing_id, updateUserItemData);
+
+        // 2) Delete the images marked for deletion
+        for (const imageId of deletedImageIds) {
+            await onDeleteImage(imageId, itemData.listing_id);
+        }
+
+        // 3) Clear deleted images after successful save
+        setDeletedImageIds([]);
+
+
     };
 
     const handelCancelEdit = () => {
@@ -135,6 +174,17 @@ const handleChange = (event) => {
     }
 
   };
+
+    const handleDeleteImage = (imageId) => {
+        // Mark image as deleted locally
+        setDeletedImageIds(prev => [...prev, imageId]);
+
+        // Also remove from images in form data
+        setFormData(prev => ({
+            ...prev,
+            images: prev.images.filter(img => img.image_id !== imageId)
+        }));
+    };
 
   const makeControlledInput = (inputName, type='text') => {
     return (
@@ -255,6 +305,12 @@ const handleChange = (event) => {
                 </div>
                 )}
             </div>
+        
+          <ImageList 
+          images={formData.images} 
+            //   onDeleteImage={onDeleteImage}
+            onLocalHandlelDeleteImage={handleDeleteImage}
+          />
 
           <div className="button-wrapper">
             <button disabled={hasErrors}>SAVE</button>
@@ -285,6 +341,7 @@ EditUserItemForm.propTypes = {
   }).isRequired,
   onUpdateUserItem: PropTypes.func.isRequired,
   onCancelUpdateUserItem: PropTypes.func.isRequired,
+  onDeleteImage: PropTypes.func.isRequired,
 };
 
 export default EditUserItemForm;

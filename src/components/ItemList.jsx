@@ -16,7 +16,7 @@ const sampleImages = [
     }
 ];
 
-const ItemList = ({ listings, userLikedListings, onToggleLike, editButton, onUpdateUserItem, onCancelUpdateUserItem, deleteButton, onDeleteUserItem}) => {
+const ItemList = ({ listings, userLikedListings, onToggleLike, editButton, onUpdateUserItem, onCancelUpdateUserItem, deleteButton, onDeleteUserItem, onDeleteImage}) => {
 
     const getItemListJSX = (listings) => {
         return listings.map((listing) => {
@@ -42,6 +42,7 @@ const ItemList = ({ listings, userLikedListings, onToggleLike, editButton, onUpd
                     onCancelUpdateUserItem={onCancelUpdateUserItem}
                     deleteButton={deleteButton}
                     onDeleteUserItem={onDeleteUserItem}
+                    onDeleteImage={onDeleteImage}
                 />
             );
         });
@@ -74,6 +75,7 @@ ItemList.propTypes = {
     onCancelUpdateUserItem: PropTypes.func,
     deleteButton: PropTypes.element,
     onDeleteUserItem: PropTypes.func,
+    onDeleteImage: PropTypes.func,
 };
 
 export default ItemList;

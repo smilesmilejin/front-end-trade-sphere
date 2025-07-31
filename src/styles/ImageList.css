@@ -1,0 +1,8 @@
+/* ImageList.css */
+.image-list-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
