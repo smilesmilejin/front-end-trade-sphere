@@ -1,15 +1,11 @@
-import './Header.css';
 import Logo from '../assets/Logo.png'; // fixed typo
 import SearchIcon from '../assets/SearchIcon.png';
 import UserLogo from '../assets/UserLogo.png';
-
-// import { Link, useNavigate } from 'react-router-dom';
-
 import { Link, useNavigate } from 'react-router';
 import { useContext } from 'react';
-// import { UserLoginStatusContext } from '../App';
 import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 import UserContext from '../contexts/UserContext';
+import './Header.css';
 
 const Header = () => {
   const { userLoginStatus, setUserLoginStatus } = useContext(UserLoginStatusContext);
@@ -20,19 +16,13 @@ const Header = () => {
     setUserLoginStatus(false);
     setCurUserData(null);
 
-    console.log('User is logged out')
-
-    // console.log('User is logged out, userLoginStatus is now:', userLoginStatus);
-    // console.log('User is logged out, curUserData is now:', curUserData);
-
-    // Optional: clear user data from localStorage or cookies if used
+    // console.log('User is logged out');
 
     // Wait for state update then navigate
     setTimeout(() => {
       navigate('/');
     }, 0);
 
-    // navigate('/');
   };
 
 
