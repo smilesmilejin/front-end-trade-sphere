@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-
+import '../styles/EditUserItemImageUploader.css';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-console.log(API_KEY);
+// console.log(API_KEY);
 
 const EditUserItemImageUploader = ({ onSetNewUploadedimagesImages, resetUploader }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -11,7 +11,6 @@ const EditUserItemImageUploader = ({ onSetNewUploadedimagesImages, resetUploader
   const [loading, setLoading] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [inputKey, setInputKey] = useState(Date.now());
-
 
 
   const handleFileChange = (event) => {
@@ -41,13 +40,7 @@ const EditUserItemImageUploader = ({ onSetNewUploadedimagesImages, resetUploader
         setUploadedUrl(data.data.display_url);
         setUploadedImages((prev) => [...prev, data.data.display_url]);
 
-        // // Optionally update form data with all uploaded images
-        // onSetFormData((prev) => ({
-        //   ...prev,
-        //   images: [...(prev.images || []), data.data.display_url],
-        // }));
-
-        // Optionally update form data with all uploaded images
+        // Update form data with all uploaded images
         onSetNewUploadedimagesImages((prev) => [
           ...prev,
           data.data.display_url
@@ -66,32 +59,25 @@ const EditUserItemImageUploader = ({ onSetNewUploadedimagesImages, resetUploader
   const handleDeleteImage = (urlToDelete) => {
     setUploadedImages((prev) => prev.filter(url => url !== urlToDelete));
 
-    // // Also update parent formData
-    // onSetFormData((prev) => ({
-    //   ...prev,
-    //   images: prev.images.filter(url => url !== urlToDelete),
-    // }));
-
     // Update the parent state by filtering out the deleted URL
     onSetNewUploadedimagesImages((prev) => [
       ...prev.filter((url) => url !== urlToDelete),
     ]);
   };
 
-  // 👇 Clear on reset signal from parent
-  useEffect(() => {
-    if (resetUploader) {
-      setSelectedFile(null);
-      setUploadedUrl("");
-      setLoading(false);
-      setUploadedImages([]);
-      setInputKey(Date.now());  // Force remount of file input
-    }
-  }, [resetUploader]);
+
+    useEffect(() => {
+      if (resetUploader) {
+        setSelectedFile(null);
+        setUploadedUrl("");
+        setLoading(false);
+        setUploadedImages([]);
+        setInputKey(Date.now());  // Force remount of file input
+      }
+    }, [resetUploader]);
 
   return (
-    <div>
-      {/* <input type="file" accept="image/*" onChange={handleFileChange} /> */}
+    <div className="image-uploader">
       <input
         key={inputKey}
         type="file"
@@ -99,37 +85,28 @@ const EditUserItemImageUploader = ({ onSetNewUploadedimagesImages, resetUploader
         onChange={handleFileChange}
         />
       <button onClick={handleUpload} disabled={loading}>
-        {loading ? "Uploading..." : "Upload to ImGBB"}
+        {loading ? "Uploading..." : "Upload Image"}
       </button>
 
       {uploadedUrl && (
-        <div style={{ marginTop: 20 }}>
+        <div className="image-preview">
           <p>Uploaded Image URL:</p>
           <a href={uploadedUrl} target="_blank" rel="noopener noreferrer">
             {uploadedUrl}
           </a>
           <br />
-          <img src={uploadedUrl} alt="Uploaded" style={{ maxWidth: "300px" }} />
+          <img src={uploadedUrl} alt="Uploaded" />
         </div>
       )}
 
         {uploadedImages.length > 0 && (
-          <div style={{ marginTop: 20 }}>
+          <div className="uploaded-images-container">
             <h3>All Uploaded Images:</h3>
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+            <div className="uploaded-images">
               {uploadedImages.map((url, idx) => (
-                <div
-                  key={idx}
-                >
-                  <img
-                    src={url}
-                    alt={`Uploaded ${idx + 1}`}
-                    style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteImage(url)}
-                  >
+                <div key={idx} >
+                  <img src={url} alt={`Uploaded ${idx + 1}`} />
+                  <button type="button" onClick={() => handleDeleteImage(url)} >
                     ×
                   </button>
                 </div>

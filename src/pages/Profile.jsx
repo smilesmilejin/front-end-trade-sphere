@@ -53,7 +53,7 @@ function Profile() {
       .then(newUserData => {
         setCurUserData(newUserData);
         setIsEditing(false); // NOT quite necesasry , since setCurUserData caues the whole page to re render, and isEditing, state go back to default
-        alert('Profile update is succesful!');
+        alert('Profile update is successful!');
       })
       .catch(error => {
         // Optional: Show error message or keep editing mode active
