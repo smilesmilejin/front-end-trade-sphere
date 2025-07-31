@@ -1,5 +1,3 @@
-// import './About.css';
-
 
 function Contact() {
   return (
