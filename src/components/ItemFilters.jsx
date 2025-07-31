@@ -22,6 +22,11 @@ const ItemFilters = ({ onGetFilteredItems }) => {
         onGetFilteredItems(updatedFilters);
     };
 
+    const handleResetFilters = () => {
+        setFilters(defaultFiltersState);
+        handleChange(defaultFiltersState);
+    };
+
 
     return (
         <div className='item-filters'>
@@ -82,13 +87,7 @@ const ItemFilters = ({ onGetFilteredItems }) => {
                 </select>
             </div>
 
-            <button
-                type="button"
-                onClick={() => {
-                    setFilters(defaultFiltersState);
-                    handleChange(defaultFiltersState)
-                }}
-                >
+            <button type="button" onClick={handleResetFilters} >
                 Reset Filters
             </button>
         </div>
