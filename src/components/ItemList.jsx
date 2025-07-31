@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 import Item from './Item.jsx';
-// import '../styles/BoardList.css';
-
 
 const sampleImages = [
     {
