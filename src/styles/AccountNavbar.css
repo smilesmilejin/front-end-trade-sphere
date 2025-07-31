@@ -15,11 +15,11 @@ button:hover {
 }
 
 /* Active Link */
-.active-link {
-  background-color: #4db069;       /* darker green */
+.account-navbar-active-link {
+  background-color: #8dd4e3;       /* darker green */
   color: white;
   font-weight: bold;
-  border-color: #377b4d;           /* matching dark border */
-  box-shadow: 0 0 10px rgba(73, 163, 98, 0.6); /* soft green glow */
+  border-color: #84cae3;           /* matching dark border */
+  box-shadow: 0 0 10px rgba(115, 210, 231, 0.6); /* soft green glow */
   transform: scale(1.05);
 }
