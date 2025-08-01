@@ -27,7 +27,9 @@
   margin: 0;
   font-size: 1.8rem;
   user-select: none;
-  color: #242717;
+  /* color: #242717; */
+  color: rgb(38, 133, 90);
+  font-family: 'Great Vibes', cursive;
 }
 
 /* .search-bar {
@@ -77,6 +79,9 @@
 
 .auth-buttons button:hover {
   background-color: #001f4d;
+  /* box-shadow: 0 2px 6px #001f4d; */
+  box-shadow: 0 6px 16px rgba(0, 31, 77, 0.3);
+  /* box-shadow: inset 0 2px 6px rgba(0, 31, 77, 0.3); */
 }
 
 .auth-buttons {
