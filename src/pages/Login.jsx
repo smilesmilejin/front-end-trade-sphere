@@ -1,7 +1,7 @@
 import Logo from '../assets/Logo.png'; 
 import axios from 'axios';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 import LoginForm from '../components/LoginForm';
 import UserContext from '../contexts/UserContext';
@@ -44,7 +44,7 @@ function Login() {
             setUserLoginStatus(true);
             setCurUserData(newUser);
 
-            alert('Login is succesful!');
+            alert('Login is successful!');
             navigate('/'); // Redirect user to home page or dashboard after login
       })
       .catch(err => {
@@ -54,10 +54,10 @@ function Login() {
 
   return (
     <div>
-      <header className="logo">
+      <Link to="/" className="logo">
         <img src={Logo} alt="My Logo" />
         <h1>TradeSphere</h1>
-      </header>
+      </Link>
 
       <LoginForm onLoginUser={loginUser} />
     </div>
