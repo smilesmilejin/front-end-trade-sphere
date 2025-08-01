@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import '../styles/LoginForm.css';
 
 const kDefaultFormState = {
   email: '',
@@ -72,7 +72,7 @@ const LoginForm = ({ onLoginUser }) => {
     return (
       <form className='login-form' onSubmit={handleSubmit}>
         <div className='form-header'>
-          Log In
+          Welcome Back, Tradespherers!
         </div>
         <>
           <div className='form-field'>

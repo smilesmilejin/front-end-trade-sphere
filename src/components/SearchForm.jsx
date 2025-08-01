@@ -87,7 +87,7 @@ const SearchForm = () => {
         Search Items
       </div> */}
       <>
-        <div className='form-field'>
+        <div className='search-form-field'>
           {makeControlledInput('search')}
         </div>
 
