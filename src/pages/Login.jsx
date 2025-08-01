@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router';
 import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 import LoginForm from '../components/LoginForm';
 import UserContext from '../contexts/UserContext';
+import '../styles/Login.css';
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
@@ -53,7 +54,7 @@ function Login() {
     };
 
   return (
-    <div>
+    <div className='login-container'>
       <Link to="/" className="logo">
         <img src={Logo} alt="My Logo" />
         <h1>TradeSphere</h1>
