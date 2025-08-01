@@ -1,23 +1,11 @@
-
-import { useNavigate } from 'react-router';
-import { useContext, useState, useEffect } from 'react';
-
 import axios from 'axios';
+import { useContext, useState, useEffect } from 'react';
 import UserContext from '../contexts/UserContext';
 import ItemList from '../components/ItemList';
 
-
-
-// const user = {
-//   name: 'John Doe',
-//   email: 'john.doe@example.com',
-//   address: 'Charlotte, NC'
-// };
-
-
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
-console.log("kBaseUrl:", kBaseUrl);
+// console.log("kBaseUrl:", kBaseUrl);
 
 
 // Get user Listings api
@@ -32,7 +20,6 @@ const getUserListingsApi = (curUserId) => {
     .catch (error => {
       console.log('GET User Listings failed:', error);
       console.log(error);
-      // console.log('Login failed:', error);
       throw error;
     });
 };
@@ -48,8 +35,6 @@ const getUserFavoritesApi = (curUserId) => {
     })
     .catch (error => {
       console.log('GET User Favorites failed:', error);
-      console.log(error);
-      // console.log('Login failed:', error);
       throw error;
     });
 };
@@ -57,7 +42,7 @@ const getUserFavoritesApi = (curUserId) => {
 // Update user Item api
 // PATCH /users/<user_id>/listings/<listing_id>
 const patchUserItemApi = (curUserId, listingId, updatedItemData) => {
-  console.log("updated User data:", updatedItemData);
+  // console.log("updated User data:", updatedItemData);
 
   return axios.patch(`${kBaseUrl}/users/${curUserId}/listings/${listingId}`, updatedItemData) 
     .then(response => { 
@@ -89,22 +74,25 @@ const deleteUserItemApi = (curUserId, listingId) => {
     });
 };
 
-// // DELETE image api
-// // DELETE /images/image_id
-// const deleteImageApi = (imageId) => {
-//   return axios.delete(`${kBaseUrl}/images/${imageId}`) 
-//     .then(response => { 
-//       console.log('###### Delete User Image response')
-//       console.log('Delete User Image response:', response.data);
-//       return response.data;
-//     })
-//     .catch (error => {
-//       console.log('Delete User Image failed:', error);
-//       console.log(error);
-//       throw error;
-//     });
-// };
+// POST user favorites API
+const postUserFavoriteApi = async (userId, listingId) => {
+  try {
+    await axios.post(`${kBaseUrl}/users/${userId}/favorites/${listingId}`);
+  } catch (error) {
+    console.error('Error liking item:', error);
+    throw error;
+  }
+};
 
+// DELETE user favorites API
+const deleteUserFavoriteApi = async (userId, listingId) => {
+  try {
+    await axios.delete(`${kBaseUrl}/users/${userId}/favorites/${listingId}`);
+  } catch (error) {
+    console.error('Error unliking item:', error);
+    throw error;
+  }
+};
 
 function ProfileListing() {
   const { curUserData } = useContext(UserContext);
@@ -113,10 +101,7 @@ function ProfileListing() {
   const [userLikedListings, setUserLikedListings] = useState(new Set());
   const curUserId = curUserData.user_id;
 
-
-  console.log('user Context is now: ', curUserData)
-
-
+  // console.log('user Context is now: ', curUserData)
 
   const getUserListings = () => {
     getUserListingsApi(curUserId)
@@ -124,7 +109,6 @@ function ProfileListing() {
         setCurUserListingsData(userListings)
       })
       .catch(error => {
-        // Optional: Show error message or keep editing mode active
         console.error('Get User Listing failed', error);
       });
   };
@@ -137,12 +121,34 @@ function ProfileListing() {
         setUserLikedListings(likedSet);
       })
       .catch(error => {
-        // Optional: Show error message or keep editing mode active
         console.error('Update failed', error);
       });
   };
 
-    // Toggle like/unlike
+  const deleteUserFavorite = (userId, listingId) => {
+    deleteUserFavoriteApi(userId, listingId)
+      .then(() => {
+        const updatedSet = new Set(userLikedListings);
+        updatedSet.delete(listingId);
+        setUserLikedListings(updatedSet);
+      })
+      .catch(error => {
+        console.error('Error deleting user favorite:', error);
+      });
+  };
+
+  const postUserFavorite = (userId, listingId) => {
+    postUserFavoriteApi(userId, listingId)
+      .then(() => {
+          const updatedSet = new Set(userLikedListings);
+          updatedSet.add(listingId);
+          setUserLikedListings(updatedSet);
+      })
+      .catch(error => {
+        console.error('Error adding user favorite:', error);
+      });
+  };
+
     // Toggle like/unlike
     const toggleLike = (listingId) => {
       if (!curUserData) {
@@ -152,23 +158,29 @@ function ProfileListing() {
       // const isLiked = userLikedListings.has(listingId);
       const isLiked = (userLikedListings || new Set()).has(listingId);
 
+      // if (isLiked) {
+      //   // Call backend to unlike
+      //   axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+      //     .then(() => {
+      //       const updatedSet = new Set(userLikedListings);
+      //       updatedSet.delete(listingId);
+      //       setUserLikedListings(updatedSet);
+      //     });
+      // } else {
+      //   // Call backend to like
+      //   axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+      //     .then(() => {
+      //       const updatedSet = new Set(userLikedListings);
+      //       updatedSet.add(listingId);
+      //       setUserLikedListings(updatedSet);
+      //     });
+      // }
       if (isLiked) {
-        // Call backend to unlike
-        axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-          .then(() => {
-            const updatedSet = new Set(userLikedListings);
-            updatedSet.delete(listingId);
-            setUserLikedListings(updatedSet);
-          });
+        deleteUserFavorite(curUserId, listingId);
       } else {
-        // Call backend to like
-        axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-          .then(() => {
-            const updatedSet = new Set(userLikedListings);
-            updatedSet.add(listingId);
-            setUserLikedListings(updatedSet);
-          });
+        postUserFavorite(curUserId, listingId);
       }
+
     };
 
     const updateUserItem = (listingId, updatedUserData) => {
@@ -184,13 +196,13 @@ function ProfileListing() {
           // setIsEditing(false); // NOT quite necesasry , since setCurUserData caues the whole page to re render, and isEditing, state go back to default
         })
         .catch(error => {
-          // Optional: Show error message or keep editing mode active
           console.error('Update failed', error);
         });
     };
 
     const cancelUpdateUserItem = () => {
       console.log('Cancel Update User Item');
+      alert("Update cancelled. No changes were saved.")
     }
 
     const deleteUserItem = (listingId) => {
@@ -206,33 +218,9 @@ function ProfileListing() {
           // setIsEditing(false); // NOT quite necesasry , since setCurUserData caues the whole page to re render, and isEditing, state go back to default
         })
         .catch(error => {
-          // Optional: Show error message or keep editing mode active
           console.error('User Item Delete is failed', error);
         });
     };
-
-    // const deleteImage = (imageId, listingId) => {
-    //   deleteImageApi(imageId)
-    //     .then(() => {
-    //       // Update listings: remove the deleted image from the relevant listing
-    //       setCurUserListingsData(prevListings => 
-    //         prevListings.map(listing => {
-    //           if (listing.listing_id === listingId) {
-    //             return {
-    //               ...listing,
-    //               images: listing.images.filter(image => image.image_id !== imageId)
-    //             };
-    //           }
-    //           return listing;
-    //         })
-    //       );
-
-    //       alert('Image deleted!');
-    //     })
-    //     .catch(error => {
-    //       console.error('Image deletion failed:', error);
-    //     });
-    // };
 
     useEffect( () => {
       getUserListings();
@@ -246,10 +234,7 @@ function ProfileListing() {
   return (
     <div>
       <h3>My Sell Listings</h3>
-      {/* <ItemList listings={curUserListingsData}/> */}
       <ItemList 
-        // listings={itemData}
-        // listings={sampleListingsData} 
         listings={curUserListingsData}
         userLikedListings={userLikedListings} 
         onToggleLike={toggleLike}
@@ -258,7 +243,6 @@ function ProfileListing() {
         onCancelUpdateUserItem={cancelUpdateUserItem}
         deleteButton={<button>Delete Listing</button>}
         onDeleteUserItem={deleteUserItem}
-        // onDeleteImage={deleteImage}
       />
 
     </div>
