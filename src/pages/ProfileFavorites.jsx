@@ -1,17 +1,7 @@
-import { useNavigate } from 'react-router';
-import { useContext, useState, useEffect } from 'react';
-
 import axios from 'axios';
+import { useContext, useState, useEffect } from 'react';
 import UserContext from '../contexts/UserContext';
 import ItemList from '../components/ItemList';
-
-
-
-// const user = {
-//   name: 'John Doe',
-//   email: 'john.doe@example.com',
-//   address: 'Charlotte, NC'
-// };
 
 
 // get backendUrl from .env file
@@ -44,20 +34,17 @@ function ProfileFavorites() {
   const [userLikedListings, setUserLikedListings] = useState(new Set());
   const curUserId = curUserData.user_id;
 
-
-  console.log('user Context is now: ', curUserData)
-
-
+  // console.log('user Context is now: ', curUserData)
 
   const getUserFavorites = () => {
     getUserFavoritesApi(curUserId)
       .then(userFavorites => {
+        // console.log('User Favorites Data is: ', userFavorites)
         setCurUserFavoritesData(userFavorites);
         const likedSet = new Set((userFavorites || []).map(fav => fav.listing_id));
         setUserLikedListings(likedSet);
       })
       .catch(error => {
-        // Optional: Show error message or keep editing mode active
         console.error('Update failed', error);
       });
   };
@@ -68,7 +55,7 @@ function ProfileFavorites() {
       alert('Please log in to like items');
       return;
     }
-    // const isLiked = userLikedListings.has(listingId);
+
     const isLiked = (userLikedListings || new Set()).has(listingId);
 
     if (isLiked) {
@@ -80,30 +67,12 @@ function ProfileFavorites() {
           updatedSet.delete(listingId);
           setUserLikedListings(updatedSet);
 
-        // Remove from favorites array
-        setCurUserFavoritesData(prevFavorites =>
-          prevFavorites.filter(fav => fav.listing_id !== listingId)
-        );
-
+          // Remove from favorites array
+          setCurUserFavoritesData(prevFavorites =>
+            prevFavorites.filter(fav => fav.listing_id !== listingId)
+          );
         });
     } 
-    
-    // else {
-    //   // Call backend to like
-    //   axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-    //     .then((response) => {
-    //       const updatedSet = new Set(userLikedListings);
-    //       updatedSet.add(listingId);
-    //       setUserLikedListings(updatedSet);
-
-    //     // Add new favorite to favorites array
-    //     // Assuming API returns the newly created favorite object in response.data
-    //     if (response.data) {
-    //       setCurUserFavoritesData(prevFavorites => [...prevFavorites, response.data]);
-    //     }
-
-    //     });
-    // }
   };
 
   useEffect( () => {
@@ -115,8 +84,6 @@ function ProfileFavorites() {
     <div>
       <h3>User favorites</h3>
       <ItemList 
-        // listings={itemData}
-        // listings={sampleListingsData} 
         listings={curUserFavoritesData}
         userLikedListings={userLikedListings} 
         onToggleLike={toggleLike}
