@@ -3,9 +3,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  /* position: sticky; */
+  /* top: 0; */
+  /* z-index: 1000; */
   margin: 0;
   /* background-color: aqua; */
 }
@@ -13,6 +13,8 @@
 .logo {
   display: flex;
   align-items: center;
+  /* //  — removes underline from links. */
+  text-decoration: none; 
   gap: 10px;
 }
 
@@ -27,7 +29,7 @@
   user-select: none;
 }
 
-.search-bar {
+/* .search-bar {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -40,9 +42,9 @@
   width: 300px;
   max-width: 100%;
   font-size: 1rem;
-}
+} */
 
-.search-button {
+/* .search-button {
   background: none;
   border: none;
   padding: 6px;
@@ -50,13 +52,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
-.search-button img {
+/* .search-button img {
   height: 20px;
   width: 20px;
   object-fit: contain;
-}
+} */
 
 
 .auth-buttons button {
@@ -119,17 +121,16 @@ Use the CSS above to show/hide tooltip on hover.  */
   text-align: center;
   padding: 5px 8px;
   border-radius: 5px;
-
   position: absolute;
-  bottom: 125%;
+  /* bottom: 125%; */
   left: 50%;
+  top: 125%;          /* changed from bottom: 125% to top: 125% */
   transform: translateX(-50%);
-
   opacity: 0;
   transition: opacity 0.3s;
   white-space: nowrap;
   pointer-events: none;
-  font-size: 12px;
+  font-size: 14px;
   z-index: 10;
 }
 

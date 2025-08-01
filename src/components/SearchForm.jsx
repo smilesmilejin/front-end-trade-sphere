@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import PropTypes from 'prop-types';
 import SearchIcon from '../assets/SearchIcon.png';
 import { useContext } from 'react';
-
+import '../styles/SearchForm.css';
 // Default form values
 const kDefaultFormState = {
   search: '',
