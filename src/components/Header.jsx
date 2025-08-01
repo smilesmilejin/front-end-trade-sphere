@@ -25,14 +25,13 @@ const Header = () => {
 
   };
 
-
   return (
     <header className="header">
       {/* Logo */}
-      <div className="logo">
+      <Link to="/" className="logo" >
         <img src={Logo} alt="My Logo" />
         <h1>TradeSphere</h1>
-      </div>
+      </Link>
 
       {/* Search Bar */}
       <div className="search-bar">
