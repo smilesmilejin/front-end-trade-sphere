@@ -5,6 +5,8 @@ import { useContext } from 'react';
 import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 import SignupForm from '../components/SignupForm';
 import UserContext from '../contexts/UserContext';
+import '../styles/Signup.css';
+
 
 // Get backend URL from environment variables .env
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
@@ -52,12 +54,11 @@ function Signup() {
   };
 
   return (
-    <div>
+    <div className='sign-up-container'>
         <Link to="/" className="logo">
             <img src={Logo} alt="My Logo" />
             <h1>TradeSphere</h1>
         </Link>
-        <h2>Sign Up</h2>
 
         {/* Pass signup handler as prop to SignupForm component */}
         <SignupForm onSignupUser={signupUser} />

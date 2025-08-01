@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import '../styles/SignupForm.css';
 
 // Default form values
 const kDefaultFormState = {
@@ -94,28 +94,28 @@ const SignupForm = ({ onSignupUser }) => {
 
   return (
     <form className='signup-form' onSubmit={handleSubmit}>
-      <div className='form-header'>
-        Sign Up
+      <div className='signup-form-header'>
+        Join the TradeSphere!
       </div>
       <>
-        <div className='form-field'>
+        <div className='signup-form-field'>
           {makeControlledInput('email','email')}
         </div>
         {errors.message && (
-          <div className='form-errors'>
+          <div className='signup-form-errors'>
               <p className='error-text'>{errors.message}</p>
           </div>
         )}
 
-        <div className='form-field'>
+        <div className='signup-form-field'>
           {makeControlledInput('name')}
         </div>
 
-        <div className='form-field'>
+        <div className='signup-form-field'>
           {makeControlledInput('address')}
         </div>
 
-        <div className="button-wrapper">
+        <div className="signup-button-wrapper">
           <button disabled={errors.message}>SIGN UP</button>
         </div>
       </>
