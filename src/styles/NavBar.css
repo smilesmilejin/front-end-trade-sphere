@@ -3,7 +3,7 @@
   justify-content: center; /* center all buttons */
   gap: 20px; /* space between buttons */
   align-items: center;           /* vertically center buttons */
-  padding: 0 15px;               /* horizontal padding */
+  padding: 50px 15px;               /* horizontal padding */
   height: 60px;                  /* set a height if you want */
   box-sizing: border-box;
 }
