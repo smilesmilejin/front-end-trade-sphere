@@ -19,7 +19,7 @@ function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav>
+    <nav className='nav-bar-container'>
       <Link to="/">
         <button className={isActive('/') ? 'active-link' : ''}>Home</button>
       </Link>

@@ -1,3 +1,13 @@
+.nav-bar-container {
+  display: flex;
+  justify-content: center; /* center all buttons */
+  gap: 20px; /* space between buttons */
+  align-items: center;           /* vertically center buttons */
+  padding: 0 15px;               /* horizontal padding */
+  height: 60px;                  /* set a height if you want */
+  box-sizing: border-box;
+}
+
 nav button {
   background-color: #f5f0f0;
   color: rgb(7, 8, 7);
