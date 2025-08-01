@@ -12,13 +12,6 @@ import { useState, useEffect, useContext } from 'react';
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
 // console.log("kBaseUrl:", kBaseUrl);
 
-const defaultFiltersState = {
-    category: '',
-    availability: '',
-    priceSort: '',
-    dateSort: '',
-};
-
 // Function to call backend signup API with user data
 const searchItemsApi = (params) => {
   console.log("SearchItemAPI with params:", params);
@@ -50,7 +43,6 @@ const getUserFavoritesApi = (curUserId) => {
     .catch (error => {
       console.log('GET User Favorites failed:', error);
       console.log(error);
-      // console.log('Login failed:', error);
       throw error;
     });
 };
@@ -80,23 +72,14 @@ const postUserFavoriteApi = async (userId, listingId) => {
 function Search() {
     const [searchResults, setSearchResults] = useState([]);
     const [searchParams] = useSearchParams();
-    const [filters, setFilters] = useState(defaultFiltersState);
     const [filteredItemData, setFilteredItemData] = useState([]);
-
     const { curUserData } = useContext(UserContext);
     const [userLikedListings, setUserLikedListings] = useState(new Set());
     const curUserId = curUserData?.user_id;
 
-
     const query = searchParams.get('query') || '';
 
     console.log('Search Keyword in Search Page is: ', query)
-//   // Get setters for login status and current user from contexts
-//   const { setUserLoginStatus } = useContext(UserLoginStatusContext);
-//   const { setCurUserData } = useContext(UserContext);
-//   const navigate = useNavigate();
-
-    // const curParams = {params: { query: query }}
 
 
    const searchItems = (params) => {
@@ -104,14 +87,8 @@ function Search() {
     searchItemsApi(params)
     .then(itemSearchResults => {
           console.log('############ In searchItems function, searchResult: ', itemSearchResults);
-
-        //   setUserLoginStatus(true); // Mark user as logged in
-          setSearchResults(itemSearchResults); // Set current user data in context
-
+          setSearchResults(itemSearchResults); 
           setFilteredItemData(itemSearchResults);
-
-        //   alert('Sign up is succesful!');
-        //   navigate('/'); // Redirect user to home page after successful signup
     })
     .catch(err => {
       alert('Search failed: ' + (err.response?.data?.error || 'Server error')); // Tries to access the error message from the response, but does so safely using optional chaining. If any part of the chain is undefined or null, it won't throw an error—it will return undefined.|| 'Server error': If err.response?.data?.error is undefined (or falsy), it falls back to 'Server error'.
@@ -173,19 +150,17 @@ function Search() {
       return 0; // If all compared values are equal (price, date, name), return 0 to leave the order unchanged.
     });
 
-    console.log('##### Current Filtered Item Data: ', filtered);
+    // console.log('##### Current Filtered Item Data: ', filtered);
     setFilteredItemData(filtered);
   };
 
   const getUserFavorites = () => {
     getUserFavoritesApi(curUserId)
       .then(userFavorites => {
-        // const likedSet = new Set(userFavorites.data.map(fav => fav.listing_id));
         const likedSet = new Set((userFavorites || []).map(fav => fav.listing_id));
         setUserLikedListings(likedSet);
       })
       .catch(error => {
-        // Optional: Show error message or keep editing mode active
         console.error('Update failed', error);
       });
   };
@@ -235,25 +210,13 @@ function Search() {
       if (!query) return; // Don’t run if query is empty
 
       searchItems(({params: { query: query }}))
-      // getFilteredItems(filters);
 
-      // setSearchResults([]);
-
-
-      // searchItemsApi(query)
-      // .then(results => {
-      //     setSearchResults(results);
-      // })
-      // .catch(err => {
-      //     alert('Search failed: ' + (err.response?.data?.error || 'Server error'));
-      // });
       if (curUserId) {
         getUserFavorites();
       };
 
     }, [query]); // 🔁 Only runs when query changes
 
-//   searchItems(curParams) // Your current code is causing an infinite loop or repeated requests because searchItems(curParams) is being called directly inside the component body, which means it runs every time the component re-renders — and since setSearchResults() triggers a re-render, it keeps going.
 
   return (
     <div>
@@ -279,7 +242,6 @@ function Search() {
         <ItemFilters onGetFilteredItems={getFilteredItems}/>
         <ItemList 
           listings={filteredItemData}
-          // listings={searchResults}
           userLikedListings={userLikedListings} 
           onToggleLike={toggleLike}
         />
