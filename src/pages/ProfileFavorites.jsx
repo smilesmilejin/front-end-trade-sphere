@@ -26,7 +26,15 @@ const getUserFavoritesApi = (curUserId) => {
     });
 };
 
-
+// DELETE user favorites API
+const deleteUserFavoriteApi = async (userId, listingId) => {
+  try {
+    await axios.delete(`${kBaseUrl}/users/${userId}/favorites/${listingId}`);
+  } catch (error) {
+    console.error('Error unliking item:', error);
+    throw error;
+  }
+};
 
 function ProfileFavorites() {
   const { curUserData } = useContext(UserContext);
@@ -49,6 +57,23 @@ function ProfileFavorites() {
       });
   };
 
+  const deleteUserFavorite = (userId, listingId) => {
+    deleteUserFavoriteApi(userId, listingId)
+      .then(() => {
+        const updatedSet = new Set(userLikedListings);
+        updatedSet.delete(listingId);
+        setUserLikedListings(updatedSet);
+
+        // Remove from favorites array
+        setCurUserFavoritesData(prevFavorites =>
+          prevFavorites.filter(fav => fav.listing_id !== listingId)
+        );
+      })
+      .catch(error => {
+        console.error('Error deleting user favorite:', error);
+      });
+  };
+
   // Toggle like/unlike
   const toggleLike = (listingId) => {
     if (!curUserData) {
@@ -58,21 +83,25 @@ function ProfileFavorites() {
 
     const isLiked = (userLikedListings || new Set()).has(listingId);
 
-    if (isLiked) {
-      // Call backend to unlike
-      axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-        .then(() => {
-          // Remove from liked set
-          const updatedSet = new Set(userLikedListings);
-          updatedSet.delete(listingId);
-          setUserLikedListings(updatedSet);
+    // if (isLiked) {
+    //   // Call backend to unlike
+    //   axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
+    //     .then(() => {
+    //       // Remove from liked set
+    //       const updatedSet = new Set(userLikedListings);
+    //       updatedSet.delete(listingId);
+    //       setUserLikedListings(updatedSet);
 
-          // Remove from favorites array
-          setCurUserFavoritesData(prevFavorites =>
-            prevFavorites.filter(fav => fav.listing_id !== listingId)
-          );
-        });
-    } 
+    //       // Remove from favorites array
+    //       setCurUserFavoritesData(prevFavorites =>
+    //         prevFavorites.filter(fav => fav.listing_id !== listingId)
+    //       );
+    //     });
+    // }
+
+    if (isLiked) {
+      deleteUserFavorite(curUserId, listingId);
+    };
   };
 
   useEffect( () => {
