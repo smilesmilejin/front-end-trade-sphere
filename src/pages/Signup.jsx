@@ -1,6 +1,6 @@
 import Logo from '../assets/Logo.png'; 
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import { useContext } from 'react';
 import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 import SignupForm from '../components/SignupForm';
@@ -53,10 +53,10 @@ function Signup() {
 
   return (
     <div>
-        <header className="logo">
+        <Link to="/" className="logo">
             <img src={Logo} alt="My Logo" />
             <h1>TradeSphere</h1>
-        </header>
+        </Link>
         <h2>Sign Up</h2>
 
         {/* Pass signup handler as prop to SignupForm component */}
