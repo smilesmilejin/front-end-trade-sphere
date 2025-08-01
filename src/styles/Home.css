@@ -1,29 +1,11 @@
 
 .home-container {
-
     background-image: url('/HomeImage.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.home-container {
-    background-image: url('/HomeImage.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* max-width: 1200px; */
-    margin: 0 auto;
-    /* padding: 2rem 1rem; */
-    text-align: center;
-    /* min-height: 70vh; */
     display: flex;
     flex-direction: column;
     justify-content: center;
