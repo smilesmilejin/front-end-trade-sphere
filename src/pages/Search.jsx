@@ -1,6 +1,4 @@
 import axios from 'axios';
-// import { useNavigate, Link } from 'react-router';
-// import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 import ItemList from '../components/ItemList';
 import ItemFilters from '../components/ItemFilters';
 import UserContext from '../contexts/UserContext';
@@ -215,7 +213,7 @@ function Search() {
         getUserFavorites();
       };
 
-    }, [query]); // 🔁 Only runs when query changes
+    }, [query]); // Only runs when query changes
 
 
   return (
