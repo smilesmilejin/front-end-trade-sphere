@@ -22,6 +22,7 @@ import ProfilePostItem from './pages/ProfilePostItem.jsx';
 import ProfileFavorites from './pages/ProfileFavorites.jsx';
 
 import ProfileListing from './pages/ProfileListing.jsx';
+import Search from './pages/Search.jsx';
 import { Navigate, Outlet } from "react-router";
 
 // import { createContext } from 'react';
@@ -86,6 +87,7 @@ function App() {
               <Route path="itemsforsale" element={<ItemsForSale />} />
               <Route path="about" element={<About/>} />
               <Route path="contact" element={<Contact/>} />
+              <Route path="search" element={<Search/>} />
               
               {/* Protect all /profile routes */}
               <Route element={<RequireAuth />}>

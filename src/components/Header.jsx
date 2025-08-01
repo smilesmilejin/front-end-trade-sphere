@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 import UserContext from '../contexts/UserContext';
 import '../styles/Header.css';
+import SearchForm from './SearchForm.jsx';
 
 const Header = () => {
   const { userLoginStatus, setUserLoginStatus } = useContext(UserLoginStatusContext);
@@ -34,12 +35,14 @@ const Header = () => {
       </Link>
 
       {/* Search Bar */}
-      <div className="search-bar">
+      {/* <div className="search-bar">
         <input type="text" placeholder="Search Items" />
         <button className="search-button" aria-label="Search">
           <img src={SearchIcon} alt="Search" />
         </button>
-      </div>
+      </div> */}
+
+      <SearchForm />
 
       {/* Auth Buttons */}
       <div className="auth-buttons">
