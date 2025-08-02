@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import '../styles/ItemFilters.css';
+
 
 const defaultFiltersState = {
     category: '',
@@ -32,7 +34,7 @@ const ItemFilters = ({ onGetFilteredItems }) => {
         <div className='item-filters'>
 
             <div className='filter-group'>
-                <label htmlFor="category">Category:</label>
+                <label htmlFor="category">🏷️  Category:</label>
                 <select
                     id="category"
                     value={filters.category}
@@ -49,7 +51,7 @@ const ItemFilters = ({ onGetFilteredItems }) => {
             </div>
 
             <div className='filter-group'>
-                <label htmlFor="availability">Availability:</label>
+                <label htmlFor="availability">✅  Availability:</label>
                 <select
                     id="availability"
                     value={filters.availability}
@@ -62,7 +64,7 @@ const ItemFilters = ({ onGetFilteredItems }) => {
             </div>
 
             <div className='filter-group'>
-                <label htmlFor="priceSort">Price:</label>
+                <label htmlFor="priceSort">💰  Price:</label>
                 <select
                     id="priceSort"
                     value={filters.priceSort}
@@ -75,7 +77,7 @@ const ItemFilters = ({ onGetFilteredItems }) => {
             </div>
 
             <div className='filter-group'>
-                <label htmlFor="dateSort">Date Added:</label>
+                <label htmlFor="dateSort">📅  Date Added:</label>
                 <select
                     id="dateSort"
                     value={filters.dateSort}
@@ -87,9 +89,11 @@ const ItemFilters = ({ onGetFilteredItems }) => {
                 </select>
             </div>
 
-            <button type="button" onClick={handleResetFilters} >
-                Reset Filters
-            </button>
+            <div className='filter-group'>
+                <button type="button" onClick={handleResetFilters} >
+                    Reset Filters
+                </button>                
+            </div>
         </div>
     )
 };
