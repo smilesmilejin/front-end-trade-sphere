@@ -3,6 +3,8 @@ import axios from 'axios';
 import ItemList from '../components/ItemList';
 import ItemFilters from '../components/ItemFilters';
 import UserContext from '../contexts/UserContext';
+import '../styles/ItemsForSale.css';
+
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
@@ -335,8 +337,8 @@ function ItemsForSale() {
 
   return (
     <div>
-      <h1>ItemsForSale Page</h1>
-      <p>ItemsForSale Page</p>
+      <h1 className="items-for-sale-h1">Browse Items for Sale</h1>
+      {/* <p>ItemsForSale Page</p> */}
       <ItemFilters onGetFilteredItems={getFilteredItems}/>
       <ItemList 
         listings={filteredItemData}
