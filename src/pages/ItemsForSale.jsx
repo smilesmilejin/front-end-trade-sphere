@@ -340,6 +340,7 @@ function ItemsForSale() {
       <h1 className="items-for-sale-h1">Browse Items for Sale</h1>
       {/* <p>ItemsForSale Page</p> */}
       <ItemFilters onGetFilteredItems={getFilteredItems}/>
+      <h3 className='items-for-sale-numbers'>{filteredItemData.length} Items</h3>
       <ItemList 
         listings={filteredItemData}
         userLikedListings={userLikedListings} 

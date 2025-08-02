@@ -9,3 +9,11 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+.items-for-sale-numbers {
+  text-align: right;
+  margin-right: 100px; /* add some space from the right edge */
+  font-weight: 600;   /* make it a bit bolder */
+  font-size: 1.2rem;  /* slightly larger */
+  color: #343333;        /* optional color */
+}
