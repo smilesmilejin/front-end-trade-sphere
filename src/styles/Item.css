@@ -146,7 +146,7 @@
 /* ___________________________________ */
 
 /* Edit and Delete buttons */
-.edit-button,
+/* .edit-button,
 .delete-button {
   background: none;
   border: 2px solid transparent;
@@ -182,7 +182,7 @@
   background: #dc3545;
   color: white;
   transform: scale(1.05);
-}
+} */
 
 /* Modal styling */
 .modal-overlay {
@@ -193,11 +193,14 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
+  /* flex-direction: column; */
+  /* flex-direction: row; */
   justify-content: center;
   align-items: center;
   z-index: 1000;
   padding: 1rem;
   backdrop-filter: blur(5px);
+  margin: 0;
 }
 
 .modal {
@@ -211,17 +214,30 @@
   position: relative;
   box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   animation: modalSlideIn 0.3s ease-out;
+  display: flex;
+  flex-direction: row;         /* side-by-side layout */
+  width: 150vw;             /* Responsive width */
+  max-width: 1200px;        /* Don't go wider than 900px */
+  max-height: 90vh;
 }
 
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.modal-image-column {
+  flex: 1;
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow: hidden;
+  width: 50%; 
+}
+
+
+.modal-text-column {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  color: #333;
 }
 
 .modal h2 {
@@ -232,6 +248,9 @@
   text-align: center;
   border-bottom: 2px solid #e9ecef;
   padding-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
 }
 
 .modal p {
@@ -239,11 +258,6 @@
   color: #495057;
   font-size: 1rem;
   line-height: 1.5;
-}
-
-.modal p strong {
-  color: #2c3e50;
-  font-weight: 600;
 }
 
 /* Close button */
@@ -272,7 +286,7 @@
 }
 
 /* Status badge */
-.status-badge {
+.item-details {
   display: inline-block;
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
@@ -280,82 +294,4 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-.status-available {
-  background: #d1ecf1;
-  color: #0c5460;
-}
-
-.status-sold {
-  background: #f8d7da;
-  color: #721c24;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .item-content {
-    padding: 1rem;
-  }
-  
-  .item-actions {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .view-details-btn {
-    width: 100%;
-  }
-  
-  .modal {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-  
-  .modal h2 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .item-content {
-    padding: 0.75rem;
-  }
-  
-  .item-info p:first-child {
-    font-size: 1.1rem;
-  }
-  
-  .item-price {
-    font-size: 1.2rem;
-  }
-  
-  .modal {
-    padding: 1rem;
-    max-height: 95vh;
-  }
-}
-
-/* Grid layout for items list */
-.items-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 0;
-  list-style: none;
-  margin: 0;
-}
-
-@media (max-width: 768px) {
-  .items-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .items-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
 }

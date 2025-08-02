@@ -81,23 +81,29 @@ const Item =({
                 <div className="modal-overlay">
                     <div className="modal">
                         <button className="close-button" onClick={handleClose}>×</button>
-                        <h2>Listing Details</h2>
-
-                        <ImageGallerySlider 
+                        {/* <h2>Listing Details</h2> */}
+                        <div className='modal-image-column'>
+                            <ImageGallerySlider
+                                images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
+                            />                      
+                        </div>
+                        {/* <ImageGallerySlider
                             images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
-                        />
-
-                        <p>Listing Id: {listing_id}</p>
-                        <p>User Id: {user_id}</p>
-                        <p>Name: {name}</p>
-                        <p>Category: {category}</p>
-                        <p>Description: {description}</p>
-                        <p>Price: ${price}</p>
-                        <p>Location: {location}</p>
-                        <p>Contact Info: {contact_information}</p>
-                        <p>Created At: {created_at}</p>
-                        <p>Updated At: {updated_at}</p>
-                        <p>Status: {sold_status ? 'Sold' : 'Available'}</p>
+                        /> */}
+                        <div className='modal-text-column'>
+                            <h2>Listing Details</h2>
+                            <p>Listing Id: {listing_id}</p>
+                            <p>User Id: {user_id}</p>
+                            <p>Name: {name}</p>
+                            <p>Category: {category}</p>
+                            <p>Description: {description}</p>
+                            <p>Price: ${price}</p>
+                            <p>Location: {location}</p>
+                            <p>Contact Info: {contact_information}</p>
+                            <p>Created At: {created_at}</p>
+                            <p>Updated At: {updated_at}</p>
+                            <p>Status: {sold_status ? 'Sold' : 'Available'}</p>                        
+                        </div>
                     </div>
                 </div>
             )}
