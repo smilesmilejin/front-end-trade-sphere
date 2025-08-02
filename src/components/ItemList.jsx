@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import Item from './Item.jsx';
+import '../styles/ItemList.css';
+
 
 const sampleImages = [
     {
@@ -46,7 +48,7 @@ const ItemList = ({ listings, userLikedListings, onToggleLike, editButton, onUpd
         });
     };
 
-    return <ul>{getItemListJSX(listings)}</ul>;
+    return <ul className="items-list-container">{getItemListJSX(listings)}</ul>;
 };
 
 ItemList.propTypes = {

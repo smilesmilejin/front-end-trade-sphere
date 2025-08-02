@@ -47,20 +47,27 @@ const Item =({
     const isLiked = (userLikedListings || new Set()).has(listing_id);
 
     return (
-        <li>
+        <li className='item-container'>
+            {/* Heart icon */}
+            <button className="heart-button" onClick={() => onToggleLike(listing_id)}>
+                {isLiked ? '❤️' : '🤍'}
+            </button>
+
             <ImageGallerySlider 
                 images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
             />
-            <p>Name: {name}</p>
-            <p>Category: {category}</p>
-            <p>Price: {price}</p>
+            <div className='item-content'>
+                <p className='item-name'>Name: {name}</p>
+                {/* <p>Category: {category}</p> */}
+                <p className='item-price'>Price: ${price}</p>
+            </div>
 
             {/* Heart icon */}
-            <button onClick={() => onToggleLike(listing_id)}>
-            {isLiked ? '❤️' : '🤍'}
-            </button>
+            {/* <button className="heart-button" onClick={() => onToggleLike(listing_id)}>
+                {isLiked ? '❤️' : '🤍'}
+            </button> */}
 
-            <button onClick={handleOpen}>View Details</button>
+            <button className='view-details-btn' onClick={handleOpen}>View Details</button>
 
             <div onClick={handleEditOpen}>
                 {editButton}
