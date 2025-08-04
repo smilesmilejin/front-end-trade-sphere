@@ -30,7 +30,8 @@
   display: flex;
   flex-direction: column; /* stack vertically */
   gap: 1rem; /* spacing between buttons */
-  width: 250px; /* optional fixed width */
+  width: 280px; /* optional fixed width */
   padding: 1rem;
   background-color: #f5f5f5; /* optional background */
+  margin-left: 8rem;
 }

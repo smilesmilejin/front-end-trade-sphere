@@ -16,19 +16,19 @@ function AccountNavbar() {
   return (
     <nav className="account-navbar">
       <Link to="/profile">
-        <button className={isActive('/profile') ? 'account-navbar-active-link' : ''}>Profile</button>
+        <button className={isActive('/profile') ? 'account-navbar-active-link' : ''}>👤 Profile</button>
       </Link>
 
       <Link to="/profile/post-item-to-sell">
-        <button className={isActive('/profile/post-item-to-sell') ? 'account-navbar-active-link' : ''}>Post an Item to Sell</button>
+        <button className={isActive('/profile/post-item-to-sell') ? 'account-navbar-active-link' : ''}>➕ Post an Item to Sell</button>
       </Link>
       
       <Link to="/profile/my-favorite-listings">
-        <button className={isActive('/profile/my-favorite-listings') ? 'account-navbar-active-link' : ''}>My Favorite Listings</button>
+        <button className={isActive('/profile/my-favorite-listings') ? 'account-navbar-active-link' : ''}>💖 My Favorite Listings</button>
       </Link>
 
       <Link to="/profile/my-sell-listings">
-        <button className={isActive('/profile/my-sell-listings') ? 'account-navbar-active-link' : ''}>My Selling Listings</button>
+        <button className={isActive('/profile/my-sell-listings') ? 'account-navbar-active-link' : ''}>🧾 My Selling Listings</button>
       </Link>
     </nav>
   );
