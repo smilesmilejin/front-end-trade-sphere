@@ -60,11 +60,11 @@ function Profile() {
           />
         ) : (
           <div className="profile-info">
-            <p><strong>Name:</strong> {curUserData.name}</p>
-            <p><strong>Email:</strong> {curUserData.email}</p>
-            <p><strong>Address:</strong> {curUserData.address}</p>
-            <p><strong>Account Created:</strong> {curUserData.created_at}</p>
-            <p><strong>Last Updated:</strong> {curUserData.updated_at}</p>
+            <p><strong>👤 Name:</strong> {curUserData.name}</p>
+            <p><strong>📧 Email:</strong> {curUserData.email}</p>
+            <p><strong>🏠 Address:</strong> {curUserData.address}</p>
+            <p><strong>📅 Account Created:</strong> {curUserData.created_at}</p>
+            <p><strong>🕒 Last Updated:</strong> {curUserData.updated_at}</p>
             <button onClick={() => setIsEditing(true)}>Edit Profile</button>
           </div>
         )}

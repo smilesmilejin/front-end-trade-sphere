@@ -49,6 +49,7 @@
 
   padding-bottom: 2em;
   font-size: clamp(0.8rem, 1vw, 1rem); /* scales with screen */
+  min-width: 200px; 
 }
 
 /* .item-container:hover {
@@ -129,13 +130,14 @@
   background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
   color: white;
   border: none;
-  padding: 0.75rem 0.75rem;
+  /* padding: 0.75rem 0.75rem; */
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
-  font-size: inherit;
+  /* font-size: 0.9rem;
+  font-size: inherit; */
+  padding: 0.25rem 0.25rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
