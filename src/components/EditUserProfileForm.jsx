@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import '../styles/EditUserProfileForm.css';
 
 const kErrorState = {
   message: '',
@@ -85,32 +85,32 @@ const EditUserProfileForm = ({ userData, onUpdateUserProfile, onCancelUpdateUser
 
     return (
       <form className='edit-user-profile-form' onSubmit={handleSubmit}>
-        <div className='form-header'>
+        <div className='edit-user-form-header'>
           Edit User Profile
         </div>
         <>
-          <div className='form-field'>
+          <div className='edit-user-form-field'>
             {makeControlledInput('name')}
           </div>
 
-          <div className='form-field'>
+          <div className='edit-user-form-field'>
             {makeControlledInput('email','email')}
           </div>
           {errors.message && (
-            <div className='form-errors'>
-                <p className='error-text'>{errors.message}</p>
+            <div className='edit-user-form-errors'>
+                <p className='edit-user-form-error-text'>{errors.message}</p>
             </div>
           )}
 
-          <div className='form-field'>
+          <div className='edit-user-form-field'>
             {makeControlledInput('address')}
           </div>
 
-          <div className="button-wrapper">
+          <div className="edit-user-button-wrapper">
             <button disabled={errors.message}>SAVE</button>
           </div>
 
-          <div className="button-wrapper">
+          <div className="edit-user-button-wrapper">
             <button type="button" onClick={onCancelUpdateUserProfile}>CANCEL</button>
           </div>
 
