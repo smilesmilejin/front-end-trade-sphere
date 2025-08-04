@@ -114,6 +114,8 @@
   user-select: none;
   padding: 0;
   transition: transform 0.2s ease;
+  /* The heart button will appear above any sibling elements in the .item-container that have z-index: 0 or no z-index at all. */
+  z-index: 1; 
 }
 
 .heart-button:hover {
@@ -295,3 +297,16 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
+/* Optional Responsive Fix for Smaller Screens */
+/* @media (max-width: 600px) {
+  .heart-button {
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 18px;
+  }
+
+  .item-container {
+    padding-bottom: 1.5em;
+  }
+} */
