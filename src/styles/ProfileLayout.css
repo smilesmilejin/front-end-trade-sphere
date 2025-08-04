@@ -1,0 +1,18 @@
+.profile-layout {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+
+/* Right: Main content */
+.profile-card {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(101, 101, 101);
+  margin-right: 3rem;
+}

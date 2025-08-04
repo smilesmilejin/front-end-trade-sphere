@@ -1,37 +1,66 @@
 .account-navbar button {
-  background-color: #f5f0f0;
-  color: #222; 
-  border: 2px solid transparent;
-  border-radius: 8px;
-  /* padding: 10px 20px; */
-  /* font-size: 1rem; */
+  /* background-color: #f5f0f0; */
+  /* color: #222;  */
+  /* border: 2px solid transparent; */
+  /* border-radius: 8px; */
   cursor: pointer;
-  transition: all 0.35s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
-  font-weight: 500;
+  /* transition: all 0.35s ease; */
+  /* font-weight: 500; */
   font-family: 'Lucida Console', Monaco, monospace;
+  font-size: 1.2rem;
+  padding: 0;
+  background:none;
+  box-shadow: none !important; 
 }
 
 .account-navbar button:hover {
-  border-color: #84cae3;
+  /* border-color: #84cae3; */
+  /* border-color: rgb(21, 96, 130); */
+  border-color: rgb(101, 176, 210)
 }
 
 /* Active Link */
 .account-navbar .account-navbar-active-link {
-  background-color: #8dd4e3;       /* darker green */
+  /* background-color: #8dd4e3;     
   color: white;
   font-weight: bold;
-  border-color: #84cae3;    /* matching dark border */
-  box-shadow: 0 0 10px rgba(115, 210, 231, 0.6); /* soft green glow */
+  border-color: #84cae3;   
+  box-shadow: 0 0 10px rgba(115, 210, 231, 0.6); 
   transform: scale(1.05);
+  font-weight: 800; */
+  /* transform: scale(1.05); */
+
+  /* background-color: rgb(21, 96,130);     
+  color: white;
+  font-weight: bold;
+  border-color: rgb(21, 96, 130);   
+  box-shadow: 0 0 10px rgb(21, 96, 130, 0.6); 
+  transform: scale(1.05);
+  font-weight: 800;
+  transform: scale(1.05); */
+
+  background-color: rgb(101, 176, 210);     
+  /* background-color: rgb(61, 136, 170); */
+  color: white;
+  font-weight: bold;
+  border-color: rgb(101, 176, 210);   
+  box-shadow: 0 0 10px rgb(101, 176, 210, 0.6); 
+  transform: scale(1.05);
+  font-weight: 800;
+  transform: scale(1.05);
+
 }
 
 .account-navbar {
   display: flex;
   flex-direction: column; /* stack vertically */
-  gap: 1rem; /* spacing between buttons */
+  gap: 2rem; /* spacing between buttons */
   width: 280px; /* optional fixed width */
-  padding: 1rem;
-  background-color: #f5f5f5; /* optional background */
-  margin-left: 8rem;
+  /* padding: 1rem; */
+  /* background-color: #f5f5f5; */
+  margin-left: 3rem;
+  /* border: 2px solid #84cae3; */
 }
+
+
+/* !!!!!!!!!!  */
