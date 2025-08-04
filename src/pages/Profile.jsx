@@ -3,7 +3,6 @@ import axios from 'axios';
 import UserContext from '../contexts/UserContext';
 import EditUserProfileForm from '../components/EditUserProfileForm';
 
-
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
 // console.log("kBaseUrl:", kBaseUrl);
