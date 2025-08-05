@@ -302,6 +302,7 @@ const handleChange = (event) => {
             </div>
             )}
 
+            <h3 className='edit-user-item-form-images-header'>Images for This Item</h3>
             <ImageList 
                 images={formData.images} 
                 onLocalHandlelDeleteImage={handleDeleteImage}

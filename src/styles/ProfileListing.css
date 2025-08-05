@@ -39,3 +39,7 @@
   margin-top: 0.5rem;
   margin-bottom: 0.1rem;
 }
+
+.edit-listings-btn:hover {
+  transform: scale(1.1);
+}

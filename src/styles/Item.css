@@ -350,4 +350,5 @@
   width: 150vw;           
   max-width: 900px;       
   max-height: 90vh;
+  /* overflow: hidden; */
 }

@@ -1,16 +1,17 @@
 .edit-user-item-form {
-  background: rgba(255, 255, 255, 0.95);
+  /* background: rgba(255, 255, 255, 0.95); */
+  /* background: rgba(221, 155, 155, 0.95); */
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 5rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  /* box-shadow: 0 20px 40px rgba(0,0,0,0.1); */
   width: 100%;
   max-width: 400px;
   border: 1px solid rgba(255,255,255,0.2);
   position: relative;
   z-index: 1;
-  /* background-color: #f9f9f9;  */
 }
+
 
 .edit-user-item-form-header {
   text-align: center;
@@ -253,4 +254,63 @@
   color: #2c3e50;
   line-height: 1.4;
   margin-right: 0.5rem;   /* optional, if you don’t use flex gap */
+}
+
+.edit-user-item-form-images-header {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  padding-bottom: 0.5rem;
+  text-align: center;
+}
+
+.delete-user-item-button-wrapper{
+  margin-top: 2rem;
+}
+
+.delete-user-item-button-wrapper button {
+  width: 100%;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #fd974e 0%, #fa429b 100%);  
+  /* background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+  background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+  background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+  background: linear-gradient(135deg, #f85032 0%, #e73827 50%, #1488cc 100%);
+  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 50%, #1e3c72 100%);
+  background: linear-gradient(135deg, #ff512f 0%, #dd2476 50%, #2c3e50 100%);
+  background: linear-gradient(135deg, #cb2d3e 0%, #ef473a 50%, #1e3c72 100%); */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5rem;
+}
+
+.delete-user-item-button-wrapper button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.delete-user-item-button-wrapper button:hover::before {
+  left: 100%;
+}
+
+.delete-user-item-button-wrappe button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
