@@ -2,6 +2,8 @@ import { useContext, useState } from 'react';
 import axios from 'axios';
 import UserContext from '../contexts/UserContext';
 import EditUserProfileForm from '../components/EditUserProfileForm';
+import '../styles/Profile.css';
+
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
@@ -49,9 +51,8 @@ function Profile() {
 
   
   return (
-    <div>
-      <h2>My Profile</h2>
-      <div className="profile-info">
+    <div className="profile-info-wrapper">
+      {/* <div className="profile-info-edit-form"> */}
         {isEditing ? (
           <EditUserProfileForm
             userData={curUserData}
@@ -60,15 +61,19 @@ function Profile() {
           />
         ) : (
           <div className="profile-info">
-            <p><strong>👤 Name:</strong> {curUserData.name}</p>
-            <p><strong>📧 Email:</strong> {curUserData.email}</p>
-            <p><strong>🏠 Address:</strong> {curUserData.address}</p>
-            <p><strong>📅 Account Created:</strong> {curUserData.created_at}</p>
-            <p><strong>🕒 Last Updated:</strong> {curUserData.updated_at}</p>
-            <button onClick={() => setIsEditing(true)}>Edit Profile</button>
+            <h2 className="profile-page-header">My Profile</h2>
+
+            <div className="profile-details">
+              <p><strong>👤 Name:</strong> {curUserData.name}</p>
+              <p><strong>📧 Email:</strong> {curUserData.email}</p>
+              <p><strong>🏠 Address:</strong> {curUserData.address}</p>
+              <p><strong>📅 Account Created:</strong> {curUserData.created_at}</p>
+              <p><strong>🕒 Last Updated:</strong> {curUserData.updated_at}</p>
+              <button className="profile-info-edit-button"onClick={() => setIsEditing(true)}>Edit Profile</button>
+            </div>
           </div>
         )}
-      </div>
+      {/* </div> */}
     </div>
   );
 }

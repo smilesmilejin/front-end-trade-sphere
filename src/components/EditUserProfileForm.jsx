@@ -84,7 +84,7 @@ const EditUserProfileForm = ({ userData, onUpdateUserProfile, onCancelUpdateUser
   };
 
     return (
-      <form className='edit-user-profile-form' onSubmit={handleSubmit}>
+      <form className='signup-form' onSubmit={handleSubmit}>
         <div className='edit-user-form-header'>
           Edit User Profile
         </div>

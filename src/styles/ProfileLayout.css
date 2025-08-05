@@ -3,7 +3,9 @@
   /* gap: 2rem; */
   /* margin-top: 1rem; */
   align-items: flex-start;
-  flex-wrap: wrap;
+  /* align-items: stretch; */
+  /* flex-wrap: wrap; */
+  /* padding: 2rem; */
 }
 
 
@@ -11,8 +13,18 @@
 .profile-card {
   flex: 1;
   background-color: #ffffff;
-  padding: 2rem;
+  /* padding: 2rem; */
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(101, 101, 101);
+  /* box-shadow: 0 0 15px rgba(101, 176, 210, 0.6); */
   margin-right: 3rem;
+
+  /* Add these to center the child */
+  display: flex;
+  justify-content: center; /* horizontally */
+  /* min-height: 100vh;  */
+  padding: 2rem;           
+  /* box-sizing: border-box; */
+
+  /* border: 2px dashed blue; */
 }

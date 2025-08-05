@@ -56,6 +56,36 @@
   font-weight: 400;
 }
 
+/* Form header styling */
+.edit-user-form-header {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
+/* Form field container */
+.edit-user-form-field {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.edit-user-form-field input {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #e1e8ed;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  box-sizing: border-box;
+  color: #2c3e50;
+  font-weight: 400;
+}
+
+
 /* Floating label effect (optional enhancement) */
 .edit-user-form-field.focused input {
   border-color: #667eea;
