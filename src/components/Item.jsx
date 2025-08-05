@@ -73,9 +73,9 @@ const Item =({
                 {editButton}
             </div>
 
-            <div onClick={() => onDeleteUserItem(listing_id)}>
+            {/* <div onClick={() => onDeleteUserItem(listing_id)}>
                 {deleteButton}
-            </div>
+            </div> */}
 
             {isModalOpen && (
                 <div className="modal-overlay">
@@ -133,6 +133,7 @@ const Item =({
                         onCancelUpdateUserItem={onCancelUpdateUserItem}
                         // onDeleteImage={onDeleteImage}
                         onHandleEditClose={handleEditClose}
+                        onDeleteUserItem={onDeleteUserItem}
                         />
                     </div>
                 </div>

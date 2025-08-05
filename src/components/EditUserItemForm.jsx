@@ -41,10 +41,12 @@ const EditUserItemForm = ({
     onUpdateUserItem, 
     onCancelUpdateUserItem,
     // onDeleteImage,
-    onHandleEditClose }) => {
+    onHandleEditClose,
+    onDeleteUserItem }) => {
 
     // Make sure the initial userData fields are never null or undefined — use empty strings instead:
     const initialItemData = {
+        listingId: itemData.listing_id,
         name: itemData.name || '',
         category: itemData.category || '',
         description: itemData.description || '',
@@ -294,23 +296,27 @@ const handleChange = (event) => {
                 )}
             </div>
         
-          <ImageList 
-            images={formData.images} 
-            onLocalHandlelDeleteImage={handleDeleteImage}
-          />
+            <ImageList 
+                images={formData.images} 
+                onLocalHandlelDeleteImage={handleDeleteImage}
+            />
 
-          <EditUserItemImageUploader 
-            onSetNewUploadedimagesImages={setNewUploadedimagesImages}
-            resetUploader={resetUploader}
-          />
+            <EditUserItemImageUploader 
+                onSetNewUploadedimagesImages={setNewUploadedimagesImages}
+                resetUploader={resetUploader}
+            />
 
-          <div className="button-wrapper">
-            <button disabled={hasErrors}>SAVE</button>
-          </div>
+            <div className="button-wrapper">
+                <button disabled={hasErrors}>SAVE</button>
+            </div>
 
-          <div className="button-wrapper">
-            <button type="button" onClick={handelCancelEdit}>CANCEL</button>
-          </div>
+            <div className="button-wrapper">
+                <button type="button" onClick={handelCancelEdit}>CANCEL</button>
+            </div>
+
+            <div>
+                <button type="button" onClick={() => onDeleteUserItem(formData.listingId)}>DELETE</button>
+            </div>
 
         </form>
     );
@@ -333,6 +339,7 @@ EditUserItemForm.propTypes = {
   onUpdateUserItem: PropTypes.func.isRequired,
   onCancelUpdateUserItem: PropTypes.func.isRequired,
 //   onDeleteImage: PropTypes.func.isRequired,
+  onDeleteUserItem: PropTypes.func.isRequired,
 };
 
 export default EditUserItemForm;
