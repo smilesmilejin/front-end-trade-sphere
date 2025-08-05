@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useContext, useState, useEffect } from 'react';
 import UserContext from '../contexts/UserContext';
 import ItemList from '../components/ItemList';
+import '../styles/ProfileFavorites.css';
 
 
 // get backendUrl from .env file
@@ -111,7 +112,7 @@ function ProfileFavorites() {
 
   return (
     <div>
-      <h3>User favorites</h3>
+      <h2 className="profile-favorites-page-header">User favorites</h2>
       <ItemList 
         listings={curUserFavoritesData}
         userLikedListings={userLikedListings} 
