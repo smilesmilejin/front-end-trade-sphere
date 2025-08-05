@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import ImageUploader from './ImageUploader';
-
+import '../styles/NewItemForm.css';
 
 // Default empty form
 const kDefaultFormState = {
@@ -116,29 +116,29 @@ const NewItemForm = ({ onPostItem }) => {
     const hasErrors = Object.values(errors).some(errorMsg => errorMsg !== '');
 
     return (
-        <form className='signup-form' onSubmit={handleSubmit}>
-            <div className='form-header'>
+        <form className='new-item-form' onSubmit={handleSubmit}>
+            <div className='new-item-form-header'>
             Post an Item for Sale
             </div>
 
-            <div className='form-field'>
+            <div className='new-item-form-field'>
                 {makeControlledInput('name')}
             </div>
             {errors.name && (
-            <div className='form-errors'>
-                <p className='error-text'>{errors.name}</p>
+            <div className='new-item-form-errors'>
+                <p className='new-item-error-text'>{errors.name}</p>
             </div>
             )}
 
-            <div className='form-field'>
-                <label htmlFor="category">Category:</label>
+            <div className='new-item-form-field-category'>
+                {/* <label htmlFor="category">Category:</label> */}
                 <select
                     id="category"
                     name='category'
                     value={formData.category}
                     onChange={handleChange}
                 >
-                    <option value="">-- All --</option>
+                    <option value="">-- SELECT CATEGORY --</option>
                     <option value="household">Household Items</option>
                     <option value="electronics">Electronics</option>
                     <option value="clothing_accessories">Clothing & Accessories</option>
@@ -147,56 +147,60 @@ const NewItemForm = ({ onPostItem }) => {
                     <option value="miscellaneous">Miscellaneous</option>
                 </select>
 
-                {errors.category && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.category}</p>
+                {/* {errors.category && (
+                <div className='new-item-form-errors'>
+                    <p className='new-item-error-text'>{errors.category}</p>
                 </div>
-                )}
+                )} */}
             </div>
+            {errors.category && (
+            <div className='new-item-form-errors'>
+                <p className='new-item-error-text'>{errors.category}</p>
+            </div>
+            )}
 
 
-
-            <div className='form-field'>
+            <div className='new-item-form-field'>
                 {makeControlledInput('description')}
             </div>
             {errors.description && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.description}</p>
+                <div className='new-item-form-errors'>
+                    <p className='new-item-error-text'>{errors.description}</p>
                 </div>
             )}
 
-            <div className='form-field'>
+            <div className='new-item-form-field'>
                 {makeControlledInput('price', 'number')}
             </div>
             {errors.price && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.price}</p>
+                <div className='new-item-form-errors'>
+                    <p className='new-item-error-text'>{errors.price}</p>
                 </div>
             )}
 
 
-            <div className='form-field'>
+            <div className='new-item-form-field'>
                 {makeControlledInput('location')}
             </div>
             {errors.location && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.location}</p>
+                <div className='new-item-form-errors'>
+                    <p className='new-item-error-text'>{errors.location}</p>
                 </div>
             )}
 
 
-            <div className='form-field'>
+            <div className='new-item-form-field'>
                 {makeControlledInput('contact_information')}
             </div>
                 {errors.contact_information && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.contact_information}</p>
+                <div className='new-item-form-errors'>
+                    <p className='new-item-error-text'>{errors.contact_information}</p>
                 </div>
                 )}
 
             <ImageUploader onSetFormData={setFormData} resetUploader={resetUploader}/>
 
-            <div className="button-wrapper">
+            <div className="new-item-button-wrapper">
                 <button disabled={hasErrors}>Submit</button>
             </div>
         </form>

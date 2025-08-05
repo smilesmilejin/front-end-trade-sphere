@@ -40,8 +40,8 @@ function ProfilePostItem() {
 
   return (
     <div>
-      <h3>Post Item to Sell</h3>
-      <p>Post a new item for sale here.</p>
+      {/* <h3>Post Item to Sell</h3>
+      <p>Post a new item for sale here.</p> */}
 
       <NewItemForm onPostItem={postItem}/>
 
