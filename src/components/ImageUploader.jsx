@@ -83,15 +83,17 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
 
   return (
     <div className="image-uploader">
-      <input
-        key={inputKey}
-        type="file"
-        accept="image/*"
-        onChange={handleFileChange}
-        />
-      <button onClick={handleUpload} disabled={loading}>
-        {loading ? "Uploading..." : "Upload Image"}
-      </button>
+      <div className="upload-controls">
+        <input
+          key={inputKey}
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          />
+        <button type="button" onClick={handleUpload} disabled={loading}>
+          {loading ? "Uploading..." : "Upload Image"}
+        </button>
+      </div>
 
       {uploadedUrl && (
         <div className="image-preview">
@@ -106,14 +108,15 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
 
         {uploadedImages.length > 0 && (
           <div className="uploaded-images-container" >
-            <h3>All Uploaded Images:</h3>
+            <h3 className="uploaded-images-container-h3">All Uploaded Images</h3>
             <div className="uploaded-images">
               {uploadedImages.map((url, idx) => (
-                <div key={idx} >
+                <div className="each-image-container" key={idx} >
                   <img src={url} alt={`Uploaded ${idx + 1}`} />
 
                   <button type="button" onClick={() => handleDeleteImage(url)} >
-                    ×
+                    {/* × */}
+                    Delete Image
                   </button>
   
                 </div>
