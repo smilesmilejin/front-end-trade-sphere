@@ -9,7 +9,8 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedUrl, setUploadedUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState([]);
+  // const [uploadedImages, setUploadedImages] = useState([]);
+  const [uploadedImages, setUploadedImages] = useState(new Set());
   const [inputKey, setInputKey] = useState(Date.now()); // Used to force reset file input
 
   // Handle file input change
@@ -41,7 +42,13 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
 
         // Update local image preview
         setUploadedUrl(data.data.display_url);
-        setUploadedImages((prev) => [...prev, data.data.display_url]);
+        // setUploadedImages((prev) => [...prev, data.data.display_url]);
+
+        setUploadedImages((prev) => {
+          const updated = new Set(prev);
+          updated.add(data.data.display_url);
+          return updated;
+        });
 
         // Update form data in parent
         onSetFormData((prev) => ({
@@ -61,7 +68,12 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
   
     // Remove an uploaded image
   const handleDeleteImage = (urlToDelete) => {
-    setUploadedImages((prev) => prev.filter(url => url !== urlToDelete));
+    // setUploadedImages((prev) => prev.filter(url => url !== urlToDelete));
+    setUploadedImages((prev) => {
+      const updated = new Set(prev);
+      updated.delete(urlToDelete);
+      return updated;
+    });
 
     // Also update parent formData
     onSetFormData((prev) => ({
@@ -76,10 +88,14 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
         setSelectedFile(null);
         setUploadedUrl("");
         setLoading(false);
-        setUploadedImages([]);
+        // setUploadedImages([]);
+        setUploadedImages(new Set());
         setInputKey(Date.now());  // Reset the <input type="file" />
       }
     }, [resetUploader]);
+
+    // Convert Set to Array once
+    const uploadedImagesArray = [...uploadedImages];
 
   return (
     <div className="image-uploader">
@@ -106,7 +122,8 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
         </div>
       )}
 
-        {uploadedImages.length > 0 && (
+        {/* uplodaed images is array */}
+        {/* {uploadedImages.length > 0 && (
           <div className="uploaded-images-container" >
             <h3 className="uploaded-images-container-h3">All Uploaded Images</h3>
             <div className="uploaded-images">
@@ -115,7 +132,7 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
                   <img src={url} alt={`Uploaded ${idx + 1}`} />
 
                   <button type="button" onClick={() => handleDeleteImage(url)} >
-                    {/* × */}
+                    ×
                     Delete Image
                   </button>
   
@@ -123,7 +140,25 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
               ))}
             </div>
           </div>
+        )} */}
+
+        {/* use uploadeImagesArra */}
+        {uploadedImagesArray.length > 0 && (
+          <div className="uploaded-images-container">
+            <h3 className="uploaded-images-container-h3">All Uploaded Images</h3>
+            <div className="uploaded-images">
+              {uploadedImagesArray.map((url, idx) => (
+                <div className="each-image-container" key={idx}>
+                  <img src={url} alt={`Uploaded ${idx + 1}`} />
+                  <button type="button" onClick={() => handleDeleteImage(url)}>
+                    Delete Image
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
+
     </div>
 
   );
