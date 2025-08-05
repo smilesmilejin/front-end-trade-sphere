@@ -233,15 +233,12 @@ const handleChange = (event) => {
                     <option value="toys_games">Toys & Games</option>
                     <option value="miscellaneous">Miscellaneous</option>
                 </select>
-
-                {errors.category && (
-                <div className='edit-user-item-form-errors'>
-                    <p className='edit-user-item-error-text'>{errors.category}</p>
-                </div>
-                )}
             </div>
-
-
+            {errors.category && (
+            <div className='edit-user-item-form-errors'>
+                <p className='edit-user-item-error-text'>{errors.category}</p>
+            </div>
+            )}
 
             <div className='edit-user-item-form-field'>
                 <label htmlFor="description-input">Description</label>
@@ -278,11 +275,11 @@ const handleChange = (event) => {
                 <label htmlFor="contact-input">Contact Info</label>
                 {makeControlledInput('contact_information')}
             </div>
-                {errors.contact_information && (
-                <div className='edit-user-item-form-errors'>
-                    <p className='edit-user-item-error-text'>{errors.contact_information}</p>
-                </div>
-                )}
+            {errors.contact_information && (
+            <div className='edit-user-item-form-errors'>
+                <p className='edit-user-item-error-text'>{errors.contact_information}</p>
+            </div>
+            )}
 
             <div className='edit-user-item-form-field-status'>
                 <label htmlFor="sold-status-input">Sold Status</label>
