@@ -4,6 +4,8 @@ import UserContext from '../contexts/UserContext';
 import ImageList from './ImageList.jsx';
 import EditUserItemImageUploader from './EditUserItemImageUploader.jsx';
 import { useNavigate } from 'react-router';
+import '../styles/EditUserItemForm.css';
+
 
 const kDefaultFormState = {
     name: '',
@@ -200,29 +202,30 @@ const handleChange = (event) => {
 
     return (
         
-        <form className='signup-form' onSubmit={handleSubmit}>
-            <div className='form-header'>
+        <form className='edit-user-item-form' onSubmit={handleSubmit}>
+            <div className='edit-user-item-form-header'>
             Edit an Item for Sale
             </div>
 
-            <div className='form-field'>
+            <div className='edit-user-item-form-field'>
+                <label htmlFor="name-input">Name</label>
                 {makeControlledInput('name')}
             </div>
             {errors.name && (
-            <div className='form-errors'>
-                <p className='error-text'>{errors.name}</p>
+            <div className='edit-user-item-form-errors'>
+                <p className='edit-user-item-error-text'>{errors.name}</p>
             </div>
             )}
 
-            <div className='form-field'>
-                <label htmlFor="category">Category:</label>
+            <div className='edit-user-item-form-field-category'>
+                <label htmlFor="category-input">Category</label>
                 <select
                     id="category"
                     name='category'
                     value={formData.category}
                     onChange={handleChange}
                 >
-                    <option value="">-- All --</option>
+                    <option value="">-- SELECT CATEGORY --</option>
                     <option value="household">Household Items</option>
                     <option value="electronics">Electronics</option>
                     <option value="clothing_accessories">Clothing & Accessories</option>
@@ -232,53 +235,57 @@ const handleChange = (event) => {
                 </select>
 
                 {errors.category && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.category}</p>
+                <div className='edit-user-item-form-errors'>
+                    <p className='edit-user-item-error-text'>{errors.category}</p>
                 </div>
                 )}
             </div>
 
 
 
-            <div className='form-field'>
+            <div className='edit-user-item-form-field'>
+                <label htmlFor="description-input">Description</label>
                 {makeControlledInput('description')}
             </div>
             {errors.description && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.description}</p>
+                <div className='edit-user-item-form-errors'>
+                    <p className='edit-user-item-error-text'>{errors.description}</p>
                 </div>
             )}
 
-            <div className='form-field'>
+            <div className='edit-user-item-form-field'>
+                <label htmlFor="price-input">Price:</label>
                 {makeControlledInput('price', 'number')}
             </div>
             {errors.price && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.price}</p>
+                <div className='edit-user-item-form-errors'>
+                    <p className='edit-user-item-error-text'>{errors.price}</p>
                 </div>
             )}
 
 
-            <div className='form-field'>
+            <div className='edit-user-item-form-field'>
+                <label htmlFor="price-input">Location</label>
                 {makeControlledInput('location')}
             </div>
             {errors.location && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.location}</p>
+                <div className='edit-user-item-form-errors'>
+                    <p className='edit-user-item-error-text'>{errors.location}</p>
                 </div>
             )}
 
-            <div className='form-field'>
+            <div className='edit-user-item-form-field'>
+                <label htmlFor="contact-input">Contact Info</label>
                 {makeControlledInput('contact_information')}
             </div>
                 {errors.contact_information && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.contact_information}</p>
+                <div className='edit-user-item-form-errors'>
+                    <p className='edit-user-item-error-text'>{errors.contact_information}</p>
                 </div>
                 )}
 
-            <div className='form-field'>
-                <label htmlFor="sold_status">Sold Status:</label>
+            <div className='edit-user-item-form-field-status'>
+                <label htmlFor="sold-status-input">Sold Status</label>
                 <select
                     id="sold_status"
                     name='sold_status'
@@ -288,14 +295,13 @@ const handleChange = (event) => {
                     <option value="available">Available</option>
                     <option value="sold">Sold</option>
                 </select>
-
-                {errors.sold_status && (
-                <div className='form-errors'>
-                    <p className='error-text'>{errors.sold_status}</p>
-                </div>
-                )}
             </div>
-        
+            {errors.sold_status && (
+            <div className='edit-user-item-form-errors'>
+                <p className='edit-user-item-error-text'>{errors.sold_status}</p>
+            </div>
+            )}
+
             <ImageList 
                 images={formData.images} 
                 onLocalHandlelDeleteImage={handleDeleteImage}
@@ -306,15 +312,15 @@ const handleChange = (event) => {
                 resetUploader={resetUploader}
             />
 
-            <div className="button-wrapper">
+            <div className="edit-user-item-button-wrapper">
                 <button disabled={hasErrors}>SAVE</button>
             </div>
 
-            <div className="button-wrapper">
+            <div className="edit-user-item-button-wrapper">
                 <button type="button" onClick={handelCancelEdit}>CANCEL</button>
             </div>
 
-            <div>
+            <div className="delete-user-item-button-wrapper">
                 <button type="button" onClick={() => onDeleteUserItem(formData.listingId)}>DELETE</button>
             </div>
 

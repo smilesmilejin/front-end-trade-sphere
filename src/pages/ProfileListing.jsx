@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useContext, useState, useEffect } from 'react';
 import UserContext from '../contexts/UserContext';
 import ItemList from '../components/ItemList';
-import '../styles/ProfileListings.css';
+import '../styles/ProfileListing.css';
 
 
 // get backendUrl from .env file
@@ -240,7 +240,7 @@ function ProfileListing() {
         listings={curUserListingsData}
         userLikedListings={userLikedListings} 
         onToggleLike={toggleLike}
-        editButton={<button>Edit Listing</button>}
+        editButton={<button className="edit-listings-btn">Edit Listing</button>}
         onUpdateUserItem={updateUserItem}
         onCancelUpdateUserItem={cancelUpdateUserItem}
         deleteButton={<button>Delete Listing</button>}

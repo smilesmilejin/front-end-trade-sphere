@@ -1,16 +1,23 @@
 
 .image-slider {
   position: relative;
-  width: 180px;          /* Enough space for image + arrows */
-  height: 180px;         /* Fixed height for consistent layout */
-  width: 65%;     /* relative to container */
+  /* Enough space for image + arrows */
+  width: 180px; 
+  /* Fixed height for consistent layout */
+  height: 180px; 
+   /* relative to container */
+  width: 62%; 
   height: auto;
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  /* margin-top: 2.5rem; */
+  /* padding-top:2rem; */
+  /* padding: 2rem; */
 }
+
 
 .gallery-image {
   /* width: 190px;

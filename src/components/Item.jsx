@@ -109,10 +109,10 @@ const Item =({
             )}
 
             {isEditOpen && (
-                <div className="modal-overlay">
-                    <div className="modal">
+                <div className="edit-modal-overlay">
+                    <div className="edit-modal">
                         <button className="close-button" onClick={handleEditClose}>×</button>
-                        <h2>Listing Details</h2>
+                        {/* <h2>Listing Details</h2> */}
 
                         <EditUserItemForm
                         itemData={{
