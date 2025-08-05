@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useContext, useState, useEffect } from 'react';
 import UserContext from '../contexts/UserContext';
 import ItemList from '../components/ItemList';
+import '../styles/ProfileListings.css';
+
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
@@ -233,7 +235,7 @@ function ProfileListing() {
 
   return (
     <div>
-      <h3>My Sell Listings</h3>
+      <h2 className="profile-listings-page-header">My Selling Listings</h2>
       <ItemList 
         listings={curUserListingsData}
         userLikedListings={userLikedListings} 
