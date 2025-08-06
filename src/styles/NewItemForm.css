@@ -82,6 +82,17 @@
   font-size: 0.8rem;
 }
 
+.new-item-error-text {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
 /* Input error state */
 .new-item-form-field input.error {
   border-color: #dc3545;

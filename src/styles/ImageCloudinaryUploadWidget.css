@@ -6,10 +6,9 @@
 .upload-controls-cloudinary {
   display: flex;
   align-items: center;
-  gap: 1rem; /* spacing between input and button */
+  gap: 1rem;
   margin-top: 1rem;
 }
-
 
 
 .cloudinary-button {
@@ -92,8 +91,18 @@
   transition: background-color 0.2s ease;
 }
 
-.each-image-container button:hover {
+.each-image-container-cloudinary button:hover {
   background-color: #9ca3af;
   color: #374151; /* dark gray */
   /* border-color: #6b7280; */
+}
+
+.new-item-error-text-image {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

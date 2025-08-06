@@ -115,8 +115,12 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
             className="cloudinary-button"
             type="button"
         >
-            Upload
+            Upload Images
         </button>
+      </div>
+
+      <div className='new-item-form-errors'>
+          <p className='new-item-error-text-image'>Supported image formats: JPEG, JPG, PNG, GIF, BMP, WEBP, SVG, ICO.</p>
       </div>
 
       {uploadedImages.length > 0 && (

@@ -193,15 +193,18 @@ const NewItemForm = ({ onPostItem }) => {
             <div className='new-item-form-field'>
                 {makeControlledInput('contact_information')}
             </div>
-                {errors.contact_information && (
-                <div className='new-item-form-errors'>
-                    <p className='new-item-error-text'>{errors.contact_information}</p>
-                </div>
-                )}
+            {errors.contact_information && (
+            <div>
+                <p className='new-item-error-text'>{errors.contact_information}</p>
+            </div>
+            )}
 
             {/* <ImageUploader onSetFormData={setFormData} resetUploader={resetUploader}/> */}
 
             <ImageCloudinaryUploadWidget onSetFormData={setFormData} resetUploader={resetUploader}/>
+            {/* <div className='new-item-form-errors'>
+                <p className='new-item-error-text-image'>Supported image formats: JPEG, JPG, PNG, GIF, BMP, WEBP, SVG, ICO.</p>
+            </div> */}
 
             <div className="new-item-button-wrapper">
                 <button disabled={hasErrors}>Submit</button>
