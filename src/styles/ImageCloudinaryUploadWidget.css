@@ -21,6 +21,8 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 1rem;
+
 }
 
 
@@ -97,6 +99,12 @@
   /* border-color: #6b7280; */
 }
 
+.new-item-form-errors {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+
 .new-item-error-text-image {
   color: #dc3545;
   font-size: 0.85rem;
@@ -105,4 +113,20 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.new-item-error-text-image-upload {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.new-item-error-text-image-upload{
+  content: "⚠️";
+  font-size: 0.8rem;
 }

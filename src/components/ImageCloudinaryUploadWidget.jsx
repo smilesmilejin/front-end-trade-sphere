@@ -23,6 +23,7 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
   const uwConfig = {
     cloudName,
     uploadPreset,
+    clientAllowedFormats: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'ico'],
     // Uncomment and modify as needed:
     // cropping: true,
     // showAdvancedOptions: true,
@@ -42,6 +43,8 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
 
   const [uploadedImages, setUploadedImages] = useState([]);
 
+  const validImageFormats = ["jpeg", "jpg", "png", "gif", "bmp", "webp", "svg", "ico"];
+
   useEffect(() => {
     const initializeUploadWidget = () => {
       if (window.cloudinary && uploadButtonRef.current) {
@@ -55,14 +58,38 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
               const imgUrl = result.info.secure_url;
               console.log('secure Url is: ', imgUrl);
 
+              const imgFileFormat = result.info.format;
+              // const imgFileFormat = result.info.format.toLowerCase();
+              console.log('image File Format is: ', imgFileFormat);
+              console.log('Type of normalized format:', typeof imgFileFormat);
 
-              setUploadedImages((prev) => [...prev, imgUrl]);
+              // setUploadedImages((prev) => [...prev, imgUrl]);
 
-              // Update form data in parent
-              onSetFormData((prev) => ({
-                ...prev,
-                images: [...(prev.images || []), imgUrl],
-              }));
+              // // Update form data in parent
+              // onSetFormData((prev) => ({
+              //   ...prev,
+              //   images: [...(prev.images || []), imgUrl],
+              // }));
+
+              if (validImageFormats.includes(imgFileFormat)) {
+                  console.log('Format is valid');
+                  setUploadedImages((prev) => [...prev, imgUrl]);
+
+                  // Update form data in parent
+                  onSetFormData((prev) => ({
+                    ...prev,
+                    images: [...(prev.images || []), imgUrl],
+                  }));
+              } 
+              // else {
+              //   console.log('Image Format is NOT valid');
+
+              //   setUploadedImagesHasInvalidImageFormats(true);
+
+                // alert('invalid format!')
+
+                // alert(`${imgFileFormat.toUpperCase()} is not a supported format. Please upload only: ${validImageFormats.join(', ')}`);
+              // }
 
               setPublicId(result.info.public_id);
             }
@@ -106,6 +133,7 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
     }));
   };
 
+
   return (
     <div className='image-uploader-cloudinary'>
       <div className="upload-controls-cloudinary">
@@ -121,6 +149,10 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
 
       <div className='new-item-form-errors'>
           <p className='new-item-error-text-image'>Supported image formats: JPEG, JPG, PNG, GIF, BMP, WEBP, SVG, ICO.</p>
+      </div>
+
+      <div className='new-item-form-errors'>
+          <p className='new-item-error-text-image'>Images in unsupported formats will not be uploaded.</p>
       </div>
 
       {uploadedImages.length > 0 && (
