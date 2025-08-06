@@ -1,17 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Cloudinary } from '@cloudinary/url-gen';
+// import '../styles/EditUserItemImageCloudinaryUploader.css';
 import PropTypes from 'prop-types';
-import '../styles/ImageCloudinaryUploadWidget.css';
 
-
-const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
-// const ImageCloudinaryUploadWidget = ({ uwConfig, setPublicId, onSetFormData }) => {
+const EditUserItemImageCloudinaryUploader = ({ onSetNewUploadedimagesImages, resetUploader }) => {
   // Configuration
   const cloudName = 'dhgqrdfrw';
   const uploadPreset = 'trade-sphere-images';
 
   // State
-  const [publicId, setPublicId] = useState('');
+//   const [publicId, setPublicId] = useState('');
 
   // Cloudinary configuration
   const cld = new Cloudinary({
@@ -77,10 +75,14 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
                   setUploadedImages((prev) => [...prev, imgUrl]);
 
                   // Update form data in parent
-                  onSetFormData((prev) => ({
-                    ...prev,
-                    images: [...(prev.images || []), imgUrl],
-                  }));
+                //   onSetFormData((prev) => ({
+                //     ...prev,
+                //     images: [...(prev.images || []), imgUrl],
+                //   }));
+
+                // Update form data with all uploaded images
+                onSetNewUploadedimagesImages((prev) => [...prev,imgUrl]);
+
               } 
               // else {
               //   console.log('Image Format is NOT valid');
@@ -92,7 +94,7 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
                 // alert(`${imgFileFormat.toUpperCase()} is not a supported format. Please upload only: ${validImageFormats.join(', ')}`);
               // }
 
-              setPublicId(result.info.public_id);
+            //   setPublicId(result.info.public_id);
             }
           }
         );
@@ -128,10 +130,16 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
     setUploadedImages((prev) => prev.filter(url => url !== urlToDelete));
 
     // Also update parent formData
-    onSetFormData((prev) => ({
-      ...prev,
-      images: prev.images.filter(url => url !== urlToDelete),
-    }));
+    // onSetFormData((prev) => ({
+    //   ...prev,
+    //   images: prev.images.filter(url => url !== urlToDelete),
+    // }));
+
+    // Update the parent state by filtering out the deleted URL
+    onSetNewUploadedimagesImages((prev) => [
+      ...prev.filter((url) => url !== urlToDelete),
+    ]);
+
   };
 
 
@@ -179,9 +187,10 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
   );
 };
 
-ImageCloudinaryUploadWidget.propTypes = {
-  onSetFormData: PropTypes.func.isRequired,
+
+EditUserItemImageCloudinaryUploader.propTypes = {
+  onSetNewUploadedimagesImages: PropTypes.func.isRequired,
   resetUploader : PropTypes.func.isRequired,
 };
 
-export default ImageCloudinaryUploadWidget;
+export default EditUserItemImageCloudinaryUploader;

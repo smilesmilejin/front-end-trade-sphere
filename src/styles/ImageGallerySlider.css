@@ -80,7 +80,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem; /* spacing between arrows and image */
+  gap: 0.8rem; /* spacing between arrows and image */
   width: 100%;
 }
 
@@ -109,9 +109,9 @@
   background-color: rgba(0, 0, 0, 0.211);
   border: none;
   color: white;
-  font-size: 14px;
-  /* padding: 6px 10px; */
-  /* font-size: 1rem;   */
+  font-size: 12px;
+  padding: 6px 10px;
+  /* font-size: 0.8rem;   */
 
   cursor: pointer;
   border-radius: 50%;

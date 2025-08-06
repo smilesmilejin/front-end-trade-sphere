@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import UserContext from '../contexts/UserContext';
 import ImageList from './ImageList.jsx';
 import EditUserItemImageUploader from './EditUserItemImageUploader.jsx';
+import EditUserItemImageCloudinaryUploader from './EditUserItemImageCloudinaryUploader.jsx';
 import { useNavigate } from 'react-router';
 import '../styles/EditUserItemForm.css';
 
@@ -305,7 +306,12 @@ const handleChange = (event) => {
                 onLocalHandlelDeleteImage={handleDeleteImage}
             />
 
-            <EditUserItemImageUploader 
+            {/* <EditUserItemImageUploader 
+                onSetNewUploadedimagesImages={setNewUploadedimagesImages}
+                resetUploader={resetUploader}
+            /> */}
+
+            <EditUserItemImageCloudinaryUploader
                 onSetNewUploadedimagesImages={setNewUploadedimagesImages}
                 resetUploader={resetUploader}
             />
