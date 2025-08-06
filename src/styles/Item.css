@@ -241,6 +241,14 @@
   padding: 1rem;
   overflow: hidden;
   width: 50%; 
+  /* position: relative;  */
+}
+
+.modal-image-column .image-slider {
+  position: relative;
+  width: 500px;      /* fill parent */
+  height: 500px;    /* fixed height */
+  /* overflow: hidden; */
 }
 
 

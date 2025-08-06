@@ -14,14 +14,18 @@ const ImageGallerySlider = ({ images }) => {
     };
 
     return (
-        <div className="image-slider">
-            <button className="arrow left" onClick={goToPrev}>&lt;</button>
-            <img
-                src={images[currentIndex]}
-                alt={`Image ${currentIndex + 1}`}
-                className="gallery-image"
-            />
-            <button className="arrow right" onClick={goToNext}>&gt;</button>
+        <div className="slider-wrapper">
+            <button className="arrow arrow-left" onClick={goToPrev}>&lt;</button>
+            <div className="image-slider">
+                {/* <button className="arrow arrow-left" onClick={goToPrev}>&lt;</button> */}
+                <img
+                    src={images[currentIndex]}
+                    alt={`Image ${currentIndex + 1}`}
+                    className="gallery-image"
+                />
+                {/* <button className="arrow arrow-right" onClick={goToNext}>&gt;</button> */}
+            </div>
+            <button className="arrow arrow-right" onClick={goToNext}>&gt;</button>
         </div>
     );
 };
