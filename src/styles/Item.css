@@ -218,7 +218,6 @@
   background: white;
   border-radius: 15px;
   padding: 2rem;
-  max-width: 600px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -230,6 +229,7 @@
   width: 150vw;             /* Responsive width */
   max-width: 1200px;        /* Don't go wider than 900px */
   max-height: 90vh;
+  /* height: 70vh;  */
 }
 
 .modal-image-column {
@@ -238,17 +238,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  /* padding: 0rem; */
   overflow: hidden;
   width: 50%; 
   /* position: relative;  */
-}
-
-.modal-image-column .image-slider {
-  position: relative;
-  width: 500px;      /* fill parent */
-  height: 500px;    /* fixed height */
-  /* overflow: hidden; */
 }
 
 
@@ -360,3 +353,6 @@
   max-height: 90vh;
   /* overflow: hidden; */
 }
+
+
+

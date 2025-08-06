@@ -86,7 +86,7 @@
 
 .image-slider {
   width: 100%;
-  max-width: 70%;
+  max-width: 60%;
   aspect-ratio: 1 / 1;
   background-color: #eaeaea;
   display: flex;
@@ -101,6 +101,8 @@
   object-position: center;
   background-color: #f0f0f0;
   display: block;
+  width: 100%;        /* fill the width */
+  height: auto;       /* keep aspect ratio */
 }
 
 .arrow {
@@ -108,9 +110,15 @@
   border: none;
   color: white;
   font-size: 14px;
-  padding: 6px 10px;
+  /* padding: 6px 10px; */
+  /* font-size: 1rem;   */
+
   cursor: pointer;
   border-radius: 50%;
   user-select: none;
   transition: background-color 0.3s ease;
+  margin: 0; /* reset any margin */
+  display: flex;
+  align-items: center;      /* center the arrow content vertically */
+  justify-content: center;  /* center the arrow content horizontally */
 } 
