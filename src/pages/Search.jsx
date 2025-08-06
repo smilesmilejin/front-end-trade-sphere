@@ -5,6 +5,7 @@ import UserContext from '../contexts/UserContext';
 
 import { useSearchParams } from 'react-router';
 import { useState, useEffect, useContext } from 'react';
+import '../styles/Search.css';
 
 // Get backend URL from environment variables .env
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
@@ -218,11 +219,12 @@ function Search() {
 
   return (
     <div>
-        <h2>Search Page</h2>
-        <h2>Search Results for "{query}"</h2>
-        <h3>There are total {searchResults.length} items that matches your search</h3>
+        {/* <h2>Search Page</h2> */}
+        <h1 className="search-page-h1">Search Results for "{query}"</h1>
+        {/* <h2>Search Results for "{query}"</h2> */}
+        {/* <h3>There are total {searchResults.length} items that matches your search</h3> */}
 
-        {searchResults.length === 0 ? (
+        {/* {searchResults.length === 0 ? (
             <p>No results found.</p>
         ) : (
             <ul>
@@ -233,11 +235,14 @@ function Search() {
               </li>
             ))}
             </ul>
-        )}
+        )} */}
 
-        <h3>After Filtering: There are total {filteredItemData.length} items that matches your search</h3>
+        {/* <h3>After Filtering: There are total {filteredItemData.length} items that matches your search</h3> */}
 
         <ItemFilters onGetFilteredItems={getFilteredItems}/>
+
+        <h3 className='search-page-numbers'>{filteredItemData.length} Items</h3>
+
         <ItemList 
           listings={filteredItemData}
           userLikedListings={userLikedListings} 

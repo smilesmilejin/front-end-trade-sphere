@@ -1,0 +1,19 @@
+.search-page-h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.search-page-numbers {
+  text-align: right;
+  margin-right: 100px; /* add some space from the right edge */
+  font-weight: 600;   /* make it a bit bolder */
+  font-size: 1.2rem;  /* slightly larger */
+  color: #343333;        /* optional color */
+}
