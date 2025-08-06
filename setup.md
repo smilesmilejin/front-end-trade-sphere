@@ -79,3 +79,13 @@ Run the following command in your project root:
 ```
 $ npm install prop-types
 ```
+
+# Intall Cloudinary Packages
+```
+npm install @cloudinary/url-gen
+```
+
+Add this in index.html to get cloudinary works
+```
+    <script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script> 
+```

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import ImageUploader from './ImageUploader';
 import '../styles/NewItemForm.css';
+import ImageCloudinaryUploadWidget from './ImageCloudinaryUploadWidget';
 
 // Default empty form
 const kDefaultFormState = {
@@ -198,7 +199,9 @@ const NewItemForm = ({ onPostItem }) => {
                 </div>
                 )}
 
-            <ImageUploader onSetFormData={setFormData} resetUploader={resetUploader}/>
+            {/* <ImageUploader onSetFormData={setFormData} resetUploader={resetUploader}/> */}
+
+            <ImageCloudinaryUploadWidget onSetFormData={setFormData} resetUploader={resetUploader}/>
 
             <div className="new-item-button-wrapper">
                 <button disabled={hasErrors}>Submit</button>
