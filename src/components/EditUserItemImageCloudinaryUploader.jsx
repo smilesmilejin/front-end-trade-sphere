@@ -8,9 +8,6 @@ const EditUserItemImageCloudinaryUploader = ({ onSetNewUploadedimagesImages, res
   const cloudName = 'dhgqrdfrw';
   const uploadPreset = 'trade-sphere-images';
 
-  // State
-//   const [publicId, setPublicId] = useState('');
-
   // Cloudinary configuration
   const cld = new Cloudinary({
     cloud: {
@@ -52,49 +49,22 @@ const EditUserItemImageCloudinaryUploader = ({ onSetNewUploadedimagesImages, res
           uwConfig,
           (error, result) => {
             if (!error && result && result.event === 'success') {
-              console.log('Upload successful:', result.info);
-
+              // console.log('Upload successful:', result.info);
               const imgUrl = result.info.secure_url;
-              console.log('secure Url is: ', imgUrl);
+              // console.log('secure Url is: ', imgUrl);
 
               const imgFileFormat = result.info.format;
-              // const imgFileFormat = result.info.format.toLowerCase();
-              console.log('image File Format is: ', imgFileFormat);
-              console.log('Type of normalized format:', typeof imgFileFormat);
-
-              // setUploadedImages((prev) => [...prev, imgUrl]);
-
-              // // Update form data in parent
-              // onSetFormData((prev) => ({
-              //   ...prev,
-              //   images: [...(prev.images || []), imgUrl],
-              // }));
+              // // const imgFileFormat = result.info.format.toLowerCase();
+              // console.log('image File Format is: ', imgFileFormat);
+              // console.log('Type of normalized format:', typeof imgFileFormat);
 
               if (validImageFormats.includes(imgFileFormat)) {
-                  console.log('Format is valid');
+                  // console.log('Format is valid');
                   setUploadedImages((prev) => [...prev, imgUrl]);
 
-                  // Update form data in parent
-                //   onSetFormData((prev) => ({
-                //     ...prev,
-                //     images: [...(prev.images || []), imgUrl],
-                //   }));
-
-                // Update form data with all uploaded images
-                onSetNewUploadedimagesImages((prev) => [...prev,imgUrl]);
-
+                  // Update form data with all uploaded images
+                  onSetNewUploadedimagesImages((prev) => [...prev,imgUrl]);
               } 
-              // else {
-              //   console.log('Image Format is NOT valid');
-
-              //   setUploadedImagesHasInvalidImageFormats(true);
-
-                // alert('invalid format!')
-
-                // alert(`${imgFileFormat.toUpperCase()} is not a supported format. Please upload only: ${validImageFormats.join(', ')}`);
-              // }
-
-            //   setPublicId(result.info.public_id);
             }
           }
         );
@@ -119,14 +89,6 @@ const EditUserItemImageCloudinaryUploader = ({ onSetNewUploadedimagesImages, res
     if (resetUploader) {
         setUploadedImages([]);
       }
-    
-    // Sometimes UI timing bugs come from fast re-renders. To avoid race conditions, add a small delay:
-    // when there are many images, it is still does not really work, problem!
-    // if (resetUploader) {
-    //   setTimeout(() => {
-    //     setUploadedImages([]);
-    //   }, 100); 
-    // }
 
     initializeUploadWidget();
     //   }, [uwConfig, setPublicId]);
@@ -136,13 +98,6 @@ const EditUserItemImageCloudinaryUploader = ({ onSetNewUploadedimagesImages, res
   // Remove an uploaded image
   const handleDeleteImage = (urlToDelete) => {
     setUploadedImages((prev) => prev.filter(url => url !== urlToDelete));
-
-    // Also update parent formData
-    // onSetFormData((prev) => ({
-    //   ...prev,
-    //   images: prev.images.filter(url => url !== urlToDelete),
-    // }));
-
     // Update the parent state by filtering out the deleted URL
     onSetNewUploadedimagesImages((prev) => [
       ...prev.filter((url) => url !== urlToDelete),
