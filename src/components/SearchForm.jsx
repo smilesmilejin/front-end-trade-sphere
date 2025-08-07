@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import PropTypes from 'prop-types';
 import SearchIcon from '../assets/SearchIcon.png';
-import { useContext } from 'react';
 import '../styles/SearchForm.css';
+
 // Default form values
 const kDefaultFormState = {
   search: '',
@@ -18,13 +17,11 @@ const kErrorState = {
 const SearchForm = () => {
   const [formData, setFormData] = useState(kDefaultFormState);
   const [errors, setErrors] = useState(kErrorState);
-//   const { userLoginStatus, setUserLoginStatus } = useContext(UserLoginStatusContext);
-//   const { setCurUserData } = useContext(UserContext);
   const navigate = useNavigate();
 
   // Handle form submission
   const handleSubmit = (event) => {
-    console.log('Search Form form submitted!');
+    // console.log('Search Form form submitted!');
 
     event.preventDefault();
     
@@ -35,22 +32,12 @@ const SearchForm = () => {
         return;
     }
 
-    console.log(encodeURIComponent(trimmedSearchKeyWord));
+    // console.log(encodeURIComponent(trimmedSearchKeyWord));
     navigate(`/search?query=${encodeURIComponent(trimmedSearchKeyWord)}`);
-
-    // const searchData = {
-    //     query: trimmedSearchKeyWord, 
-    // };
-
-    // console.log("searchData: ", searchData); // trim the title and owner before posting
-
-    // Pass cleaned data to parent component handler
-    // onSignupUser(signUpData);
 
     // Reset form and error state
     setFormData(kDefaultFormState);
     setErrors(kErrorState);
-
   };
 
   // Handle input field changes and validate email
@@ -83,9 +70,6 @@ const SearchForm = () => {
 
   return (
     <form className='search-bar' onSubmit={handleSubmit}>
-      {/* <div className='form-header'>
-        Search Items
-      </div> */}
       <>
         <div className='search-form-field'>
           {makeControlledInput('search')}
@@ -104,8 +88,5 @@ const SearchForm = () => {
   );
 };
 
-// SearchForm.propTypes = {
-//   onSignupUser: PropTypes.func.isRequired,
-// };
 
 export default SearchForm;
