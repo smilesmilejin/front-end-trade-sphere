@@ -1,7 +1,5 @@
-
 .image-uploader {
   margin-top: 20px;
-  /* background-color: rgb(188, 239, 239); */
 }
 
 .upload-controls {
@@ -74,8 +72,6 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: #285a93;
-  /* margin-bottom: 1rem;
-  padding-bottom: 0.5rem; */
 }
 
 .uploaded-images {
@@ -98,7 +94,6 @@
   width: 160px;
   height: 190px;
   background-color: white;  /* fill the extra space with white */
-  /* border: 1px solid #2c3e50; */
   display: flex;
   flex-direction: column; /* vertical layout */
   justify-content: center;
@@ -110,14 +105,12 @@
   margin-bottom: 0.5rem;
 }
 
-
 .each-image-container img {
   width: 100%;
   height: 150px;
   object-fit: cover;
   border-radius: 6px;
 }
-
 
 .each-image-container button {
   padding: 6px 12px;
@@ -133,5 +126,4 @@
 .each-image-container button:hover {
   background-color: #9ca3af;
   color: #374151; /* dark gray */
-  /* border-color: #6b7280; */
 }
