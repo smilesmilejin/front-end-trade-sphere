@@ -1,5 +1,4 @@
 .account-header {
-  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
   padding: 1rem;
   margin-left: 3rem;
   margin-right: 3rem;
@@ -12,17 +11,14 @@
   border-bottom: 2px solid rgb(124, 120, 120); /* subtle white line */
 }
 
-
 /* User logo styling */
 .account-header-logo{
   width: 70px;
   height: 70px;
 }
 
-
 .welcome-message {
   font-size: 1.2rem;
-  /* background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -33,6 +29,5 @@
   text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   position: relative;
   animation: fadeInGlow 2s ease-in-out;
-  /* letter-spacing: 0.5px; */
   font-family: 'Quicksand', sans-serif;
 }

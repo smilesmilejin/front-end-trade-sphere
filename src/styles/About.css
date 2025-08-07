@@ -1,9 +1,6 @@
-
 .about-container {
   max-width: 900px;
   margin: 0 auto;
-  /* padding: 3rem 2rem; */
-  /* background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); */
   min-height: 100vh;
   line-height: 1.7;
 }
@@ -19,8 +16,6 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* text-shadow: 0 2px 4px rgba(0,0,0,0.1); */
-  /* position: relative; */
 }
 
 /* Section styling */
@@ -54,7 +49,6 @@
   align-items: center;
   gap: 0.75rem;
 }
-
 
 /* Section paragraphs */
 .about-container section p {
