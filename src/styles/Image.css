@@ -1,22 +1,14 @@
-/* Image.css */
 .image-item {
   flex: 0 0 auto;
   width: 150px;
   text-align: center;
 }
 
-/* .image-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-} */
-
 .image-item button {
   margin-top: 5px;
   padding: 4px 8px;
   font-size: 0.8rem;
 }
-
 
 .edit-image-wrapper {
   width: 150px;               /* square dimensions */
@@ -25,7 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ccc;     /* optional: visual border */
+  border: 1px solid #ccc;     /* visual border */
   overflow: hidden;
   margin-bottom: 5px;
 }
