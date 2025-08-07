@@ -119,6 +119,14 @@ const EditUserItemImageCloudinaryUploader = ({ onSetNewUploadedimagesImages, res
     if (resetUploader) {
         setUploadedImages([]);
       }
+    
+    // Sometimes UI timing bugs come from fast re-renders. To avoid race conditions, add a small delay:
+    // when there are many images, it is still does not really work, problem!
+    // if (resetUploader) {
+    //   setTimeout(() => {
+    //     setUploadedImages([]);
+    //   }, 100); 
+    // }
 
     initializeUploadWidget();
     //   }, [uwConfig, setPublicId]);

@@ -136,13 +136,41 @@ const EditUserItemForm = ({
 
     };
 
+    // const handelCancelEdit = () => {
+    //     onCancelUpdateUserItem();
+    //     setFormData(initialItemData);
+    //     setDeletedImageIds([]);
+    //     setNewUploadedimagesImages([]);
+    //     setResetUploader(true); // Trigger image uploader reset
+    //     // onHandleEditClose();
+    //     // navigate('/profile/my-sell-listings');
+    // }
+    
+
+    // Option 1 - someimes click cancel does not reset All Uploaded Images, This seesm to work by toggling the flag
+    // const handelCancelEdit = () => {
+    //     onCancelUpdateUserItem();                // Reset any temporary state in parent
+    //     setFormData(initialItemData);           // Restore form to original data
+    //     setDeletedImageIds([]);                 // Clear deleted images
+    //     setNewUploadedimagesImages([]);         // Clear new uploads
+
+    //     // Reset uploader by toggling the flag
+    //     setResetUploader(false);
+    //     setTimeout(() => {
+    //         setResetUploader(true);
+
+    //         // Optional: now that reset is triggered, close modal or navigate
+    //         // onHandleEditClose();
+    //         // navigate('/profile/my-sell-listings'); // If needed
+    //     }, 50); // Give uploader time to register the reset flag
+    // };
+
+    // // Optional 2: Make Cancel button has the same effect as Close Button: Handles cancellation of the item editing process
     const handelCancelEdit = () => {
         onCancelUpdateUserItem();
-        setFormData(initialItemData);
-        setDeletedImageIds([]);
-        setNewUploadedimagesImages([]);
-        setResetUploader(true); // Trigger image uploader reset
+        onHandleEditClose();
     }
+
 
 
 const handleChange = (event) => {

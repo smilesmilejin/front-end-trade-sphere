@@ -49,6 +49,20 @@ function Profile() {
     setIsEditing(false);
   };
 
+  // Converts an ISO 8601 date-time string to a formatted date and time string in UTC.
+  const formatUTCDateTime = (isoString) => {
+      const date = new Date(isoString);
+      
+      return date.toLocaleString('en-US', {
+          timeZone: 'UTC',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+      }) + ' UTC';
+  }
   
   return (
     <div className="profile-info-wrapper">
@@ -64,11 +78,28 @@ function Profile() {
             <h2 className="profile-page-header">My Profile</h2>
 
             <div className="profile-details">
-              <p><strong>👤 Name:</strong> {curUserData.name}</p>
-              <p><strong>📧 Email:</strong> {curUserData.email}</p>
-              <p><strong>🏠 Address:</strong> {curUserData.address}</p>
-              <p><strong>📅 Account Created:</strong> {curUserData.created_at}</p>
-              <p><strong>🕒 Last Updated:</strong> {curUserData.updated_at}</p>
+              <p>
+                <span className="profile-label">👤 Name:</span>
+                <span className="profile-value">{curUserData.name}</span>
+              </p>
+              <p>
+                <span className="profile-label">📧 Email:</span>
+                <span className="profile-value">{curUserData.email}</span>
+              </p>
+              <p>
+                <span className="profile-label" >🏠 Address:</span>
+                <span className="profile-value">{curUserData.address}</span>
+              </p>
+              <p>
+                <span className="profile-label">📅 Account Created:</span>
+                {/* <span className="profile-value">{curUserData.created_at}</span> */}
+                <span className="profile-value">{formatUTCDateTime(curUserData.created_at)}</span>
+              </p>
+              <p>
+                <span className="profile-label">🕒 Last Updated:</span>
+                {/* <span className="profile-value">{curUserData.updated_at}</span> */}
+                <span className="profile-value">{formatUTCDateTime(curUserData.updated_at)}</span>
+              </p>
               <button className="profile-info-edit-button"onClick={() => setIsEditing(true)}>Edit Profile</button>
             </div>
           </div>
