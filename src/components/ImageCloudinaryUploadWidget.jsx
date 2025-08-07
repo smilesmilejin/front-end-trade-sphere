@@ -3,10 +3,11 @@ import { Cloudinary } from '@cloudinary/url-gen';
 import PropTypes from 'prop-types';
 import '../styles/ImageCloudinaryUploadWidget.css';
 
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 
 const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
   // Configuration
-  const cloudName = 'dhgqrdfrw';
+  const cloudName = CLOUD_NAME;
   const uploadPreset = 'trade-sphere-images';
 
   // Cloudinary configuration
