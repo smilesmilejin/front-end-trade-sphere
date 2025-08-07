@@ -14,7 +14,7 @@ const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
 
 // Post User API
 const loginUserApi = (loginData) => {
-  console.log("Login user with data:", loginData);
+  // console.log("Login user with data:", loginData);
 
   return axios.post(`${kBaseUrl}/users/login`, loginData) 
     .then(response => { 
@@ -23,7 +23,7 @@ const loginUserApi = (loginData) => {
       return response.data;
     })
     .catch (error => {
-      console.log('Login failed:', error);
+      // console.log('Login failed:', error);
       // console.log(error);
       throw error;
     });

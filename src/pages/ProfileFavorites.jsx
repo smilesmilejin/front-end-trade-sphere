@@ -7,20 +7,20 @@ import '../styles/ProfileFavorites.css';
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
-console.log("kBaseUrl:", kBaseUrl);
+// console.log("kBaseUrl:", kBaseUrl);
 
 
 // Get user Favorites api
 const getUserFavoritesApi = (curUserId) => {
-  console.log("Get User Favorites Api:", curUserId);
+  // console.log("Get User Favorites Api:", curUserId);
   return axios.get(`${kBaseUrl}/users/${curUserId}/favorites`) 
     .then(response => { 
-      console.log('###### User Favorites API response')
-      console.log('User Favorites response:', response.data);
+      // console.log('###### User Favorites API response')
+      // console.log('User Favorites response:', response.data);
       return response.data;
     })
     .catch (error => {
-      console.log('GET User Favorites failed:', error);
+      // console.log('GET User Favorites failed:', error);
       console.log(error);
       // console.log('Login failed:', error);
       throw error;
@@ -107,7 +107,7 @@ function ProfileFavorites() {
 
   useEffect( () => {
     getUserFavorites()
-    console.log('I am inside the useEffect')
+    // console.log('I am inside the useEffect')
   }, [])
 
   return (

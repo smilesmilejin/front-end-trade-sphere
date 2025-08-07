@@ -13,17 +13,17 @@ const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
 
 // Function to call backend signup API with user data
 const searchItemsApi = (params) => {
-  console.log("SearchItemAPI with params:", params);
+  // console.log("SearchItemAPI with params:", params);
 
-  console.log()
+  // console.log()
   return axios.get(`${kBaseUrl}/search`, params) 
     .then(response => { 
-      console.log('###### Search API response')
-      console.log('Search Response:', response.data);
+      // console.log('###### Search API response')
+      // console.log('Search Response:', response.data);
       return response.data;
     })
     .catch (error => {
-      console.log('Search failed:', error);
+      // console.log('Search failed:', error);
       console.log(error);
       throw error;
     });
@@ -32,15 +32,15 @@ const searchItemsApi = (params) => {
 
 // Get user Favorites api
 const getUserFavoritesApi = (curUserId) => {
-  console.log("Get User Favorites Api:", curUserId);
+  // console.log("Get User Favorites Api:", curUserId);
   return axios.get(`${kBaseUrl}/users/${curUserId}/favorites`) 
     .then(response => { 
-      console.log('###### User Favorites API response')
-      console.log('User Favorites response:', response.data);
+      // console.log('###### User Favorites API response')
+      // console.log('User Favorites response:', response.data);
       return response.data;
     })
     .catch (error => {
-      console.log('GET User Favorites failed:', error);
+      // console.log('GET User Favorites failed:', error);
       console.log(error);
       throw error;
     });
@@ -78,14 +78,14 @@ function Search() {
 
     const query = searchParams.get('query') || '';
 
-    console.log('Search Keyword in Search Page is: ', query)
+    // console.log('Search Keyword in Search Page is: ', query)
 
 
    const searchItems = (params) => {
     // console.log('signupnUser function: ');
     searchItemsApi(params)
     .then(itemSearchResults => {
-          console.log('############ In searchItems function, searchResult: ', itemSearchResults);
+          // console.log('############ In searchItems function, searchResult: ', itemSearchResults);
           setSearchResults(itemSearchResults); 
           setFilteredItemData(itemSearchResults);
     })
@@ -99,12 +99,12 @@ function Search() {
 
     let filtered = [...searchResults];
 
-    console.log('##### filtered: ', filtered)
+    // console.log('##### filtered: ', filtered)
 
     // Category filter
     if (filters.category !== '') {
       filtered = filtered.filter(item => item.category === filters.category);
-      console.log('##### filtered category: ', filtered)
+      // console.log('##### filtered category: ', filtered)
     }
 
     // Availability filter

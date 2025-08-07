@@ -18,12 +18,12 @@ const signupUserApi = (signupData) => {
   // console.log("sign up user with data:", signupData);
   return axios.post(`${kBaseUrl}/users`, signupData) 
     .then(response => { 
-      console.log('###### Signup User API response')
-      console.log('Signup response:', response.data);
+      // console.log('###### Signup User API response')
+      // console.log('Signup response:', response.data);
       return response.data;
     })
     .catch (error => {
-      console.log('Signup failed:', error);
+      // console.log('Signup failed:', error);
       console.log(error);
       throw error;
     });

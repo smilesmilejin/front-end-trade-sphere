@@ -61,7 +61,7 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
               // console.log('Type of normalized format:', typeof imgFileFormat);
 
               if (validImageFormats.includes(imgFileFormat)) {
-                  console.log('Format is valid');
+                  // console.log('Format is valid');
                   setUploadedImages((prev) => [...prev, imgUrl]);
 
                   // Update form data in parent

@@ -11,16 +11,16 @@ const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
 
 // Update user API
 const patchUserApi = (curUserId, updatedUserData) => {
-  console.log("updated User data:", updatedUserData);
+  // console.log("updated User data:", updatedUserData);
 
   return axios.patch(`${kBaseUrl}/users/${curUserId}`, updatedUserData) 
     .then(response => { 
-      console.log('###### Updated User API response')
-      console.log('Updated User response:', response.data);
+      // console.log('###### Updated User API response')
+      // console.log('Updated User response:', response.data);
       return response.data;
     })
     .catch (error => {
-      console.log('Edit User failed:', error);
+      // console.log('Edit User failed:', error);
       throw error;
     });
 };
