@@ -2,6 +2,10 @@ import { Link, useLocation } from 'react-router';
 // import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
 // import { useContext } from 'react';
 import '../styles/AccountNavbar.css';
+import { useNavigate } from 'react-router';
+import { useContext } from 'react';
+import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
+import UserContext from '../contexts/UserContext';
 
 function AccountNavbar() {
   const location = useLocation(); // gives you current pathname
@@ -11,7 +15,24 @@ function AccountNavbar() {
   // console.log('Current location:', location);            // Full location object
   // console.log('Current path:', location.pathname);       // Just the path like "/about"
 
+  const { setUserLoginStatus } = useContext(UserLoginStatusContext);
+  const { setCurUserData } = useContext(UserContext);
+  const navigate = useNavigate();
+
   const isActive = (path) => location.pathname === path;
+
+  const handleLogout = () => {
+    setUserLoginStatus(false);
+    setCurUserData(null);
+
+    // console.log('User is logged out');
+
+    // Wait for state update then navigate
+    setTimeout(() => {
+      navigate('/');
+    }, 0);
+
+  };
 
   return (
     <nav className="account-navbar">
@@ -30,6 +51,10 @@ function AccountNavbar() {
       <Link to="/profile/my-sell-listings">
         <button className={isActive('/profile/my-sell-listings') ? 'account-navbar-active-link' : ''}>🧾 My Selling Listings</button>
       </Link>
+
+      <div>
+        <button className="logout" onClick={handleLogout}>👋 Log Out</button>
+      </div>
     </nav>
   );
 
