@@ -1,7 +1,6 @@
 .profile-info-wrapper {
   display: flex;
   width: 100%;
-  /* text-align: center; */
   justify-content: center; 
 }
 
@@ -40,12 +39,6 @@
   flex-wrap: wrap;
   font-size: 20px;
 }
-
-/* .profile-details p strong {
-  min-width: 110px;
-  font-weight: 600;
-  color: #333;
-} */
 
 .profile-details p {
   display: flex;
