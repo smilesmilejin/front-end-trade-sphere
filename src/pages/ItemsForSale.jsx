@@ -8,12 +8,10 @@ import '../styles/ItemsForSale.css';
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
-// console.log("In ItemsForSale page, the kBaseUrl:", kBaseUrl);
 
 const getAllListingsApi = () => {
   return axios.get(`${kBaseUrl}/listings`)
     .then(response => {
-      // console.log('In ItemsForSale page: ', response.data)
       return response.data;
     })
     .catch(error => {
@@ -23,17 +21,12 @@ const getAllListingsApi = () => {
 
 // Get user Favorites api
 const getUserFavoritesApi = (curUserId) => {
-  // console.log("Get User Favorites Api:", curUserId);
   return axios.get(`${kBaseUrl}/users/${curUserId}/favorites`) 
     .then(response => { 
-      // console.log('###### User Favorites API response')
-      // console.log('User Favorites response:', response.data);
       return response.data;
     })
     .catch (error => {
-      // console.log('GET User Favorites failed:', error);
       console.log(error);
-      // console.log('Login failed:', error);
       throw error;
     });
 };
@@ -81,12 +74,9 @@ function ItemsForSale() {
 
     let filtered = [...itemData];
 
-    // console.log('##### filtered: ', filtered)
-
     // Category filter
     if (filters.category !== '') {
       filtered = filtered.filter(item => item.category === filters.category);
-      // console.log('##### filtered category: ', filtered)
     }
 
     // Availability filter
@@ -131,14 +121,12 @@ function ItemsForSale() {
       return 0; // If all compared values are equal (price, date, name), return 0 to leave the order unchanged.
     });
 
-    // console.log('##### Current Filtered Item Data: ', filtered);
     setFilteredItemData(filtered);
   };
 
   const getUserFavorites = () => {
     getUserFavoritesApi(curUserId)
       .then(userFavorites => {
-        // const likedSet = new Set(userFavorites.data.map(fav => fav.listing_id));
         const likedSet = new Set((userFavorites || []).map(fav => fav.listing_id));
         setUserLikedListings(likedSet);
       })
@@ -193,7 +181,6 @@ function ItemsForSale() {
     if (curUserId) {
       getUserFavorites();
     };
-    // console.log('I am inside the useEffect')
   }, [])
 
   return (

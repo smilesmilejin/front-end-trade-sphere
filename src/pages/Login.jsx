@@ -9,21 +9,16 @@ import '../styles/Login.css';
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
-// console.log("kBaseUrl:", kBaseUrl);
 
 
 // Post User API
 const loginUserApi = (loginData) => {
-  // console.log("Login user with data:", loginData);
 
   return axios.post(`${kBaseUrl}/users/login`, loginData) 
     .then(response => { 
-      // console.log('###### Log in User API response')
-      // console.log('Login response:', response.data);
       return response.data;
     })
     .catch (error => {
-      // console.log('Login failed:', error);
       console.log(error);
       throw error;
     });
@@ -36,12 +31,8 @@ function Login() {
   const navigate = useNavigate();
 
   const loginUser = (loginData) => {
-      // console.log('loginUser function: ');
-
       loginUserApi(loginData)
       .then(newUser => {
-            // console.log('############ in loginUser, current user is: ', newUser);
-
             setUserLoginStatus(true);
             setCurUserData(newUser);
 
