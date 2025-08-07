@@ -1,6 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import UserContext from '../contexts/UserContext';
 import ImageList from './ImageList.jsx';
 import EditUserItemImageUploader from './EditUserItemImageUploader.jsx';
 import EditUserItemImageCloudinaryUploader from './EditUserItemImageCloudinaryUploader.jsx';
@@ -136,6 +135,7 @@ const EditUserItemForm = ({
 
     };
 
+    // Original
     // const handelCancelEdit = () => {
     //     onCancelUpdateUserItem();
     //     setFormData(initialItemData);
@@ -145,7 +145,6 @@ const EditUserItemForm = ({
     //     // onHandleEditClose();
     //     // navigate('/profile/my-sell-listings');
     // }
-    
 
     // Option 1 - someimes click cancel does not reset All Uploaded Images, This seesm to work by toggling the flag
     // const handelCancelEdit = () => {
@@ -172,31 +171,30 @@ const EditUserItemForm = ({
     }
 
 
+    const handleChange = (event) => {
+        const inputName = event.target.name;
+        const inputValue = event.target.value;
 
-const handleChange = (event) => {
-    const inputName = event.target.name;
-    const inputValue = event.target.value;
-
-    setFormData((formData) => ({
-      ...formData,
-      [inputName]: inputValue,
-    }));
-
-    const trimmedLength = inputValue.trim().length;
-
-    if (trimmedLength === 0) {
-        setErrors((prev) => ({
-            ...prev,
-            [inputName]: kErrorState[inputName],
+        setFormData((formData) => ({
+        ...formData,
+        [inputName]: inputValue,
         }));
-    } else {
+
+        const trimmedLength = inputValue.trim().length;
+
+        if (trimmedLength === 0) {
             setErrors((prev) => ({
-            ...prev,
-            [inputName]: '',
-        }));
-    }
+                ...prev,
+                [inputName]: kErrorState[inputName],
+            }));
+        } else {
+                setErrors((prev) => ({
+                ...prev,
+                [inputName]: '',
+            }));
+        }
 
-  };
+    };
 
     const handleDeleteImage = (imageId) => {
         // Mark image as deleted locally
@@ -230,7 +228,6 @@ const handleChange = (event) => {
     const hasErrors = Object.values(errors).some(errorMsg => errorMsg !== '');
 
     return (
-        
         <form className='edit-user-item-form' onSubmit={handleSubmit}>
             <div className='edit-user-item-form-header'>
             Edit an Item for Sale
