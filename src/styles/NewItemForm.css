@@ -9,7 +9,6 @@
   border: 1px solid rgba(255,255,255,0.2);
   position: relative;
   z-index: 1;
-  /* background-color: #f9f9f9;  */
 }
 
 /* Form header styling */
@@ -92,7 +91,6 @@
   gap: 0.5rem;
 }
 
-
 /* Input error state */
 .new-item-form-field input.error {
   border-color: #dc3545;
@@ -167,7 +165,6 @@
   box-shadow: none;
 }
 
-
 .new-item-form-field-category {
   display: flex;
   flex-direction: column;
@@ -175,7 +172,6 @@
   text-align: center;
   margin-bottom: 1.5rem;
 }
-
 
 /* Select dropdown styling */
 .new-item-form-field-category select {
@@ -194,7 +190,6 @@
   background-size: 22px;
   text-align: center;
 }
-
 
 .new-item-form-field-category select:hover {
   border-color: #667eea;
