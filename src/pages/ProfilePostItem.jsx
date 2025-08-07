@@ -5,7 +5,6 @@ import axios from 'axios';
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
-// console.log("In ItemsForSale page, the kBaseUrl:", kBaseUrl);
 
 // post new Listing to the database
 const postItemApi = (userId, newItemData) => {
@@ -22,7 +21,6 @@ const postItemApi = (userId, newItemData) => {
 
 function ProfilePostItem() {
   const { curUserData } = useContext(UserContext);
-  // console.log('user Context is now: ', curUserData);
   const curUserId = curUserData.user_id;
 
   const postItem= (newItemData) => {

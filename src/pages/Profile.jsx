@@ -7,20 +7,15 @@ import '../styles/Profile.css';
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
-// console.log("kBaseUrl:", kBaseUrl);
 
 // Update user API
 const patchUserApi = (curUserId, updatedUserData) => {
-  // console.log("updated User data:", updatedUserData);
 
   return axios.patch(`${kBaseUrl}/users/${curUserId}`, updatedUserData) 
     .then(response => { 
-      // console.log('###### Updated User API response')
-      // console.log('Updated User response:', response.data);
       return response.data;
     })
     .catch (error => {
-      // console.log('Edit User failed:', error);
       console.log(error);
       throw error;
     });
@@ -29,7 +24,6 @@ const patchUserApi = (curUserId, updatedUserData) => {
 function Profile() {
   const { curUserData, setCurUserData } = useContext(UserContext);
   const curUserId = curUserData.user_id;
-  // console.log('user Context is now: ', curUserData)
   const [isEditing, setIsEditing] = useState(false);
 
 
@@ -67,7 +61,6 @@ function Profile() {
   
   return (
     <div className="profile-info-wrapper">
-      {/* <div className="profile-info-edit-form"> */}
         {isEditing ? (
           <EditUserProfileForm
             userData={curUserData}
@@ -93,19 +86,16 @@ function Profile() {
               </p>
               <p>
                 <span className="profile-label">📅 Account Created:</span>
-                {/* <span className="profile-value">{curUserData.created_at}</span> */}
                 <span className="profile-value">{formatUTCDateTime(curUserData.created_at)}</span>
               </p>
               <p>
                 <span className="profile-label">🕒 Last Updated:</span>
-                {/* <span className="profile-value">{curUserData.updated_at}</span> */}
                 <span className="profile-value">{formatUTCDateTime(curUserData.updated_at)}</span>
               </p>
               <button className="profile-info-edit-button"onClick={() => setIsEditing(true)}>Edit Profile</button>
             </div>
           </div>
         )}
-      {/* </div> */}
     </div>
   );
 }

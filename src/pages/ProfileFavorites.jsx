@@ -7,22 +7,16 @@ import '../styles/ProfileFavorites.css';
 
 // get backendUrl from .env file
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
-// console.log("kBaseUrl:", kBaseUrl);
 
 
 // Get user Favorites api
 const getUserFavoritesApi = (curUserId) => {
-  // console.log("Get User Favorites Api:", curUserId);
   return axios.get(`${kBaseUrl}/users/${curUserId}/favorites`) 
     .then(response => { 
-      // console.log('###### User Favorites API response')
-      // console.log('User Favorites response:', response.data);
       return response.data;
     })
     .catch (error => {
-      // console.log('GET User Favorites failed:', error);
       console.log(error);
-      // console.log('Login failed:', error);
       throw error;
     });
 };
@@ -43,12 +37,10 @@ function ProfileFavorites() {
   const [userLikedListings, setUserLikedListings] = useState(new Set());
   const curUserId = curUserData.user_id;
 
-  // console.log('user Context is now: ', curUserData)
 
   const getUserFavorites = () => {
     getUserFavoritesApi(curUserId)
       .then(userFavorites => {
-        // console.log('User Favorites Data is: ', userFavorites)
         setCurUserFavoritesData(userFavorites);
         const likedSet = new Set((userFavorites || []).map(fav => fav.listing_id));
         setUserLikedListings(likedSet);
@@ -91,7 +83,6 @@ function ProfileFavorites() {
 
   useEffect( () => {
     getUserFavorites()
-    // console.log('I am inside the useEffect')
   }, [])
 
   return (
