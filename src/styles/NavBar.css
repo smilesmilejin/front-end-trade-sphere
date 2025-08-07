@@ -4,7 +4,7 @@
   gap: 20px; /* space between buttons */
   align-items: center;           /* vertically center buttons */
   padding: 50px 15px;               /* horizontal padding */
-  height: 60px;                  /* set a height if you want */
+  height: 60px;
   box-sizing: border-box;
 }
 
@@ -33,6 +33,5 @@ nav button:hover {
   color: white;
   font-weight: bold;
   border-color: #377b4d;           /* matching dark border */
-  /* box-shadow: 0 0 10px rgba(38, 133, 90); soft green glow */
   transform: scale(1.05);
 }
