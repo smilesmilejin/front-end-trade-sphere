@@ -21,6 +21,7 @@ const patchUserApi = (curUserId, updatedUserData) => {
     })
     .catch (error => {
       // console.log('Edit User failed:', error);
+      console.log(error);
       throw error;
     });
 };

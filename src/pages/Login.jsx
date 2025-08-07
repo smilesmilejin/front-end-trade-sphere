@@ -24,7 +24,7 @@ const loginUserApi = (loginData) => {
     })
     .catch (error => {
       // console.log('Login failed:', error);
-      // console.log(error);
+      console.log(error);
       throw error;
     });
 };
