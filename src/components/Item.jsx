@@ -82,14 +82,8 @@ const Item =({
             />
             <div className='item-content'>
                 <p className='item-name'>Name: {name}</p>
-                {/* <p>Category: {category}</p> */}
                 <p className='item-price'>Price: ${price}</p>
             </div>
-
-            {/* Heart icon */}
-            {/* <button className="heart-button" onClick={() => onToggleLike(listing_id)}>
-                {isLiked ? '❤️' : '🤍'}
-            </button> */}
 
             <button className='view-details-btn' onClick={handleOpen}>View Details</button>
 
@@ -97,23 +91,16 @@ const Item =({
                 {editButton}
             </div>
 
-            {/* <div onClick={() => onDeleteUserItem(listing_id)}>
-                {deleteButton}
-            </div> */}
 
             {isModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal">
                         <button className="close-button" onClick={handleClose}>×</button>
-                        {/* <h2>Listing Details</h2> */}
                         <div className='modal-image-column'>
                             <ImageGallerySlider
                                 images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
                             />                      
                         </div>
-                        {/* <ImageGallerySlider
-                            images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
-                        /> */}
                         {/* <div className='modal-text-column'>
                             <h2>📝 Listing Details</h2>
                             <p>🆔 Listing Id: {listing_id}</p>
@@ -187,7 +174,6 @@ const Item =({
                 <div className="edit-modal-overlay">
                     <div className="edit-modal">
                         <button className="close-button" onClick={handleEditClose}>×</button>
-                        {/* <h2>Listing Details</h2> */}
 
                         <EditUserItemForm
                         itemData={{
@@ -206,7 +192,6 @@ const Item =({
                         }}
                         onUpdateUserItem={onUpdateUserItem}
                         onCancelUpdateUserItem={onCancelUpdateUserItem}
-                        // onDeleteImage={onDeleteImage}
                         onHandleEditClose={handleEditClose}
                         onDeleteUserItem={onDeleteUserItem}
                         />
