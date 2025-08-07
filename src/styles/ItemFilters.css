@@ -3,8 +3,6 @@
   padding: 10px;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  /* margin-bottom: 2rem;
-  margin-left:3rem; */
   margin: 2rem;
   border: 1px solid rgba(102, 126, 234, 0.1);
   position: relative;
@@ -54,7 +52,6 @@
   text-align: center;
 }
 
-
 .filter-group select:hover {
   border-color: #667eea;
   background: white;
@@ -79,7 +76,6 @@
   position: relative;
   overflow: hidden;
 }
-
 
 .item-filters button:hover {
   background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
