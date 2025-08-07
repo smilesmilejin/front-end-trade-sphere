@@ -5,13 +5,9 @@ import '../styles/ImageCloudinaryUploadWidget.css';
 
 
 const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
-// const ImageCloudinaryUploadWidget = ({ uwConfig, setPublicId, onSetFormData }) => {
   // Configuration
   const cloudName = 'dhgqrdfrw';
   const uploadPreset = 'trade-sphere-images';
-
-  // State
-  const [publicId, setPublicId] = useState('');
 
   // Cloudinary configuration
   const cld = new Cloudinary({
@@ -54,23 +50,15 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
           uwConfig,
           (error, result) => {
             if (!error && result && result.event === 'success') {
-              console.log('Upload successful:', result.info);
+              // console.log('Upload successful:', result.info);
 
               const imgUrl = result.info.secure_url;
-              console.log('secure Url is: ', imgUrl);
+              // console.log('secure Url is: ', imgUrl);
 
               const imgFileFormat = result.info.format;
-              // const imgFileFormat = result.info.format.toLowerCase();
-              console.log('image File Format is: ', imgFileFormat);
-              console.log('Type of normalized format:', typeof imgFileFormat);
-
-              // setUploadedImages((prev) => [...prev, imgUrl]);
-
-              // // Update form data in parent
-              // onSetFormData((prev) => ({
-              //   ...prev,
-              //   images: [...(prev.images || []), imgUrl],
-              // }));
+              // // const imgFileFormat = result.info.format.toLowerCase();
+              // console.log('image File Format is: ', imgFileFormat);
+              // console.log('Type of normalized format:', typeof imgFileFormat);
 
               if (validImageFormats.includes(imgFileFormat)) {
                   console.log('Format is valid');
@@ -82,17 +70,6 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
                     images: [...(prev.images || []), imgUrl],
                   }));
               } 
-              // else {
-              //   console.log('Image Format is NOT valid');
-
-              //   setUploadedImagesHasInvalidImageFormats(true);
-
-                // alert('invalid format!')
-
-                // alert(`${imgFileFormat.toUpperCase()} is not a supported format. Please upload only: ${validImageFormats.join(', ')}`);
-              // }
-
-              setPublicId(result.info.public_id);
             }
           }
         );
