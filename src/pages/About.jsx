@@ -42,13 +42,6 @@ function About() {
         </p>
       </section>
 
-      {/* <section>
-        <h2>👀 Watchlist Feature</h2>
-        <p>
-          Users can add category-related keywords to a personalized watchlist. When new items matching these criteria are posted,
-          they appear in the user’s watchlist within their profile, helping users stay updated on items of interest.
-        </p>
-      </section> */}
     </div>
 
   );
