@@ -3,20 +3,7 @@ import Item from './Item.jsx';
 import '../styles/ItemList.css';
 
 
-const sampleImages = [
-    {
-      image_id: 23,
-      listing_id: 23,
-      image_url: "https://i.ibb.co/tT57qP2d/81k4-Wltu3-RL-AC-SL1500.jpg"
-    },
-    {
-      image_id: 24,
-      listing_id: 23,
-      image_url: "https://i.ibb.co/bR8qdMb9/81-Hv-O7-AT5h-L-AC-SL1500.jpg"
-    }
-];
-
-const ItemList = ({ listings, userLikedListings, onToggleLike, editButton, onUpdateUserItem, onCancelUpdateUserItem, deleteButton, onDeleteUserItem, onDeleteImage}) => {
+const ItemList = ({ listings, userLikedListings, onToggleLike, editButton, onUpdateUserItem, onCancelUpdateUserItem, onDeleteUserItem }) => {
 
     const getItemListJSX = (listings) => {
         return listings.map((listing) => {
@@ -40,9 +27,7 @@ const ItemList = ({ listings, userLikedListings, onToggleLike, editButton, onUpd
                     editButton={editButton}
                     onUpdateUserItem={onUpdateUserItem}
                     onCancelUpdateUserItem={onCancelUpdateUserItem}
-                    deleteButton={deleteButton}
                     onDeleteUserItem={onDeleteUserItem}
-                    // onDeleteImage={onDeleteImage}
                 />
             );
         });
@@ -73,9 +58,7 @@ ItemList.propTypes = {
     editButton: PropTypes.element,
     onUpdateUserItem:PropTypes.func,
     onCancelUpdateUserItem: PropTypes.func,
-    deleteButton: PropTypes.element,
     onDeleteUserItem: PropTypes.func,
-    onDeleteImage: PropTypes.func,
 };
 
 export default ItemList;

@@ -18,8 +18,6 @@ const ItemFilters = ({ onGetFilteredItems }) => {
     const handleChange = (newValues = {}) => {
         const updatedFilters = { ...filters, ...newValues };
 
-        // console.log('updatedFilters is:', updatedFilters);
-
         setFilters(updatedFilters);
         onGetFilteredItems(updatedFilters);
     };
