@@ -72,8 +72,8 @@ const Item =({
                 images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
             />
             <div className='item-content'>
-                <p className='item-name'>Name: {name}</p>
-                <p className='item-price'>Price: ${price}</p>
+                <p className='item-name'>{name}</p>
+                <p className='item-price'>${price}</p>
             </div>
 
             <button className='view-details-btn' onClick={handleOpen}>View Details</button>
