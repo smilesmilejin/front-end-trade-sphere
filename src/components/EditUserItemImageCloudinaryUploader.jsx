@@ -52,17 +52,10 @@ const EditUserItemImageCloudinaryUploader = ({ onSetNewUploadedimagesImages, res
           uwConfig,
           (error, result) => {
             if (!error && result && result.event === 'success') {
-              // console.log('Upload successful:', result.info);
               const imgUrl = result.info.secure_url;
-              // console.log('secure Url is: ', imgUrl);
-
               const imgFileFormat = result.info.format;
-              // // const imgFileFormat = result.info.format.toLowerCase();
-              // console.log('image File Format is: ', imgFileFormat);
-              // console.log('Type of normalized format:', typeof imgFileFormat);
 
               if (validImageFormats.includes(imgFileFormat)) {
-                  // console.log('Format is valid');
                   setUploadedImages((prev) => [...prev, imgUrl]);
 
                   // Update form data with all uploaded images
@@ -94,13 +87,13 @@ const EditUserItemImageCloudinaryUploader = ({ onSetNewUploadedimagesImages, res
       }
 
     initializeUploadWidget();
-    //   }, [uwConfig, setPublicId]);
     }, [resetUploader]);
 
 
   // Remove an uploaded image
   const handleDeleteImage = (urlToDelete) => {
     setUploadedImages((prev) => prev.filter(url => url !== urlToDelete));
+
     // Update the parent state by filtering out the deleted URL
     onSetNewUploadedimagesImages((prev) => [
       ...prev.filter((url) => url !== urlToDelete),

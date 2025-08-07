@@ -7,17 +7,6 @@ import { useNavigate } from 'react-router';
 import '../styles/EditUserItemForm.css';
 
 
-const kDefaultFormState = {
-    name: '',
-    category: '',
-    description: '',
-    price: '',
-    location: '',
-    contact_information: '',
-    images:[],
-    sold_status: '',
-};
-
 const kErrorState = {
     name: 'Name cannot be empty',
     category: 'Category cannot be empty',
@@ -58,7 +47,6 @@ const EditUserItemForm = ({
         images:itemData.images || [],
         sold_status:
             itemData.sold_status === true 
-            // || itemData.sold_status === "true"
             ? "sold"
             : "available",
 
@@ -83,7 +71,6 @@ const EditUserItemForm = ({
     const [newUploadedimages, setNewUploadedimagesImages] = useState([]);
 
     const handleSubmit = async (event) => {
-        // console.log('Edit User Item Form is submitted!');
 
         event.preventDefault();
 
@@ -92,7 +79,6 @@ const EditUserItemForm = ({
         const trimmedLocation = formData.location.trim();
         const trimmedContactInformation = formData.contact_information.trim();
 
-        // console.log('deletedImageIds is now: ', deletedImageIds);
 
         // Filter out deleted images  before submitting
         const filteredImagesUrls = formData.images
@@ -112,8 +98,6 @@ const EditUserItemForm = ({
                 sold_status: formData.sold_status === 'available' ? false : true,
         };
 
-        // trim the title and owner before posting
-        // console.log("Update User Item Form: ", updateUserItemData);
 
         const newErrors = getInitialErrors(updateUserItemData);
         setErrors(newErrors);
@@ -129,42 +113,13 @@ const EditUserItemForm = ({
         setResetUploader(true); // Trigger image uploader reset
         setTimeout(() => setResetUploader(false), 100); // Reset the flag after effect
 
-        // alert('Going back  to my-sell-listings pages!')
         onHandleEditClose();
         navigate('/profile/my-sell-listings'); // Redirect user to home page or dashboard ediUser Form
 
     };
 
-    // Original
-    // const handelCancelEdit = () => {
-    //     onCancelUpdateUserItem();
-    //     setFormData(initialItemData);
-    //     setDeletedImageIds([]);
-    //     setNewUploadedimagesImages([]);
-    //     setResetUploader(true); // Trigger image uploader reset
-    //     // onHandleEditClose();
-    //     // navigate('/profile/my-sell-listings');
-    // }
 
-    // Option 1 - someimes click cancel does not reset All Uploaded Images, This seesm to work by toggling the flag
-    // const handelCancelEdit = () => {
-    //     onCancelUpdateUserItem();                // Reset any temporary state in parent
-    //     setFormData(initialItemData);           // Restore form to original data
-    //     setDeletedImageIds([]);                 // Clear deleted images
-    //     setNewUploadedimagesImages([]);         // Clear new uploads
-
-    //     // Reset uploader by toggling the flag
-    //     setResetUploader(false);
-    //     setTimeout(() => {
-    //         setResetUploader(true);
-
-    //         // Optional: now that reset is triggered, close modal or navigate
-    //         // onHandleEditClose();
-    //         // navigate('/profile/my-sell-listings'); // If needed
-    //     }, 50); // Give uploader time to register the reset flag
-    // };
-
-    // // Optional 2: Make Cancel button has the same effect as Close Button: Handles cancellation of the item editing process
+    // Make Cancel button has the same effect as Close Button: Handles cancellation of the item editing process
     const handelCancelEdit = () => {
         onCancelUpdateUserItem();
         onHandleEditClose();
@@ -342,11 +297,6 @@ const EditUserItemForm = ({
             ) : (
             <p className="no-images-message">No images uploaded for this item.</p>
             )}
-
-            {/* <EditUserItemImageUploader 
-                onSetNewUploadedimagesImages={setNewUploadedimagesImages}
-                resetUploader={resetUploader}
-            /> */}
 
             <EditUserItemImageCloudinaryUploader
                 onSetNewUploadedimagesImages={setNewUploadedimagesImages}
