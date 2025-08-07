@@ -10,16 +10,12 @@ import '../styles/Signup.css';
 
 // Get backend URL from environment variables .env
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
-// console.log("kBaseUrl:", kBaseUrl);
 
 
 // Function to call backend signup API with user data
 const signupUserApi = (signupData) => {
-  // console.log("sign up user with data:", signupData);
   return axios.post(`${kBaseUrl}/users`, signupData) 
     .then(response => { 
-      // console.log('###### Signup User API response')
-      // console.log('Signup response:', response.data);
       return response.data;
     })
     .catch (error => {
@@ -37,11 +33,8 @@ function Signup() {
   const navigate = useNavigate();
 
    const signupUser = (signupData) => {
-    // console.log('signupnUser function: ');
     signupUserApi(signupData)
     .then(newUser => {
-          // console.log('############ In signupUser function User, current user is: ', newUser);
-
           setUserLoginStatus(true); // Mark user as logged in
           setCurUserData(newUser); // Set current user data in context
 
@@ -60,7 +53,6 @@ function Signup() {
             <h1>TradeSphere</h1>
         </Link>
 
-        {/* Pass signup handler as prop to SignupForm component */}
         <SignupForm onSignupUser={signupUser} />
     </div>
   );
