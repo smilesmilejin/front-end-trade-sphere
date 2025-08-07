@@ -84,22 +84,6 @@ function ProfileFavorites() {
 
     const isLiked = (userLikedListings || new Set()).has(listingId);
 
-    // if (isLiked) {
-    //   // Call backend to unlike
-    //   axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-    //     .then(() => {
-    //       // Remove from liked set
-    //       const updatedSet = new Set(userLikedListings);
-    //       updatedSet.delete(listingId);
-    //       setUserLikedListings(updatedSet);
-
-    //       // Remove from favorites array
-    //       setCurUserFavoritesData(prevFavorites =>
-    //         prevFavorites.filter(fav => fav.listing_id !== listingId)
-    //       );
-    //     });
-    // }
-
     if (isLiked) {
       deleteUserFavorite(curUserId, listingId);
     };

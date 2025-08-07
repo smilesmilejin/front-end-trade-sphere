@@ -10,127 +10,6 @@ import '../styles/ItemsForSale.css';
 const kBaseUrl = import.meta.env.VITE_APP_BACKEND_URL;
 // console.log("In ItemsForSale page, the kBaseUrl:", kBaseUrl);
 
-// const sampleListingsData = 
-// [
-//    {
-//        "listing_id": 9,
-//        "user_id": 1,
-//        "name": "Frank",
-//        "category": "Electronics",
-//        "description": "very new",
-//        "price": "12.00",
-//        "location": "Charlotte downtown",
-//        "contact_information": "123-456-7890",
-//        "created_at": "2025-07-23T16:49:29.324Z",
-//        "updated_at": "2025-07-23T16:49:29.324Z",
-//        "sold_status": false,
-//        "images": []
-//    },
-//    {
-//        "listing_id": 10,
-//        "user_id": 1,
-//        "name": "Frank",
-//        "category": "Electronics",
-//        "description": "very new",
-//        "price": "12.00",
-//        "location": "Charlotte downtown",
-//        "contact_information": "123-456-7890",
-//        "created_at": "2025-07-23T16:50:51.653Z",
-//        "updated_at": "2025-07-23T16:50:51.653Z",
-//        "sold_status": false,
-//        "images": [
-//            {
-//                "image_id": 1,
-//                "listing_id": 10,
-//                "image_url": "image_url.com1"
-//            },
-//            {
-//                "image_id": 2,
-//                "listing_id": 10,
-//                "image_url": "image_url.com2"
-//            }
-//        ]
-//    },
-//    {
-//        "listing_id": 6,
-//        "user_id": 1,
-//        "name": null,
-//        "category": null,
-//        "description": null,
-//        "price": null,
-//        "location": null,
-//        "contact_information": null,
-//        "created_at": "2025-07-22T19:38:37.923Z",
-//        "updated_at": "2025-07-22T19:38:37.923Z",
-//        "sold_status": false,
-//        "images": []
-//    },
-//    {
-//        "listing_id": 12,
-//        "user_id": 1,
-//        "name": "Frank",
-//        "category": "Electronics",
-//        "description": "very new",
-//        "price": "12.00",
-//        "location": "Charlotte downtown",
-//        "contact_information": "123-456-7890",
-//        "created_at": "2025-07-23T16:56:57.602Z",
-//        "updated_at": "2025-07-23T16:56:57.602Z",
-//        "sold_status": false,
-//        "images": [
-//            {
-//                "image_id": 5,
-//                "listing_id": 12,
-//                "image_url": "image_url.com1"
-//            },
-//            {
-//                "image_id": 6,
-//                "listing_id": 12,
-//                "image_url": "image_url.com2"
-//            }
-//        ]
-//    },
-//    {
-//        "listing_id": 5,
-//        "user_id": 1,
-//        "name": null,
-//        "category": null,
-//        "description": null,
-//        "price": null,
-//        "location": null,
-//        "contact_information": null,
-//        "created_at": "2025-07-22T19:37:31.208Z",
-//        "updated_at": "2025-07-22T19:37:31.208Z",
-//        "sold_status": false,
-//        "images": []
-//    },
-//    {
-//        "listing_id": 11,
-//        "user_id": 1,
-//        "name": "Frank",
-//        "category": "Electronics",
-//        "description": "very new",
-//        "price": "12.00",
-//        "location": "Charlotte downtown",
-//        "contact_information": "123-456-7890",
-//        "created_at": "2025-07-23T16:53:10.007Z",
-//        "updated_at": "2025-07-23T16:53:10.007Z",
-//        "sold_status": false,
-//        "images": [
-//            {
-//                "image_id": 3,
-//                "listing_id": 11,
-//                "image_url": "image_url.com1"
-//            },
-//            {
-//                "image_id": 4,
-//                "listing_id": 11,
-//                "image_url": "image_url.com2"
-//            }
-//        ]
-//    }
-// ];
-
 const getAllListingsApi = () => {
   return axios.get(`${kBaseUrl}/listings`)
     .then(response => {
@@ -302,24 +181,6 @@ function ItemsForSale() {
 
     const isLiked = (userLikedListings || new Set()).has(listingId);
 
-    // if (isLiked) {
-    //   // Call backend to unlike
-    //   axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-    //     .then(() => {
-    //       const updatedSet = new Set(userLikedListings);
-    //       updatedSet.delete(listingId);
-    //       setUserLikedListings(updatedSet);
-    //     });
-    // } else {
-    //   // Call backend to like
-    //   axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-    //     .then(() => {
-    //       const updatedSet = new Set(userLikedListings);
-    //       updatedSet.add(listingId);
-    //       setUserLikedListings(updatedSet);
-    //     });
-    // }
-
     if (isLiked) {
       deleteUserFavorite(curUserId, listingId);
     } else {
@@ -338,7 +199,6 @@ function ItemsForSale() {
   return (
     <div>
       <h1 className="items-for-sale-h1">Browse Items for Sale</h1>
-      {/* <p>ItemsForSale Page</p> */}
       <ItemFilters onGetFilteredItems={getFilteredItems}/>
       <h3 className='items-for-sale-numbers'>{filteredItemData.length} Items</h3>
       <ItemList 

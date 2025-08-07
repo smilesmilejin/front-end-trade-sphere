@@ -161,23 +161,6 @@ function ProfileListing() {
       // const isLiked = userLikedListings.has(listingId);
       const isLiked = (userLikedListings || new Set()).has(listingId);
 
-      // if (isLiked) {
-      //   // Call backend to unlike
-      //   axios.delete(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-      //     .then(() => {
-      //       const updatedSet = new Set(userLikedListings);
-      //       updatedSet.delete(listingId);
-      //       setUserLikedListings(updatedSet);
-      //     });
-      // } else {
-      //   // Call backend to like
-      //   axios.post(`${kBaseUrl}/users/${curUserId}/favorites/${listingId}`)
-      //     .then(() => {
-      //       const updatedSet = new Set(userLikedListings);
-      //       updatedSet.add(listingId);
-      //       setUserLikedListings(updatedSet);
-      //     });
-      // }
       if (isLiked) {
         deleteUserFavorite(curUserId, listingId);
       } else {
