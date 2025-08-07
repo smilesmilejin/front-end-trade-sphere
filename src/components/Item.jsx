@@ -5,13 +5,6 @@ import ImageGallerySlider from './ImageGallerySlider.jsx';
 import EditUserItemForm from './EditUserItemForm.jsx';
 import '../styles/Item.css';
 
-const sampleImagesArray = [
-    "https://i.ibb.co/gLQ48Lrp/71-O-3j3d9-DL-AC-SL1500.jpg",
-    "https://i.ibb.co/vxj76yx1/71w0-Ozy-Bav-L.jpg",
-    "https://i.ibb.co/jZwGPvXP/premium-photo-1710346961272-c23f174b6e39.jpg",
-    "https://i.ibb.co/DDMbKGDp/indoor-photo-realistic-green-christmas-260nw-2539815647-jpg.webp",
-]
-
 
 const Item =({
     listing_id, 
@@ -31,9 +24,7 @@ const Item =({
     editButton,
     onUpdateUserItem, 
     onCancelUpdateUserItem,
-    deleteButton, 
-    onDeleteUserItem,
-    onDeleteImage }) => {
+    onDeleteUserItem }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpen = () => setIsModalOpen(true);
@@ -101,20 +92,6 @@ const Item =({
                                 images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
                             />                      
                         </div>
-                        {/* <div className='modal-text-column'>
-                            <h2>📝 Listing Details</h2>
-                            <p>🆔 Listing Id: {listing_id}</p>
-                            <p>👤 User Id: {user_id}</p>
-                            <p>📛 Name: {name}</p>
-                            <p>📂 Category: {category}</p>
-                            <p>📝 Description: {description}</p>
-                            <p>💰 Price: ${price}</p>
-                            <p>📍 Location: {location}</p>
-                            <p>📞 Contact Info: {contact_information}</p>
-                            <p>🗓️ Created At: {created_at}</p>
-                            <p>✏️ Updated At: {updated_at}</p>
-                            <p>📦 Status: {sold_status ? 'Sold' : 'Available'}</p>                        
-                        </div> */}
 
                         <div className='modal-text-column'>
                             <h2>📝 Listing Details</h2>
@@ -132,7 +109,6 @@ const Item =({
                             </p>
                             <p>
                                 <span className="label">Item Category: </span>
-                                {/* <span className="value">{category}</span> */}
                                 <span className="value">{categoryOptions[category] || category}</span>
                             </p>
                             <p>
@@ -153,12 +129,10 @@ const Item =({
                             </p>
                             <p>
                                 <span className="label">Date Listed: </span>
-                                {/* <span className="value">{created_at}</span> */}
                                 <span className="value">{formatUTCDateTime(created_at)}</span>
                             </p>
                             <p>
                                 <span className="label">Last Updated: </span>
-                                {/* <span className="value">{updated_at}</span> */}
                                 <span className="value">{formatUTCDateTime(updated_at)}</span>
                             </p>
                             <p>
@@ -221,9 +195,7 @@ Item.propTypes = {
     editButton: PropTypes.element,
     onUpdateUserItem:PropTypes.func,
     onCancelUpdateUserItem: PropTypes.func,
-    deleteButton: PropTypes.element,
     onDeleteUserItem: PropTypes.func,
-    onDeleteImage: PropTypes.func,
 }
 
 

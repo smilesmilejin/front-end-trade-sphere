@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import '../styles/ImageUploader.css';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-// console.log(API_KEY);
+
 
 const ImageUploader = ({ onSetFormData, resetUploader }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedUrl, setUploadedUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  // const [uploadedImages, setUploadedImages] = useState([]);
   const [uploadedImages, setUploadedImages] = useState(new Set());
   const [inputKey, setInputKey] = useState(Date.now()); // Used to force reset file input
 
@@ -42,7 +41,6 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
 
         // Update local image preview
         setUploadedUrl(data.data.display_url);
-        // setUploadedImages((prev) => [...prev, data.data.display_url]);
 
         setUploadedImages((prev) => {
           const updated = new Set(prev);
@@ -68,7 +66,6 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
   
     // Remove an uploaded image
   const handleDeleteImage = (urlToDelete) => {
-    // setUploadedImages((prev) => prev.filter(url => url !== urlToDelete));
     setUploadedImages((prev) => {
       const updated = new Set(prev);
       updated.delete(urlToDelete);
@@ -88,7 +85,6 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
         setSelectedFile(null);
         setUploadedUrl("");
         setLoading(false);
-        // setUploadedImages([]);
         setUploadedImages(new Set());
         setInputKey(Date.now());  // Reset the <input type="file" />
       }
@@ -121,26 +117,6 @@ const ImageUploader = ({ onSetFormData, resetUploader }) => {
           <img src={uploadedUrl} alt="Uploaded" style={{ maxWidth: "300px" }} />
         </div>
       )}
-
-        {/* uplodaed images is array */}
-        {/* {uploadedImages.length > 0 && (
-          <div className="uploaded-images-container" >
-            <h3 className="uploaded-images-container-h3">All Uploaded Images</h3>
-            <div className="uploaded-images">
-              {uploadedImages.map((url, idx) => (
-                <div className="each-image-container" key={idx} >
-                  <img src={url} alt={`Uploaded ${idx + 1}`} />
-
-                  <button type="button" onClick={() => handleDeleteImage(url)} >
-                    ×
-                    Delete Image
-                  </button>
-  
-                </div>
-              ))}
-            </div>
-          </div>
-        )} */}
 
         {/* use uploadeImagesArra */}
         {uploadedImagesArray.length > 0 && (
