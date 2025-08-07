@@ -50,7 +50,7 @@ function App() {
               {/* Protect all /profile routes */}
               <Route element={<RequireAuth />}>
                 <Route path="profile" element={<ProfileLayout />}>
-                  <Route index element={<Profile />} /> {/* /profile */}
+                  <Route index element={<Profile />} />
                   <Route path="post-item-to-sell" element={<ProfilePostItem />} />
                   <Route path="my-favorite-listings" element={<ProfileFavorites />} />
                   <Route path="my-sell-listings" element={<ProfileListing />} />
