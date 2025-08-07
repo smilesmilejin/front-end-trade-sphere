@@ -12,8 +12,8 @@
 
 .search-page-numbers {
   text-align: right;
-  margin-right: 100px; /* add some space from the right edge */
-  font-weight: 600;   /* make it a bit bolder */
-  font-size: 1.2rem;  /* slightly larger */
-  color: #343333;        /* optional color */
+  margin-right: 100px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #343333;
 }
