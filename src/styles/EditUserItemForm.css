@@ -1,10 +1,7 @@
 .edit-user-item-form {
-  /* background: rgba(255, 255, 255, 0.95); */
-  /* background: rgba(221, 155, 155, 0.95); */
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 5rem;
-  /* box-shadow: 0 20px 40px rgba(0,0,0,0.1); */
   width: 100%;
   max-width: 400px;
   border: 1px solid rgba(255,255,255,0.2);
@@ -26,7 +23,6 @@
 .edit-user-item-form-field {
   margin-bottom: 1.5rem;
   position: relative;
-
   display: flex;
   align-items: center; 
 
@@ -37,7 +33,6 @@
 }
 
 .edit-user-item-form-field input {
-  /* width: 100%; */
   width: 300px;
   padding: 15px 20px;
   border: 2px solid #e1e8ed;
@@ -64,7 +59,6 @@
   font-weight: 400;
 }
 
-/* Floating label effect (optional enhancement) */
 .edit-user-item-form-field.focused input {
   border-color: #667eea;
   background: white;
@@ -101,7 +95,6 @@
   box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
 }
 
-/* Button wrapper */
 .edit-user-item-button-wrapper {
   margin-top: 2rem;
 }
@@ -165,7 +158,6 @@
   box-shadow: none;
 }
 
-
 .edit-user-item-form-field-category {
   margin-bottom: 1.5rem;
   position: relative;
@@ -175,17 +167,16 @@
 
 
 .edit-user-item-form-field-category label {
-  min-width: 80px;      /* fixed width so labels align consistently */
+  min-width: 80px;
   flex-grow: 1;       
-  /* width: auto;          */
 }
 
 
 /* Select dropdown styling */
 .edit-user-item-form-field-category select {
-  padding: 15px 20px; /* Match input padding */
+  padding: 15px 20px;
   border: 2px solid #e1e8ed;
-  border-radius: 12px; /* Match input border radius */
+  border-radius: 12px;
   font-size: 1rem;
   background: #f8f9fa;
   color: #2c3e50;
@@ -205,7 +196,6 @@
   background: white;
 }
 
-
 .edit-user-item-form-field-status {
   margin-bottom: 1.5rem;
   position: relative;
@@ -213,19 +203,16 @@
   align-items: center; 
 }
 
-
 .edit-user-item-form-field-status label {
-  min-width: 80px;      /* fixed width so labels align consistently */
+  min-width: 80px;
   flex-grow: 1;       
-  /* width: auto;          */
 }
-
 
 /* Select dropdown styling */
 .edit-user-item-form-field-status select {
-  padding: 15px 20px; /* Match input padding */
+  padding: 15px 20px;
   border: 2px solid #e1e8ed;
-  border-radius: 12px; /* Match input border radius */
+  border-radius: 12px;
   font-size: 1rem;
   background: #f8f9fa;
   color: #2c3e50;
@@ -248,12 +235,12 @@
 .edit-user-item-form-field label,
 .edit-user-item-form-field-category label,
 .edit-user-item-form-field-status label {
-  min-width: 100px;       /* fixed width so labels align */
+  min-width: 100px;
   font-size: 1rem;
   font-weight: 500;
   color: #2c3e50;
   line-height: 1.4;
-  margin-right: 0.5rem;   /* optional, if you don’t use flex gap */
+  margin-right: 0.5rem;
 }
 
 .edit-user-item-form-images-header {
@@ -272,15 +259,7 @@
 .delete-user-item-button-wrapper button {
   width: 100%;
   padding: 15px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   background: linear-gradient(135deg, #fd974e 0%, #fa429b 100%);  
-  /* background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-  background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
-  background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-  background: linear-gradient(135deg, #f85032 0%, #e73827 50%, #1488cc 100%);
-  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 50%, #1e3c72 100%);
-  background: linear-gradient(135deg, #ff512f 0%, #dd2476 50%, #2c3e50 100%);
-  background: linear-gradient(135deg, #cb2d3e 0%, #ef473a 50%, #1e3c72 100%); */
   color: white;
   border: none;
   border-radius: 12px;
@@ -318,7 +297,7 @@
 
 .no-images-message {
   font-size: 18px;
-  color: #2c3e50; /* same tone as form header */
+  color: #2c3e50;
   border: 1px solid #ccc;
   border-radius: 12px;
   padding: 12px 16px;
