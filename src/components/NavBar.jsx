@@ -4,18 +4,6 @@ import '../styles/NavBar.css';
 
 function Navbar() {
   const location = useLocation(); // gives you current pathname
-
-  // console.log('Current location:', location);            // Full location object
-  // console.log('Current path:', location.pathname);       // Just the path like "/about"
-
-  // Current location: {pathname: '/itemsforsale', search: '', hash: '', state: null, key: 'qhzlwbqh'}
-  // Current path: /itemsforsale
-
-  // helper to check if path is active
-  // You're defining a helper function called isActive.
-  // It takes a path (like "/about" or "/contact") as input.
-  // It compares that input with the current path of the URL, using location.pathname.
-  // It returns true if they match (i.e., the user is currently on that page), otherwise false.
   const isActive = (path) => location.pathname === path;
 
   return (

@@ -22,7 +22,6 @@ const SignupForm = ({ onSignupUser }) => {
 
   // Handle form submission
   const handleSubmit = (event) => {
-    // console.log('sign up form submitted!');
 
     event.preventDefault();
     
@@ -36,8 +35,6 @@ const SignupForm = ({ onSignupUser }) => {
         name: trimmedName,
         address: trimmedAddress
     };
-
-    // console.log("Sign up Data: ", signUpData); // trim the title and owner before posting
 
     // Pass cleaned data to parent component handler
     onSignupUser(signUpData);

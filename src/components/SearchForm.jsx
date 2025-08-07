@@ -21,8 +21,6 @@ const SearchForm = () => {
 
   // Handle form submission
   const handleSubmit = (event) => {
-    // console.log('Search Form form submitted!');
-
     event.preventDefault();
     
     // Trim input values to avoid leading/trailing whitespace issues
@@ -32,7 +30,6 @@ const SearchForm = () => {
         return;
     }
 
-    // console.log(encodeURIComponent(trimmedSearchKeyWord));
     navigate(`/search?query=${encodeURIComponent(trimmedSearchKeyWord)}`);
 
     // Reset form and error state

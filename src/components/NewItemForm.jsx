@@ -33,7 +33,6 @@ const NewItemForm = ({ onPostItem }) => {
 
 
     const handleSubmit = (event) => {
-        // console.log('New Item Form submitted!');
         event.preventDefault();
 
         // Trim input values and parse price to float
@@ -52,9 +51,6 @@ const NewItemForm = ({ onPostItem }) => {
             contact_information: trimmedContactInformation,
             images: formData.images
         };
-
-        // trim the title and owner before posting
-        // console.log("Post Item Data: ", postItemData);
 
         // Call parent callback to handle posting
         onPostItem(postItemData);
@@ -109,11 +105,6 @@ const NewItemForm = ({ onPostItem }) => {
         );
     };
 
-    // This converts the errors object into an array of its values:
-    // The .some() array method tests whether at least one element in the array passes the condition inside the callback function. It returns:
-    // true if any element meets the condition,
-    // false if none do.
-    // Determine if there are any validation errors
     const hasErrors = Object.values(errors).some(errorMsg => errorMsg !== '');
 
     return (
@@ -192,8 +183,6 @@ const NewItemForm = ({ onPostItem }) => {
                 <p className='new-item-error-text'>{errors.contact_information}</p>
             </div>
             )}
-
-            {/* <ImageUploader onSetFormData={setFormData} resetUploader={resetUploader}/> */}
 
             <ImageCloudinaryUploadWidget onSetFormData={setFormData} resetUploader={resetUploader}/>
 

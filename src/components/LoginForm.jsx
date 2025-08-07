@@ -16,14 +16,12 @@ const LoginForm = ({ onLoginUser }) => {
   const [errors, setErrors] = useState(kErrorState);
 
   const handleSubmit = (event) => {
-    // console.log('Login Form submitted!');
 
     event.preventDefault();
     
     // trim the title and owner before posting
     const trimmedEmail = formData.email.trim();
 
-    // console.log("Email:", { message: trimmedEmail});
     onLoginUser({ email: trimmedEmail});
 
     setFormData(kDefaultFormState);
