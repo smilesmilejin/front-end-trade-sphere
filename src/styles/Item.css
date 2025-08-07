@@ -250,6 +250,41 @@
   padding: 2rem;
   overflow-y: auto;
   color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* wrap long description text without showing a scrollbar */
+.modal-text-column p {
+  white-space: normal;       /* Allow wrapping */
+  overflow-wrap: break-word; /* Break long words if needed */
+  word-break: break-word;    /* Ensures words break properly */
+  max-height: none;          /* Remove any fixed height */
+  overflow-y: visible;       /* No vertical scrollbar */
+  letter-spacing: 0.5px; 
+
+
+  display: flex;
+  gap: 3rem;
+  margin: 0.4rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  /* border-bottom: 1px solid #eaeaea; */
+  padding-bottom: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.modal-text-column .label {
+  font-weight: 600;
+  min-width: 150px;
+  color: #333;
+  text-align: left;
+}
+
+.modal-text-column .value {
+  flex: 1;
+  text-align: left;
+  color: #555;
+  word-break: break-word;
 }
 
 .modal h2 {
@@ -353,6 +388,8 @@
   max-height: 90vh;
   /* overflow: hidden; */
 }
+
+
 
 
 

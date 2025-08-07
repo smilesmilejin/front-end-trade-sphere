@@ -45,6 +45,30 @@ const Item =({
 
     const imageUrls = images?.map(image => image.image_url) || [];
     const isLiked = (userLikedListings || new Set()).has(listing_id);
+    
+    // Converts an ISO 8601 date-time string to a formatted date and time string in UTC.
+    const formatUTCDateTime = (isoString) => {
+        const date = new Date(isoString);
+        
+        return date.toLocaleString('en-US', {
+            timeZone: 'UTC',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+        }) + ' UTC';
+    }
+
+    const categoryOptions = {
+        household: "Household Items",
+        electronics: "Electronics",
+        clothing_accessories: "Clothing & Accessories",
+        books_media: "Books & Media",
+        toys_games: "Toys & Games",
+        miscellaneous: "Miscellaneous",
+    };
 
     return (
         <li className='item-container'>
@@ -90,19 +114,70 @@ const Item =({
                         {/* <ImageGallerySlider
                             images={imageUrls && imageUrls.length > 0 ? imageUrls : [NoImageAvailable]}
                         /> */}
+                        {/* <div className='modal-text-column'>
+                            <h2>📝 Listing Details</h2>
+                            <p>🆔 Listing Id: {listing_id}</p>
+                            <p>👤 User Id: {user_id}</p>
+                            <p>📛 Name: {name}</p>
+                            <p>📂 Category: {category}</p>
+                            <p>📝 Description: {description}</p>
+                            <p>💰 Price: ${price}</p>
+                            <p>📍 Location: {location}</p>
+                            <p>📞 Contact Info: {contact_information}</p>
+                            <p>🗓️ Created At: {created_at}</p>
+                            <p>✏️ Updated At: {updated_at}</p>
+                            <p>📦 Status: {sold_status ? 'Sold' : 'Available'}</p>                        
+                        </div> */}
+
                         <div className='modal-text-column'>
-                            <h2>Listing Details</h2>
-                            <p>Listing Id: {listing_id}</p>
-                            <p>User Id: {user_id}</p>
-                            <p>Name: {name}</p>
-                            <p>Category: {category}</p>
-                            <p>Description: {description}</p>
-                            <p>Price: ${price}</p>
-                            <p>Location: {location}</p>
-                            <p>Contact Info: {contact_information}</p>
-                            <p>Created At: {created_at}</p>
-                            <p>Updated At: {updated_at}</p>
-                            <p>Status: {sold_status ? 'Sold' : 'Available'}</p>                        
+                            <h2>📝 Listing Details</h2>
+                            <p>
+                                <span className="label">Listing ID: </span>
+                                <span className="value">{listing_id}</span>
+                            </p>
+                            <p>
+                                <span className="label">User ID: </span>
+                                <span className="value">{user_id}</span>
+                            </p>
+                            <p>
+                                <span className="label">Item Name: </span>
+                                <span className="value">{name}</span>
+                            </p>
+                            <p>
+                                <span className="label">Item Category: </span>
+                                {/* <span className="value">{category}</span> */}
+                                <span className="value">{categoryOptions[category] || category}</span>
+                            </p>
+                            <p>
+                                <span className="label">Item Description: </span>
+                                <span className="value">{description}</span>
+                            </p>
+                            <p>
+                                <span className="label">Item Price: </span>
+                                <span className="value">${price}</span>
+                            </p>
+                            <p>
+                                <span className="label">Item Location: </span>
+                                <span className="value">{location}</span>
+                            </p>
+                            <p>
+                                <span className="label">Contact Info: </span>
+                                <span className="value">{contact_information}</span>
+                            </p>
+                            <p>
+                                <span className="label">Date Listed: </span>
+                                {/* <span className="value">{created_at}</span> */}
+                                <span className="value">{formatUTCDateTime(created_at)}</span>
+                            </p>
+                            <p>
+                                <span className="label">Last Updated: </span>
+                                {/* <span className="value">{updated_at}</span> */}
+                                <span className="value">{formatUTCDateTime(updated_at)}</span>
+                            </p>
+                            <p>
+                                <span className="label">Availability: </span>
+                                <span className="value">{sold_status ? 'Sold' : 'Available'}</span>
+                            </p>                        
                         </div>
                     </div>
                 </div>
