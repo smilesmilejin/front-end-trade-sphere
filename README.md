@@ -91,12 +91,11 @@ Access this URL in your code with `import.meta.env.VITE_APP_BACKEND_URL`.
 #### Cloudinary Configuration
 The front-end uses the Cloudinary Upload Widget to upload images and retrieve their URLs. To enable this, the front-end repository must include a .env file containing the following line:
 
-Replace <your-cloudinary-cloud-name> with your actual Cloudinary cloud name, which you can find in your Cloudinary dashboard.
-
 ```
 VITE_CLOUDINARY_CLOUD_NAME=<your-cloudinary-cloud-name>
 ```
 
+Replace <your-cloudinary-cloud-name> with your actual Cloudinary cloud name, which you can find in your Cloudinary dashboard.
 
 ### Run the Program
 Start the development server. The app will be available at http://localhost:5173/.
