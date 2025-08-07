@@ -51,18 +51,10 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
           uwConfig,
           (error, result) => {
             if (!error && result && result.event === 'success') {
-              // console.log('Upload successful:', result.info);
-
               const imgUrl = result.info.secure_url;
-              // console.log('secure Url is: ', imgUrl);
-
               const imgFileFormat = result.info.format;
-              // // const imgFileFormat = result.info.format.toLowerCase();
-              // console.log('image File Format is: ', imgFileFormat);
-              // console.log('Type of normalized format:', typeof imgFileFormat);
 
               if (validImageFormats.includes(imgFileFormat)) {
-                  // console.log('Format is valid');
                   setUploadedImages((prev) => [...prev, imgUrl]);
 
                   // Update form data in parent
@@ -97,7 +89,6 @@ const ImageCloudinaryUploadWidget = ({ onSetFormData, resetUploader }) => {
       }
 
     initializeUploadWidget();
-    //   }, [uwConfig, setPublicId]);
     }, [resetUploader]);
 
 

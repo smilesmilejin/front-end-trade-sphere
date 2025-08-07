@@ -19,7 +19,6 @@ const EditUserProfileForm = ({ userData, onUpdateUserProfile, onCancelUpdateUser
     const [errors, setErrors] = useState(kErrorState);
 
     const handleSubmit = (event) => {
-      // console.log('Edit User Profile Form submitted!');
 
       event.preventDefault();
       
@@ -32,9 +31,6 @@ const EditUserProfileForm = ({ userData, onUpdateUserProfile, onCancelUpdateUser
           name: trimmedName,
           address: trimmedAddress
       };
-
-      // trim the title and owner before posting
-      // console.log("Edit User Profile Form: ", updateUserProfileData);
 
       onUpdateUserProfile(updateUserProfileData);
 

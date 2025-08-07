@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import '../styles/EditUserItemImageUploader.css';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-// console.log(API_KEY);
 
 const EditUserItemImageUploader = ({ onSetNewUploadedimagesImages, resetUploader }) => {
   const [selectedFile, setSelectedFile] = useState(null);

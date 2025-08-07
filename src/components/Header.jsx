@@ -17,8 +17,6 @@ const Header = () => {
     setUserLoginStatus(false);
     setCurUserData(null);
 
-    // console.log('User is logged out');
-
     // Wait for state update then navigate
     setTimeout(() => {
       navigate('/');
@@ -33,14 +31,6 @@ const Header = () => {
         <img src={Logo} alt="My Logo" />
         <h1>TradeSphere</h1>
       </Link>
-
-      {/* Search Bar */}
-      {/* <div className="search-bar">
-        <input type="text" placeholder="Search Items" />
-        <button className="search-button" aria-label="Search">
-          <img src={SearchIcon} alt="Search" />
-        </button>
-      </div> */}
 
       <SearchForm />
 
