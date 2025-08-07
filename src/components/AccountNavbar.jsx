@@ -1,6 +1,4 @@
 import { Link, useLocation } from 'react-router';
-// import UserLoginStatusContext from '../contexts/UserLoginStatusContext';
-// import { useContext } from 'react';
 import '../styles/AccountNavbar.css';
 import { useNavigate } from 'react-router';
 import { useContext } from 'react';
@@ -9,12 +7,6 @@ import UserContext from '../contexts/UserContext';
 
 function AccountNavbar() {
   const location = useLocation(); // gives you current pathname
-  
-  // const { userLoginStatus } = useContext(UserLoginStatusContext);
-
-  // console.log('Current location:', location);            // Full location object
-  // console.log('Current path:', location.pathname);       // Just the path like "/about"
-
   const { setUserLoginStatus } = useContext(UserLoginStatusContext);
   const { setCurUserData } = useContext(UserContext);
   const navigate = useNavigate();
@@ -24,8 +16,6 @@ function AccountNavbar() {
   const handleLogout = () => {
     setUserLoginStatus(false);
     setCurUserData(null);
-
-    // console.log('User is logged out');
 
     // Wait for state update then navigate
     setTimeout(() => {

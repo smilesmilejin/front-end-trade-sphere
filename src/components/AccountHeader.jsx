@@ -2,8 +2,6 @@ import UserLogo from '../assets/UserLogo.png';
 import '../styles/AccountHeader.css';
 
 function AccountHeader() {
-
-
     return (
         <header className="account-header">
             <img className="account-header-logo" src={UserLogo} alt="User Logo" />
@@ -11,8 +9,6 @@ function AccountHeader() {
         </header>
 
   );
-
-
 }
 
 export default AccountHeader; 
