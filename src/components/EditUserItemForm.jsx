@@ -232,7 +232,7 @@ const EditUserItemForm = ({
             )}
 
             <div className='edit-user-item-form-field'>
-                <label htmlFor="price-input">Price:</label>
+                <label htmlFor="price-input">Price</label>
                 {makeControlledInput('price', 'number')}
             </div>
             {errors.price && (
