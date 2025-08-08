@@ -13,7 +13,6 @@
   width: 100%;
   max-width: 60%;
   aspect-ratio: 1 / 1;
-  /* background-color: #eaeaea; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +41,6 @@
   max-height: 100%;
   object-fit: contain;
   object-position: center;
-  /* background-color: #f0f0f0; */
   display: block;
 
   width: auto;
