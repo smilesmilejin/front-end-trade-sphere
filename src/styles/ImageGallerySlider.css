@@ -4,6 +4,9 @@
   justify-content: center;
   gap: 0.8rem; /* spacing between arrows and image */
   width: 100%;
+
+  display: -webkit-flex;
+  -webkit-align-items: center;
 }
 
 .image-slider {
@@ -14,6 +17,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  position: relative;
+
+  /* Safari fallback - FIXED: Use max-width percentage for padding */
+  height: 0;
+  padding-bottom: 60%; 
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+}
+
+/* Reset padding for modern browsers that support aspect-ratio */
+@supports (aspect-ratio: 1 / 1) {
+  .image-slider {
+    height: auto;
+    padding-bottom: 0;
+    display: flex; /* Restore flex for modern browsers */
+  }
 }
 
 .gallery-image {
@@ -23,8 +44,58 @@
   object-position: center;
   background-color: #f0f0f0;
   display: block;
-  width: 100%;        /* fill the width */
-  height: auto;       /* keep aspect ratio */
+
+  width: auto;
+  height: auto;
+
+  /* Safari positioning - FIXED */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto; /* This centers the image */
+}
+
+/* Reset for modern browsers */
+@supports (aspect-ratio: 1 / 1) {
+  .gallery-image {
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Alternative fix for Safari - more reliable */
+@supports (-webkit-appearance: none) and (not (aspect-ratio: 1 / 1)) {
+  .image-slider {
+    width: 100%;
+    max-width: 60%;
+    height: 0;
+    padding-bottom: 60%; /* Creates square */
+    position: relative;
+    background-color: #eaeaea;
+    overflow: hidden; /* Prevents image overflow */
+  }
+  
+  .gallery-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
 }
 
 .arrow {
@@ -41,4 +112,28 @@
   display: flex;
   align-items: center;      /* center the arrow content vertically */
   justify-content: center;  /* center the arrow content horizontally */
+
+
+  -webkit-transition: background-color 0.3s ease;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  min-width: 36px;
+  min-height: 36px;
+  flex-shrink: 0;
 } 
+
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Additional fix for very tall/wide images */
+.gallery-image {
+  /* Force maximum dimensions to prevent overflow */
+  max-width: calc(100% - 4px);
+  max-height: calc(100% - 4px);
+}
