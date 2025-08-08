@@ -13,7 +13,7 @@
   width: 100%;
   max-width: 60%;
   aspect-ratio: 1 / 1;
-  background-color: #eaeaea;
+  /* background-color: #eaeaea; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,7 @@
   max-height: 100%;
   object-fit: contain;
   object-position: center;
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   display: block;
 
   width: auto;
@@ -129,11 +129,4 @@
 
 .arrow:hover {
   background-color: rgba(0, 0, 0, 0.7);
-}
-
-/* Additional fix for very tall/wide images */
-.gallery-image {
-  /* Force maximum dimensions to prevent overflow */
-  max-width: calc(100% - 4px);
-  max-height: calc(100% - 4px);
 }
